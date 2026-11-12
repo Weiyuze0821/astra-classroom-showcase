@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我只说了四句话，Astra 让一间教室经历了四种结局</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --paper: #101714;
+      --ink: #f3f0e6;
+      --muted: #b5c0b8;
+      --line: #38463e;
+      --accent: #c7e4ab;
+      --text: system-ui, "Microsoft YaHei", sans-serif;
+      --display: "Noto Serif CJK SC", "Songti SC", SimSun, serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--text); }
+    a { color: var(--accent); text-underline-offset: .24em; }
+    .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+    .mast { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
+    .mast strong { font-size: .86rem; letter-spacing: .14em; }
+    nav { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; font-size: .82rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--ink); text-decoration: underline; }
+    header { padding-block: clamp(3.8rem, 8vw, 7.5rem) 2rem; }
+    h1, h2, h3, blockquote { font-family: var(--display); }
+    h1 { font-size: clamp(2.35rem, 6.8vw, 5.6rem); line-height: 1.1; letter-spacing: -.055em; margin: 0 0 1.45rem; }
+    h1 span { display: block; color: var(--accent); }
+    .lead { max-width: 47ch; font-size: clamp(1.03rem, 2.3vw, 1.24rem); color: var(--muted); line-height: 1.8; margin: 0; }
+    figure { margin: 0; min-width: 0; }
+    img, video { display: block; width: 100%; height: auto; background: #090d0b; }
+    video { aspect-ratio: 16/9; }
+    figcaption { padding-top: .65rem; font-size: .82rem; line-height: 1.6; color: var(--muted); }
+    .prose { width: min(680px, 100%); margin-inline: auto; }
+    section { padding-top: clamp(4rem, 8vw, 7rem); scroll-margin-top: 1rem; }
+    .prose p, .variant p { margin: 0 0 1.05em; font-size: 1.06rem; line-height: 1.95; }
+    .prose p:last-child, .variant p:last-child { margin-bottom: 0; }
+    h2 { font-size: clamp(2rem, 4.8vw, 3.5rem); line-height: 1.17; margin: 0 0 .7em; letter-spacing: -.035em; }
+    h3 { font-size: 1.8rem; line-height: 1.35; margin: .85rem 0 1.1rem; }
+    .variant img { margin-bottom: 1.4rem; }
+    .original { margin-top: 1.7rem; }
+    .variants { display: grid; grid-template-columns: 1fr; gap: 3.5rem; }
+    .variant { border-top: 1px solid var(--line); padding-top: .8rem; }
+    .variant img, .comparison img { aspect-ratio: 16/9; object-fit: cover; }
+    .variant p { color: var(--muted); max-width: 680px; }
+    .comparison { margin-top: 1.9rem; gap: 1rem; }
+    blockquote { margin: 1.75rem 0 0; padding: .2rem 0 .2rem 1rem; border-left: 2px solid var(--accent); font-size: clamp(1.3rem, 3vw, 1.85rem); line-height: 1.65; }
+    footer { margin-top: 5rem; padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .83rem; line-height: 1.8; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+    @media (max-width: 620px) {
+      .wrap { width: calc(100% - 2rem); }
+      .mast { align-items: flex-start; flex-direction: column; }
+      h1 { letter-spacing: -.045em; }
+      .variants, .comparison { grid-template-columns: 1fr; }
+    }
+
+    .wire-split { --split: 50%; --slant: min(8%, var(--split), calc(100% - var(--split))); --top: calc(var(--split) + var(--slant)); --bottom: calc(var(--split) - var(--slant)); position: relative; isolation: isolate; aspect-ratio: 16 / 9; margin-bottom: 1.4rem; overflow: hidden; }
+    .wire-split img { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+    .wire-clay { clip-path: polygon(var(--top) 0, 100% 0, 100% 100%, var(--bottom) 100%); }
+    .wire-divider { position: absolute; inset: 0; background: #f3f0e6; clip-path: polygon(var(--top) 0, calc(var(--top) + 2px) 0, calc(var(--bottom) + 2px) 100%, var(--bottom) 100%); }
+    .wire-label { position: absolute; left: .75rem; bottom: .75rem; padding: .3rem .55rem; color: #fff; background: #101714dc; font-size: .78rem; }
+    .wire-label-clay { left: auto; right: .75rem; bottom: auto; top: .75rem; }
+
+    .wire-slider { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+    .wire-handle { position: absolute; top: 50%; left: clamp(24px, var(--split), calc(100% - 24px)); transform: translate(-50%, -50%); display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid white; border-radius: 50%; color: white; background: #101714dc; font: 700 24px system-ui; }
+    .wire-slider:focus-visible + .wire-handle { outline: 3px solid #c7e4ab; outline-offset: 4px; }
+    .wire-split[data-view="clay"] .wire-label:not(.wire-label-clay),
+    .wire-split[data-view="render"] .wire-label-clay,
+    .wire-split[data-view] .wire-divider { visibility: hidden; }
+
+    .process-record { margin: 2rem 0; padding: clamp(1.1rem, 4vw, 2rem); border: 1px solid #46584c; border-radius: 12px; background: #17221c; }
+    .process-record figcaption { padding: 0 0 1.15rem; color: #c7e4ab; }
+    .dialogue-record { max-width: 760px; margin: 1.8rem auto 2rem; padding: 0; border: 0; border-radius: 0; background: transparent; }
+    .dialogue-record .dialogue-caption { margin: 0 0 1.2rem; color: var(--muted); font: .72rem/1.5 var(--text); opacity: .75; }
+    .dialogue-record .chat-line { width: fit-content; max-width: 82%; margin: 0 0 1.5rem auto; padding: .85rem 1.15rem; border: 1px solid #34443a; border-radius: 20px 20px 5px 20px; background: #223128; }
+    .dialogue-record .chat-line > strong { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .dialogue-record .chat-line p { margin: 0; color: var(--ink); font-size: .98rem; line-height: 1.8; }
+    .dialogue-record .chat-line.agent { position: relative; width: auto; max-width: 94%; margin: 0; padding: 0 0 0 2.65rem; border: 0; border-radius: 0; background: transparent; }
+    .dialogue-record .chat-line.agent .agent-avatar { position: absolute; top: -9px; left: -9px; width: 47px; height: 47px; margin: 0; aspect-ratio: 1; object-fit: contain; background: transparent; }
+    .dialogue-record .chat-line.agent > strong { position: static; display: block; width: auto; height: auto; overflow: visible; clip-path: none; margin: .1rem 0 .4rem; color: var(--ink); font-size: .84rem; font-weight: 600; }
+    .dialogue-record .chat-line.agent p { color: var(--muted); }
+    @media (max-width: 620px) {
+      .dialogue-record { margin-block: 1.4rem 1.8rem; }
+      .dialogue-record .chat-line { max-width: 90%; padding: .75rem .95rem; }
+      .dialogue-record .chat-line.agent { max-width: 100%; padding-left: 2.4rem; }
+    }
+    .client-result { margin: 2rem 0; }
+    .client-result img { border: 1px solid var(--line); border-radius: 8px; }
+    .terminal { margin: 1rem 0; padding: 1.1rem; background: #080e0b; border-radius: 8px; overflow-x: auto; font: .84rem/1.8 "Cascadia Code", Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .record-stats { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: .75rem; margin: 1rem 0; }
+    .record-stats div { border-top: 1px solid #46584c; padding-top: .7rem; }
+    .record-stats strong { display: block; font-size: 1.8rem; color: #c7e4ab; }
+    .record-stats span { color: #b5c0b8; font-size: .85rem; }
+    .record-note { color: #b5c0b8; font-size: .82rem !important; }
+
+    .opening-note { max-width: 680px; margin: 1.8rem auto 0; color: var(--muted); font-size: 1.05rem; line-height: 1.9; }
+    .iteration-image { margin: 2rem 0; }
+    .terminal-window { margin: 2rem 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: #080e0b; }
+    .terminal-window .terminal-bar { display: flex; flex-wrap: wrap; gap: .7rem; padding: .85rem 1.1rem; border-bottom: 1px solid var(--line); background: #1b2520; color: var(--ink); }
+    .terminal-bar span { margin-left: auto; color: var(--muted); font-size: .72rem; }
+    .terminal-body { padding: clamp(1rem, 3vw, 1.5rem); }
+    .terminal-body .terminal-label { font-size: .82rem; line-height: 1.7; color: var(--muted); margin-bottom: .6rem; }
+    .terminal-body .terminal { padding: 0; margin: .6rem 0 1.5rem; font-size: .85rem; }
+    .terminal-window .record-stats strong { font-size: clamp(1.3rem, 4vw, 1.8rem); white-space: nowrap; }
+    .terminal-window .record-stats span { font-size: .78rem; }
+    .terminal-prompt, .eyebrow { color: var(--accent); }
+    .terminal-error { color: #e3b58b; }
+    .eyebrow { font-size: .85rem !important; }
+    .future-replay { margin: 2rem 0 2.5rem; }
+    .future-replay video { border: 1px solid var(--line); border-radius: 10px; }
+    .motion-preview { margin: 1.6rem 0 2rem; }
+    .motion-preview video { border: 1px solid var(--line); border-radius: 8px; }
+
+    .opening-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .opening-card { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: #142019; }
+    .opening-card video { object-fit: contain; }
+    .opening-card figcaption { padding: 1rem 1.1rem 1.2rem; }
+    .opening-card .scene-index { display: block; margin-bottom: .55rem; color: var(--accent); font-size: .7rem; letter-spacing: .12em; }
+    .opening-card strong { display: block; color: var(--ink); font-family: var(--display); font-size: clamp(1rem, 1.6vw, 1.35rem); font-weight: 500; }
+    .opening-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+    .opening-toolbar p { flex: 1 1 260px; margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.7; }
+    .opening-toolbar button { min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--line); border-radius: 24px; background: transparent; color: var(--ink); font: inherit; font-size: .82rem; cursor: pointer; }
+    .opening-toolbar button:hover { background: #25372b; border-color: var(--accent); }
+    @media (max-width: 680px) {
+      .opening-grid { grid-template-columns: 1fr; gap: 18px; }
+      .opening-card figcaption { display: flex; align-items: baseline; gap: 1rem; padding: .8rem 1rem; }
+      .opening-card .scene-index { margin: 0; }
+    }
+
+    body:not(.media-ready) { overflow: hidden; }
+    body:not(.media-ready) > .wrap { display: none; }
+    .page-loader { min-height: 100svh; display: grid; place-items: center; padding: 2rem; }
+    .loader-inner { width: min(420px, 100%); }
+    .loader-brand { color: var(--accent); letter-spacing: .16em; font-size: .76rem; }
+    .loader-inner h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 1.4rem 0; }
+    .loader-inner p { color: var(--muted); line-height: 1.8; font-size: .9rem; }
+    .loader-progress { width: 100%; height: 3px; margin: 1rem 0; accent-color: var(--accent); }
+    #loader-retry { padding: .7rem 1.2rem; border: 1px solid var(--line); border-radius: 24px; color: var(--ink); background: transparent; cursor: pointer; }
+    .media-ready .page-loader { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page-loader" role="status" aria-live="polite">
+    <div class="loader-inner">
+      <div class="loader-brand">ASTRA × BLENDER × RENDERBUS</div>
+      <h2>同一间教室，<br>不同的可能。</h2>
+      <p id="loader-message">正在准备完整画面，加载完成后自动进入。</p>
+      <progress class="loader-progress" id="loader-progress" value="0" max="100" aria-label="素材下载进度"></progress>
+      <p id="loader-detail">0%</p>
+      <button type="button" id="loader-retry" hidden>重新加载</button>
+      <noscript><p>请开启浏览器 JavaScript，以加载视频和交互画面。</p></noscript>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="mast">
+      <strong>Blender 场景实验</strong>
+      <nav aria-label="文章目录">
+        <a href="#variants">四种结局</a>
+        <a href="#farm">从工程到成片</a>
+        <a href="#credits">作品署名</a>
+      </nav>
+    </div>
+    <main>
+      <article>
+        <header>
+          <h1>我只说了四句话，<span>Astra 让一间教室<br>经历了四种结局</span></h1>
+          <p class="lead">桌椅慢慢离地，墙面老去，藤蔓爬上黑板，洪水冲进教室。<br>这些以前让我想到制作成本就放下的念头，这次，我让 Astra 一步步做了出来。</p>
+        </header>
+        <div class="opening-showcase" role="group" aria-label="同一间教室，三种动态变化">
+          <div class="opening-grid">
+            <figure class="opening-card">
+              <video loop muted playsinline preload="auto" width="1920" height="1080" aria-label="失重动画，静音循环播放" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-farm.mp4"></video>
+              <figcaption><span class="scene-index">01 / 失重</span><strong>让桌椅飘起来。</strong></figcaption>
+            </figure>
+            <figure class="opening-card">
+              <video loop muted playsinline preload="auto" width="1920" height="1080" aria-label="荒废动画，静音循环播放" data-poster="article-media/aging-farm-poster.jpg" data-src="article-media/aging-farm.mp4"></video>
+              <figcaption><span class="scene-index">02 / 荒废</span><strong>像很久没人来过。</strong></figcaption>
+            </figure>
+            <figure class="opening-card">
+              <video loop muted playsinline preload="auto" width="1920" height="1080" aria-label="洪水动画，静音循环播放" data-poster="article-media/8b8d97246329a84c.jpeg" data-src="article-media/f841c31eb2fa537c.mp4"></video>
+              <figcaption><span class="scene-index">03 / 洪水</span><strong>把它淹了。</strong></figcaption>
+            </figure>
+          </div>
+          <div class="opening-toolbar">
+            <p id="opening-status" aria-live="polite">三种变化，同时开始。静音循环播放，结束后停留在最后一帧。</p>
+            <button type="button" id="opening-toggle">播放</button>
+            <button type="button" id="opening-replay">↻ 重新播放</button>
+          </div>
+          <p class="opening-note">四个想法，说出来只要四句话。把它们变成眼前的画面，中间还得一遍遍看、一遍遍改。</p>
+        </div>
+
+        <section aria-labelledby="start">
+          <div class="prose">
+            <h2 id="start">事情一开始，只是想换个光</h2>
+            <p>一开始，我就想看看教室变成黄昏是什么样。看完觉得还挺有意思，又想看看它荒废已久的样子，让桌椅飘起来。最后干脆问了一句，能不能把这里淹了？下面是教室最初的样子。</p>
+          </div>
+          <figure class="original">
+            <img data-src="article-media/2b613f18b87412bd.jpeg" alt="改造前的教室，桌椅整齐排在黑板前">
+            <figcaption>改造前的教室</figcaption>
+          </figure>
+        </section>
+
+        <section id="variants" aria-labelledby="variants-heading">
+          <h2 id="variants-heading">要求，一次比一次离谱</h2>
+          <div class="variants">
+            <figure class="variant">
+              <h3>「把下午改成黄昏。」</h3>
+              <p class="dialogue-caption">对话按实际制作过程整理，非逐字记录。</p><div class="process-record dialogue-record" role="group" aria-label="黄昏对话示意">
+                
+                <div class="chat-line">
+                  <strong>我</strong>
+                  <p>把这个教室弄成黄昏的感觉，暖一点，像快放学了。</p>
+                </div>
+              </div>
+
+              <div class="wire-split">
+                <img data-src="article-media/13847e1f881f9bb5.jpeg" alt="黄昏的教室，低角度暖光穿过百叶窗">
+                <img class="wire-clay" data-src="article-media/8b22de34d2888c16.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">成片</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true">↔</span>
+              </div>
+              <p>Astra 把太阳压低，色温调到 2400 K。光穿过百叶窗，在墙面和课桌上留下长长的影子。教室一下有了放学后的感觉。</p>
+              <p>黄昏看完，我想再往前推一步。如果很久都没人进来，这间教室会变成什么样？</p>
+            </figure>
+            <figure class="variant">
+              <h3>「让这里像很久没人来过。」</h3>
+              <div class="process-record dialogue-record" role="group" aria-label="废弃对话示意">
+                
+                <div class="chat-line">
+                  <strong>我</strong>
+                  <p>再试试荒废已久的样子，破旧一点，长些植物。</p>
+                </div>
+              </div>
+
+              <figure class="motion-preview">
+  <video controls data-autoplay="true" loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/aging-farm-poster.jpg" data-src="article-media/aging-farm.mp4" aria-label="教室逐渐荒废动画，墙面斑驳，桌椅歪倒，藤蔓生长，纸张落叶堆积，9秒无声"></video>
+  <figcaption>9 秒时光流逝动画 · Renderbus 1080p 成片 · 以原荒废效果图为终点，逐渐走向墙面斑驳、桌椅散乱、藤蔓覆盖和杂物堆积。变化速度为艺术化表达，末尾停留 1 秒。</figcaption>
+</figure>
+<div class="wire-split">
+                <img data-src="article-media/aecb2b911b431591.jpeg" alt="废弃教室，桌椅倾倒，藤蔓沿墙爬向黑板">
+                <img class="wire-clay" data-src="article-media/4b6f6d96bde5c68d.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">成片</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true">↔</span>
+              </div>
+              <p>墙皮褪色，桌椅歪倒，废纸和枯叶堆在角落。换成手工，我光想到要挨个做旧、摆杂物、铺藤蔓，大概就会把这个念头先放一放。</p>
+              <p>Astra 把原来的荒废效果图作为终点，让积尘、污渍和剥落逐渐加深，桌椅慢慢歪倒，纸张与落叶积起来。藤蔓则由几何节点控制生长和叶片展开，最后回到那片爬上黑板边缘的常春藤。</p><figure class="motion-preview">
+  <video controls data-autoplay="true" loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/aging-timelapse-process-poster.jpg" data-src="article-media/aging-timelapse-process-replay.mp4" aria-label="荒废已久制作步骤回放，一次要求后Astra说明进展，展示真实Blender工程和几何节点"></video>
+  <figcaption>制作步骤回放 · 一次提出想法，由 Astra 说明后续进展。右侧展示真实 Blender 工程、藤蔓几何节点和渲染预览；对话经整理，非原始实时录像。</figcaption>
+</figure><p>看着常春藤爬到黑板边上，我开始想试试更不讲道理的画面。</p>
+            </figure>
+            <figure class="variant">
+              <h3>「让桌椅都飘起来。」</h3>
+              <div class="process-record dialogue-record" role="group" aria-label="失重对话示意">
+                
+                <div class="chat-line">
+                  <strong>我</strong>
+                  <p>让桌椅都飘起来，像没有重力一样。</p>
+                </div>
+              </div>
+
+              <figure class="motion-preview">
+  <video controls data-autoplay="true" loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-farm.mp4" aria-label="失重动画1080p成片，桌椅分批升起旋转，纸张漂浮，8秒无声"></video>
+  <figcaption>8 秒失重动画 · Renderbus 1080p 成片。桌椅分批升起，纸张逐渐漂浮，以关键帧控制运动，不含刚体碰撞模拟。</figcaption>
+</figure>
+<div class="wire-split">
+                <img data-src="article-media/2164b0ecfe25d0d1.jpeg" alt="失重教室，课桌、椅子和纸张悬浮在空中">
+                <img class="wire-clay" data-src="article-media/cd76a6fa17e4a336.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">成片</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true">↔</span>
+              </div>
+              <p>课桌和椅子错开时间离开地面，纸张随后飘起来。升起以后，物体仍然有轻微的旋转和漂移，教室像突然失去了重力。</p>
+              <p>Astra 沿用静态构图中的视线安排，让镜头前的几张桌椅留在原处，再给后排物体分配不同的起飞时间、高度和旋转幅度。先看低清动画，确认运动节奏，再决定哪里需要继续调整。</p><figure class="motion-preview">
+  <video controls data-autoplay="true" loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/zerog-process-poster.jpg" data-src="article-media/zerog-process-replay.mp4" aria-label="失重动画制作步骤回放，一次要求后由Astra说明进展，右侧为真实Blender动画工程"></video>
+  <figcaption>制作步骤回放 · 一次提出想法，由 Astra 说明后续进展。右侧为真实 Blender 动画工程与渲染预览；对话经整理，非原始实时录像。可全屏查看。</figcaption>
+</figure>
+            </figure>
+            <figure class="variant">
+              <h3>「把教室淹了。」</h3>
+              <div class="process-record dialogue-record" role="group" aria-label="洪水对话示意">
+                
+                <div class="chat-line">
+                  <strong>我</strong>
+                  <p>能不能把教室淹了？水从窗户冲进来，做成一小段动画。</p>
+                </div>
+                <div class="chat-line agent">
+                  <img class="agent-avatar" data-src="article-media/openai-blossom-white.svg" alt="OpenAI" width="29" height="29">
+                  <strong>Astra</strong>
+                  <p>可以试试。我先让水从窗边冲进来，镜头跟着往前走。先看水的效果，再慢慢调。</p>
+                </div>
+              </div>
+
+              <img data-src="article-media/8b8d97246329a84c.jpeg" alt="洪水涌进教室，浪花从课桌之间掀起">
+              <p>这次，光靠调整摆放已经不够了。水要从窗口涌进来，穿过课桌，掀起浪花；镜头往前推进时，还要能看清教室。</p>
+              <p>Astra 在 Blender 里搭建流体域，从窗边放水，让水绕过课桌，在桌腿之间拍出浪花。再加上飞沫粒子，调整相机推进的节奏，让视线跟着水往教室深处走。精修版一次流体解算约 25 分钟。</p>
+              <p>如果每个临时冒出的想法，都要先为这套流程排出时间，很多尝试可能就停在脑子里了。这次，我可以先把要求说出来，再根据跑出来的结果决定下一步。</p>
+            </figure>
+          </div>
+        </section>
+
+<section aria-labelledby="working"><div class="prose"><h2 id="working">洪水也曾变成一场「暴雪」</h2><p>加上粒子以后，水花是有了，却密得像在下雪。屏幕里到处都是白点，水流本身反而看不清了。</p></div><figure class="iteration-image"><img data-src="article-media/flood-particles-before.png" alt="调整前的第60帧：大量白色飞沫覆盖教室"><figcaption>调整前 · 第 60 帧预览，飞沫与泡沫过密。</figcaption></figure><div class="process-record dialogue-record" role="group" aria-label="飞沫调整对话示意">
+                
+                <div class="chat-line">
+                  <strong>我</strong>
+                  <p>这个水花怎么像下雪了，能不能自然一点？</p>
+                </div>
+                <div class="chat-line agent">
+                  <img class="agent-avatar" data-src="article-media/openai-blossom-white.svg" alt="OpenAI" width="29" height="29">
+                  <strong>Astra</strong>
+                  <p>确实有点像下雪了。我把泡沫减掉，水滴也缩小一点，再出一版看看。</p>
+                </div>
+              </div>
+
+            <figure class="iteration-image"><img data-src="article-media/flood-particles-after.png" alt="调整后的第60帧：农场重渲的洪水画面"><figcaption>调整后 · 农场重渲的第 60 帧。期间也调整了镜头等细节，并非只改变粒子的对照实验。</figcaption></figure><div class="prose"><p>Astra 调整粒子显示、液滴大小和材质，再渲染检查；入水、浪的高度和镜头也经过多轮调整。</p><p>我不用先说清每一个参数，只要看着结果指出哪里感觉不对。想法可以先说个大概，细节随着画面一点点补上。</p></div></section><section id="farm" aria-labelledby="farm-heading">
+          <div class="prose">
+            <h2 id="farm-heading">最后一步，<br>交给 Renderbus CLI</h2>
+            <p>水面、飞沫和运镜调到满意后，我们用 <strong>Renderbus CLI 把 96 帧提交到云渲染农场</strong>。第一轮出图缺了几张贴图，补齐后重新渲染，再下载帧序列，合成了预告中那段洪水的完整四秒 1080p 镜头。</p>
+
+              <div class="process-record dialogue-record" role="group" aria-label="农场提交对话示意">
+                
+                <div class="chat-line">
+                  <strong>我</strong>
+                  <p>这个效果可以，帮我用 Renderbus CLI 提交到农场渲染吧。</p>
+                </div>
+                <div class="chat-line agent">
+                  <img class="agent-avatar" data-src="article-media/openai-blossom-white.svg" alt="OpenAI" width="29" height="29">
+                  <strong>Astra</strong>
+                  <p>好，我先检查文件和贴图，再用 CLI 把这 96 帧提交上去，渲完下载回来。</p>
+                </div>
+              </div>
+
+            <figure class="terminal-window">
+<figcaption class="terminal-bar">›_ CMD · Renderbus CLI <span>执行记录节选</span></figcaption>
+<div class="terminal-body">
+<p class="terminal-label">flood_farm.blend · 1920 × 1080 · 1–96 帧</p>
+<p class="terminal-label">首次提交流程停在上传阶段，错误节选：</p>
+<pre class="terminal terminal-error"><code>E_DAEMON_UNREACHABLE: submit pipeline stopped at stage upload
+… to resume: rft submit --task-id 240500631</code></pre>
+<p class="terminal-label">沿用已有任务继续提交；命令按 CMD 格式整理：</p>
+<pre class="terminal"><code><span class="terminal-prompt">C:\&gt;</span> rft --zone gpu75 submit ^
+      --task-id 240500631 ^
+      --yes</code></pre>
+<p class="terminal-label">第一轮出图仍有贴图缺失。补齐资产、重渲后，再查询任务：</p>
+<pre class="terminal"><code><span class="terminal-prompt">C:\&gt;</span> rft --json --zone gpu75 task get 240500631</code></pre>
+<div class="record-stats" aria-label="已核验的渲染结果"><div><strong>96 / 96</strong><span>帧已完成</span></div><div><strong>0</strong><span>失败帧</span></div><div><strong>1080p</strong><span>下载后的帧尺寸</span></div></div>
+<p class="record-note">结果为 2026 年 11 月 11 日核验后的摘要，不是实时终端。完整帧序列已下载，并抽查第 1、48、96 帧日志。</p>
+</div></figure>
+<figure class="client-result">
+              <a href="article-media/renderbus-client-completed.png" target="_blank" rel="noopener" aria-label="打开完整 Renderbus 客户端截图">
+                <img data-src="article-media/renderbus-client-completed.png" alt="Renderbus 客户端中的 flood_farm.blend 任务，96 帧完成、0 帧失败，分辨率为 1920×1080" width="1000" height="700">
+              </a>
+              <figcaption>提交后在 Renderbus 客户端查看结果 · 96 帧完成，0 帧失败。点击图片可查看原图。</figcaption>
+            </figure>
+
+<details class="terminal-window" id="animation-farm-record">
+<summary class="terminal-bar">›_ 两段动画，也交给农场 <span>真实提交记录 · 2026 年 11 月 12 日</span></summary>
+<div class="terminal-body">
+<p>桌椅失重和逐渐荒废都做成了 96 帧动画，再用同样的 CLI 流程提交到 Renderbus，渲染 1080p 帧序列。</p>
+<p class="terminal-label">分析并打包资产后，沿用已有任务号提交。以下命令按 CMD 格式整理：</p>
+<pre class="terminal"><code><span class="terminal-prompt">C:\&gt;</span> rft --zone gpu75 submit --task-id 240536419 --yes
+<span class="terminal-prompt">C:\&gt;</span> rft --zone gpu75 submit --task-id 240536491 --yes
+
+<span class="terminal-prompt">C:\&gt;</span> rft --json --zone gpu75 task get 240536419
+<span class="terminal-prompt">C:\&gt;</span> rft --json --zone gpu75 task get 240536491</code></pre>
+<p class="record-note">失重任务 240536419、荒废任务 240536491 均已完成 96 / 96 帧，失败帧为 0。两个任务使用 Blender 5.1.1，输出分辨率为 1920 × 1080。</p>
+<p class="record-note">两套帧序列已完整下载并检查文件可读性，抽查首帧、中间帧与末帧。上文独立动画和开头预告已替换为农场成片，制作步骤回放保留当时的工作预览。<a href="animation-farm-evidence.json">查看带时间的核验摘要</a></p>
+</div></details>
+
+            <p>以前遇到「让洪水冲过教室」这种念头，我会先想自己有没有时间搭模拟、改粒子、调镜头。现在，我可以先让 Astra 跑一版，看看水怎么流、镜头能拍到什么，再决定哪些地方值得继续做。</p>
+            <p><a href="https://www.renderbus.com/">了解 Renderbus 云渲染</a></p>
+            
+          </div>
+        </section>
+<section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">彩蛋 · 教室还有下一种可能</p><h2 id="future-heading">如果这间教室在太空里呢？</h2><p>后来，这间教室又被改成了一间轨道实验室。最开始是偏霓虹的灯光和轨道示意屏，继续调整后，金属墙板、桌面终端和讲台上的天体仪，让它更像一个可以上课的空间站。</p></div><figure class="future-replay">
+  <video controls data-autoplay="true" loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/future-process-poster.jpg" aria-label="未来教室制作步骤回放，左侧一次创意要求与Astra的分步进展，右侧真实Blender界面，28秒无声" data-src="article-media/future-process-replay.mp4"></video>
+  <figcaption>28 秒步骤回放：一次说出想法，随后由 Astra 说明各步进展。右侧在真实 Blender 工程中逐步显现已有模型、检查布线，最后查看成片。对话经整理，非原始实时录像。可使用播放器全屏查看。</figcaption>
+</figure>
+<figure class="iteration-image"><img data-src="article-media/future-first.png" alt="未来教室早期版：青蓝和品红灯光、轨道示意屏"><figcaption>早期方向 · 霓虹教学实验室</figcaption></figure><figure class="iteration-image"><img data-src="article-media/future-final.png" alt="未来教室最终版：金属墙板、桌面终端和天体仪"><figcaption>继续调整后 · 轨道实验室</figcaption></figure><div class="prose"><p>同一个起点，可以沿着不同的想法继续往下做。不用等到所有细节都想清楚，先试一版，再决定下一步。</p><blockquote>你想让 Astra 下一次实现什么构思？</blockquote></div></section>      </article>
+    </main>
+    <footer id="credits">
+      原始场景《Classroom》由 Christophe Seux 制作，采用 CC0 授权。场景改造由 Astra 协助编写脚本，画面由 Blender Cycles 渲染。<a href="https://www.blender.org/download/demo-files/">Blender 官方 Demo 文件</a>
+    </footer>
+  </div>
+  <script>
+    const opening = document.querySelector('.opening-showcase');
+    const openingVideos = [...opening.querySelectorAll('video')];
+    const toggle = document.querySelector('#opening-toggle');
+    const openingStatus = document.querySelector('#opening-status');
+    let openingStarted = false;
+    const ready = video => video.readyState >= 2 ? Promise.resolve() : new Promise(resolve => {
+      video.addEventListener('loadeddata', resolve, { once: true });
+    });
+    const updateOpening = () => {
+      const playing = openingVideos.some(video => !video.paused && !video.ended);
+      toggle.textContent = playing ? '暂停' : '播放';
+    };
+    const playOpening = async (restart = false) => {
+      openingStarted = true;
+      await Promise.all(openingVideos.map(ready));
+      if (restart || openingVideos.every(video => video.ended)) {
+        openingVideos.forEach(video => { video.currentTime = 0; });
+      }
+      const results = await Promise.allSettled(openingVideos.filter(video => !video.ended).map(video => video.play()));
+      openingStatus.textContent = results.some(result => result.status === 'rejected')
+        ? '点击“播放”，一起查看三种变化。'
+        : '同时起播，各自静音循环播放，可随时暂停。';
+      updateOpening();
+    };
+    openingVideos.forEach(video => {
+      video.addEventListener('ended', updateOpening);
+      video.addEventListener('pause', updateOpening);
+    });
+    toggle.addEventListener('click', () => {
+      if (openingVideos.some(video => !video.paused && !video.ended)) {
+        openingVideos.forEach(video => video.pause());
+      } else { playOpening(); }
+    });
+    document.querySelector('#opening-replay').addEventListener('click', () => playOpening(true));
+    const openingObserver = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting) && !openingStarted) {
+        openingObserver.disconnect();
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) playOpening();
+      }
+    }, { threshold: 0.15 });
+    openingObserver.observe(opening);
+
+    document.querySelectorAll('.wire-slider').forEach(slider => {
+      const comparison = slider.closest('.wire-split');
+      const update = () => {
+        const value = slider.valueAsNumber;
+        comparison.style.setProperty('--split', value + '%');
+        if (value === 0 || value === 100) {
+          comparison.dataset.view = value === 0 ? 'clay' : 'render';
+        } else {
+          delete comparison.dataset.view;
+        }
+        slider.setAttribute('aria-valuetext', '成片 ' + value + '%');
+      };
+      slider.addEventListener('input', update);
+      update();
+    });
+  </script>
+<script src="load-gallery.js"></script>
+</body>
+</html>

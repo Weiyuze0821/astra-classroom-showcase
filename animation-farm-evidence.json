@@ -1,0 +1,59 @@
+{
+  "verified_at": "2026-11-12T14:34:37+08:00",
+  "zone": "gpu75",
+  "software_config": "5.1",
+  "cloud_blender": "5.1.1",
+  "resolution": [
+    1920,
+    1080
+  ],
+  "fps": 12,
+  "gpu_count": 1,
+  "ram_gb": 64,
+  "tasks": [
+    {
+      "task_id": 240536419,
+      "scene": "zerog-farm.blend",
+      "status": "done",
+      "frames": 96,
+      "frames_done": 96,
+      "frames_failed": 0,
+      "submit_command": "rft --zone gpu75 submit --task-id 240536419 --yes",
+      "verify_command": "rft --json --zone gpu75 task get 240536419",
+      "frame_log_verified": 1,
+      "downloaded_frames": 96,
+      "decoded_frames": 96,
+      "inspected_frames": [
+        1,
+        48,
+        96
+      ],
+      "article_video": "article-media/zerog-farm.mp4"
+    },
+    {
+      "task_id": 240536491,
+      "scene": "aging-farm.blend",
+      "status": "done",
+      "frames": 96,
+      "frames_done": 96,
+      "frames_failed": 0,
+      "submit_command": "rft --zone gpu75 submit --task-id 240536491 --yes",
+      "verify_command": "rft --json --zone gpu75 task get 240536491",
+      "frame_log_verified": 1,
+      "downloaded_frames": 96,
+      "decoded_frames": 96,
+      "inspected_frames": [
+        1,
+        48,
+        96
+      ],
+      "article_video": "article-media/aging-farm.mp4"
+    }
+  ],
+  "notes": [
+    "CLI 1.0.7 Blender analysis bundle repaired in an isolated directory using the local analyzer source.",
+    "Transfer daemon used the running Renderbus client HTTP service.",
+    "Local submit commands returned connection errors; subsequent cloud task, frame lists and node logs confirm both tasks rendering. No duplicate submission was issued after cloud verification.",
+    "All 192 downloaded frames decoded at 1920x1080. Frames 1, 48 and 96 of each animation visually inspected. Article animations and opening montage replaced with farm output; historical Blender UI replays retained."
+  ]
+}
