@@ -202,6 +202,7 @@
   </div>
 
 
+
   <div class="wrap">
     <div class="mast">
       <strong>Blender 场景实验</strong>
@@ -380,19 +381,21 @@
 <div class="replay-layout">
 <div class="replay-conversation" tabindex="0" aria-label="回放对话，可滚动查看">
 <div class="replay-message user" data-replay-step="0"><span>我</span><p>这个效果可以，帮我提交到 Renderbus 渲染吧。</p></div>
-<div class="replay-message" data-replay-step="0"><span>Astra</span><p>我先检查工程和资产，再提交这段失重动画。96 帧，1080p。</p></div>
-<div class="replay-message" data-replay-step="1" hidden><span>Astra</span><p>云端已经开始渲染。任务号 <b>240536419</b>。本地提交回执出现过连接中断，我查询了云端状态和节点日志，确认任务已经在运行。</p></div>
-<div class="replay-message user" data-replay-step="2" hidden><span>我</span><p>现在渲到哪了？</p></div>
-<div class="replay-message" data-replay-step="2" hidden><span>Astra</span><p>这次查询已完成 <b>9 / 96 帧</b>，失败帧为 0，其余还在渲染。</p><div class="replay-progress"><span></span></div><small>实际查询快照 · 非实时进度</small></div>
-<div class="replay-message replay-delivery" data-replay-step="3" hidden><span>Astra</span><p>渲染完成，<b>96 / 96 帧，0 失败</b>。帧序列已下载，检查后合成了这段 1080p 动画，你可以直接看。</p>
+<div class="replay-message" data-replay-step="0"><span>Astra</span><p>这次沿用之前洪水任务跑通的 CLI 流程。我先确认本机 Blender、云端软件配置和登录状态，再检查工程与资产。</p></div>
+<div class="replay-message" data-replay-step="1" hidden><span>Astra</span><p>本机是 Blender 5.1.0，已找到安装路径；云端已有名为 <b>5.1</b> 的配置，对应 Blender 5.1.1。登录由你在浏览器里完成后，云端查询已恢复。</p></div>
+<div class="replay-message" data-replay-step="2" hidden><span>Astra</span><p>工程已打包，50 张图像已内嵌，没有缺失图像。CLI 自带的 Blender 分析包仍有缺项，我沿用之前的修复方式，在临时目录补齐分析器。分析通过，再按单卡、64 GB、96 帧、1080p 提交。</p></div>
+<div class="replay-message" data-replay-step="3" hidden><span>Astra</span><p>云端已经开始渲染。任务号 <b>240536419</b>。本地提交回执出现过连接中断，我查询了云端状态和节点日志，确认任务已经在运行。</p></div>
+<div class="replay-message user" data-replay-step="4" hidden><span>我</span><p>现在渲到哪了？</p></div>
+<div class="replay-message" data-replay-step="4" hidden><span>Astra</span><p>这次查询已完成 <b>9 / 96 帧</b>，失败帧为 0，其余还在渲染。</p><div class="replay-progress"><span></span></div><small>实际查询快照 · 非实时进度</small></div>
+<div class="replay-message replay-delivery" data-replay-step="5" hidden><span>Astra</span><p>渲染完成，<b>96 / 96 帧，0 失败</b>。帧序列已下载，检查后合成了这段 1080p 动画，你可以直接看。</p>
 <video id="replay-result" controls muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-farm.mp4" aria-label="Astra 交付的失重动画，真实农场成片"></video>
 <a href="article-media/zerog-farm.mp4" download="astra-classroom-zerog-1080p.mp4">↓ 下载成片 · MP4 / 1080p</a></div>
 </div>
 <div class="replay-terminal"><div class="replay-terminal-title">›_ CLI 执行记录 <span>任务 240536419</span></div>
 <pre id="replay-command"></pre><p id="replay-evidence"></p><a href="animation-farm-evidence.json" target="_blank" rel="noopener">查看核验摘要 ↗</a></div>
 </div>
-<div class="replay-controls"><div class="replay-steps" aria-label="跳转回放步骤"><button type="button" data-replay-jump="0" aria-current="step">01 提交</button><button type="button" data-replay-jump="1">02 云端确认</button><button type="button" data-replay-jump="2">03 查进度</button><button type="button" data-replay-jump="3">04 收到成片</button></div><button type="button" id="replay-toggle">播放回放</button><button type="button" id="replay-restart">↻ 重播</button></div>
-<p class="replay-disclosure">根据失重任务的真实命令、查询结果与下载文件整理；对话为编辑重述，非逐字聊天记录或原始实时录屏。9 / 96 与 96 / 96 是两次真实查询快照，中间等待已省略。末尾视频为该任务的实际成片。</p>
+<div class="replay-controls"><div class="replay-steps" aria-label="跳转回放步骤"><button type="button" data-replay-jump="0" aria-current="step">01 沿用流程</button><button type="button" data-replay-jump="1">02 核对环境</button><button type="button" data-replay-jump="2">03 分析提交</button><button type="button" data-replay-jump="3">04 云端确认</button><button type="button" data-replay-jump="4">05 查进度</button><button type="button" data-replay-jump="5">06 收到成片</button></div><button type="button" id="replay-toggle">播放回放</button><button type="button" id="replay-restart">↻ 重播</button></div>
+<p class="replay-disclosure">根据失重任务的真实命令、查询结果与下载文件整理；对话为编辑重述，非逐字聊天记录或原始实时录屏。9 / 96 与 96 / 96 是两次真实查询快照，安装路径、版本与分析修复来自本次执行记录；登录由用户完成，传输服务也经过排查后恢复。中间等待已省略。末尾视频为该任务的实际成片。</p>
 </div>
             <details class="terminal-window">
 <summary class="terminal-bar">展开洪水任务的原始 CLI 记录</summary>
