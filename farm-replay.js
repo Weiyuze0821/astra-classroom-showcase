@@ -1,9 +1,12 @@
 (() => {
   const root = document.querySelector('#farm-replay');
   const chat = root.querySelector('.replay-conversation');
+  const terminal = root.querySelector('.replay-terminal');
+  const output = root.querySelector('#replay-command');
   const video = root.querySelector('video');
   const toggle = root.querySelector('#replay-toggle');
-  const buttons = [...root.querySelectorAll('[data-replay-jump]')];
+  const messages = [...root.querySelectorAll('[data-replay-step]')];
+  const phases = [...root.querySelectorAll('[data-replay-phase]')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stages = [
     {"command": "核验记录摘要 · 沿用已跑通的流程\n\n前次任务：240500631\n工程：flood_farm.blend\n流程：分析 → 上传 → 提交 → 查询 → 下载", "note": "本次复用洪水任务验证过的 CLI 工作流和分析修复方法，不代表新工程可以跳过环境与资产检查。"},
@@ -13,64 +16,85 @@
     {command: 'C:\\> rft --json --zone gpu75\n     task get 240536419\n\nstatus: rendering\nframes_done: 9\nframes: 96\nframes_failed: 0', note: '实际保存的中途查询：9 帧完成，0 失败。等待过程被压缩，进度不会虚构为连续增长。'},
     {command: 'C:\\> rft --json --zone gpu75\n     task get 240536419\n\nstatus: done\nframes_done: 96\nframes_failed: 0\n\nC:\\> rft --zone gpu75 download submit\n     --task-id 240536419\n     --dest <本地输出目录>', note: '下载命令中的本机目录已缩写。96 张图片均可读取，尺寸为 1920×1080，抽查第 1、48、96 帧后合成为左侧动画。'}
   ];
-  const finalStep = stages.length - 1;
-  let step = 0;
+  const events = [];
+  let timer;
+  let cursor = 0;
   let playing = false;
   let started = false;
-  let timer;
-  function show(index) {
-    step = index;
-    root.querySelectorAll('[data-replay-step]').forEach(message => {
-      message.hidden = Number(message.dataset.replayStep) > step;
-    });
-    buttons.forEach((button, i) => {
-      if (i === step) button.setAttribute('aria-current', 'step');
-      else button.removeAttribute('aria-current');
-    });
-    root.querySelector('#replay-command').textContent = stages[step].command;
-    root.querySelector('#replay-evidence').textContent = stages[step].note;
-    chat.scrollTop = step === finalStep ? root.querySelector('.replay-delivery').offsetTop - 16 : chat.scrollHeight;
-    if (step !== finalStep) video.pause();
-    else if (!reduced) video.play().catch(() => { video.controls = true; });
+  const focus = side => {
+    chat.classList.toggle('is-active', side === 'chat');
+    terminal.classList.toggle('is-active', side === 'terminal');
+  };
+  function reveal(message) {
+    focus('chat');
+    message.hidden = false;
+    message.classList.add('is-entering');
+    chat.scrollTop = message.classList.contains('replay-delivery') ? message.offsetTop - 16 : chat.scrollHeight;
   }
-  function pause() {
-    clearTimeout(timer);
-    playing = false;
-    video.pause();
-    toggle.textContent = step === finalStep ? '播放成片' : '继续回放';
+  stages.forEach((stage, index) => {
+    events.push({delay: 400, run() {
+      phases.forEach((phase, i) => {
+        if (i === index) phase.setAttribute('aria-current', 'step');
+        else phase.removeAttribute('aria-current');
+      });
+    }});
+    const group = messages.filter(message => Number(message.dataset.replayStep) === index);
+    group.filter(message => message.classList.contains('user')).forEach(message => {
+      events.push({delay: 1700, run: () => reveal(message)});
+    });
+    events.push({delay: 500, run() {
+      focus('terminal'); output.textContent = '';
+      root.querySelector('#replay-evidence').textContent = stage.note;
+    }});
+    stage.command.split('\n').forEach(line => {
+      events.push({delay: line ? 230 : 100, run() { output.textContent += line + '\n'; }});
+    });
+    group.filter(message => !message.classList.contains('user')).forEach(message => {
+      events.push({delay: index === stages.length - 1 ? 11000 : 3300, run() {
+        reveal(message);
+        if (message.classList.contains('replay-delivery')) {
+          video.currentTime = 0;
+          video.play().catch(() => { video.controls = true; });
+        }
+      }});
+    });
+  });
+  function reset() {
+    cursor = 0; video.pause(); video.currentTime = 0;
+    messages.forEach(message => { message.hidden = true; message.classList.remove('is-entering'); });
+    phases.forEach(phase => phase.removeAttribute('aria-current'));
+    output.textContent = ''; chat.scrollTop = 0;
   }
   function advance() {
-    if (step === finalStep) {
-      playing = false;
-      toggle.textContent = video.paused ? '播放成片' : '暂停成片';
-      return;
-    }
-    timer = setTimeout(() => { show(step + 1); advance(); }, step < 3 ? 8500 : 6000);
+    if (!playing) return;
+    if (cursor === events.length) reset();
+    const event = events[cursor++];
+    event.run();
+    timer = setTimeout(advance, event.delay);
+  }
+  function pause() {
+    clearTimeout(timer); playing = false; video.pause();
+    toggle.textContent = '继续回放';
   }
   function play() {
-    started = true;
-    if (step === finalStep) { video.play().catch(() => { video.controls = true; }); return; }
-    clearTimeout(timer);
-    playing = true;
-    toggle.textContent = '暂停回放';
+    if (!started && reduced) reset();
+    started = true; playing = true; toggle.textContent = '暂停回放';
+    if (!root.querySelector('.replay-delivery').hidden && !video.ended) video.play().catch(() => { video.controls = true; });
     advance();
   }
-  toggle.addEventListener('click', () => playing || !video.paused ? pause() : play());
-  video.addEventListener('play', () => { if (step === finalStep) toggle.textContent = '暂停成片'; });
-  video.addEventListener('pause', () => { if (step === finalStep) toggle.textContent = '播放成片'; });
-  video.addEventListener('ended', () => { toggle.textContent = '播放成片'; });
-  root.querySelector('#replay-restart').addEventListener('click', () => {
-    pause(); video.currentTime = 0; show(0); play();
-  });
-  buttons.forEach((button, index) => button.addEventListener('click', () => {
-    started = true; pause(); show(index); toggle.textContent = index === finalStep ? (video.paused ? '播放成片' : '暂停成片') : '继续回放';
-  }));
-  show(0);
-  const observer = new IntersectionObserver(entries => {
-    if (entries.some(entry => entry.isIntersecting) && !started) {
-      observer.disconnect();
-      if (!reduced) play();
-    }
-  }, {threshold: 0.2});
-  observer.observe(root);
+  toggle.addEventListener('click', () => playing ? pause() : play());
+  root.querySelector('#replay-restart').addEventListener('click', () => { pause(); reset(); play(); });
+  reset();
+  if (reduced) {
+    messages.forEach(message => { message.hidden = false; });
+    output.textContent = stages.map(stage => stage.command).join('\n\n');
+    toggle.textContent = '播放回放';
+  } else {
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting) && !started) {
+        observer.disconnect(); play();
+      }
+    }, {threshold: 0.2});
+    observer.observe(root);
+  }
 })();
