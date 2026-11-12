@@ -192,6 +192,18 @@
     .replay-terminal.is-active { box-shadow: inset 3px 0 #c7e4ab; }
     .replay-conversation.is-active { box-shadow: inset 3px 0 #c7e4ab; }
     @media(prefers-reduced-motion: reduce) { .replay-message.is-entering { animation: none; } }
+
+    .image-zoom { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+    img[data-zoomable] { cursor: zoom-in; }
+    html.image-preview-open { overflow: hidden; }
+    .image-lightbox { width: min(1120px, 88vw); max-width: none; max-height: 86vh; padding: 1rem; border: 1px solid #536b48; border-radius: 12px; color: var(--ink); background: #142019; box-shadow: 0 24px 100px #0009; }
+    .image-lightbox::backdrop { background: #030805b8; backdrop-filter: blur(3px); }
+    .image-lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .7rem; }
+    .image-lightbox-bar span { font-size: .78rem; color: var(--muted); }
+    .image-lightbox-close { width: 40px; height: 40px; flex-shrink: 0; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); font-size: 1.6rem; cursor: pointer; }
+    .image-lightbox img { width: auto; height: auto; max-width: 100%; max-height: 65vh; object-fit: contain; margin: 0 auto; background: transparent; border-radius: 4px; }
+    .image-lightbox-caption { margin: .8rem 0 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+    @media(max-width: 620px) { .image-lightbox { width: 90vw; padding: .75rem; } }
     body:not(.media-ready) { overflow: hidden; }
     body:not(.media-ready) > .wrap { display: none; }
     .page-loader { min-height: 100svh; display: grid; place-items: center; padding: 2rem; }
@@ -216,6 +228,7 @@
       <noscript><p>请开启浏览器 JavaScript，以加载视频和交互画面。</p></noscript>
     </div>
   </div>
+
 
 
 
@@ -452,16 +465,16 @@
 <button type="button" role="tab" id="farm-tab-flood" aria-controls="farm-panel-flood" aria-selected="false" tabindex="-1"><span>洪水</span><strong>96 / 96</strong><small>帧完成 · 1080p</small></button>
 </div>
 <figure role="tabpanel" id="farm-panel-zerog" aria-labelledby="farm-tab-zerog">
-<a href="article-media/renderbus-web-zerog-completed.png" target="_blank" rel="noopener" aria-label="放大失重任务的网页端任务截图"><img data-src="article-media/renderbus-web-zerog-completed.png" alt="Renderbus 失重任务 240536419：96 帧完成，0 帧失败，1920×1080" width="1920" height="919"></a>
-<figcaption>失重 · 任务 240536419 · 0 失败帧。点击截图查看原图。</figcaption>
+<button type="button" class="image-zoom" aria-label="放大失重任务的网页端任务截图"><img data-src="article-media/renderbus-web-zerog-completed.png" alt="Renderbus 失重任务 240536419：96 帧完成，0 帧失败，1920×1080" width="1920" height="919"></button>
+<figcaption>失重 · 任务 240536419 · 0 失败帧。点击截图在当前页面放大。</figcaption>
 </figure>
 <figure role="tabpanel" id="farm-panel-aging" aria-labelledby="farm-tab-aging" hidden>
-<a href="article-media/renderbus-web-aging-completed.png" target="_blank" rel="noopener" aria-label="放大荒废任务的网页端任务截图"><img data-src="article-media/renderbus-web-aging-completed.png" alt="Renderbus 荒废任务 240536491：96 帧完成，0 帧失败，1920×1080" width="1920" height="919"></a>
-<figcaption>荒废 · 任务 240536491 · 0 失败帧。点击截图查看原图。</figcaption>
+<button type="button" class="image-zoom" aria-label="放大荒废任务的网页端任务截图"><img data-src="article-media/renderbus-web-aging-completed.png" alt="Renderbus 荒废任务 240536491：96 帧完成，0 帧失败，1920×1080" width="1920" height="919"></button>
+<figcaption>荒废 · 任务 240536491 · 0 失败帧。点击截图在当前页面放大。</figcaption>
 </figure>
 <figure role="tabpanel" id="farm-panel-flood" aria-labelledby="farm-tab-flood" hidden>
-<a href="article-media/renderbus-web-flood-completed.png" target="_blank" rel="noopener" aria-label="放大洪水任务的网页端任务截图"><img data-src="article-media/renderbus-web-flood-completed.png" alt="Renderbus 洪水任务 240500631：96 帧完成，0 帧失败，1920×1080" width="1920" height="919"></a>
-<figcaption>洪水 · 任务 240500631 · 0 失败帧。点击截图查看原图。</figcaption>
+<button type="button" class="image-zoom" aria-label="放大洪水任务的网页端任务截图"><img data-src="article-media/renderbus-web-flood-completed.png" alt="Renderbus 洪水任务 240500631：96 帧完成，0 帧失败，1920×1080" width="1920" height="919"></button>
+<figcaption>洪水 · 任务 240500631 · 0 失败帧。点击截图在当前页面放大。</figcaption>
 </figure>
 </div>
 <aside class="farm-promo" aria-labelledby="farm-promo-heading">
@@ -566,6 +579,7 @@
     });
   </script>
 <script src="farm-replay.js"></script>
+<script src="image-lightbox.js"></script>
 <script src="load-gallery.js"></script>
 </body>
 </html>
