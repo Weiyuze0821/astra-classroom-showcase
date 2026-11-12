@@ -65,6 +65,7 @@
 
     .wire-slider { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
     .wire-handle { position: absolute; top: 50%; left: clamp(24px, var(--split), calc(100% - 24px)); transform: translate(-50%, -50%); display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid white; border-radius: 50%; color: white; background: #101714dc; font: 700 24px system-ui; }
+    .wire-handle svg { display: block; width: 24px; height: 24px; }
     .wire-slider:focus-visible + .wire-handle { outline: 3px solid #c7e4ab; outline-offset: 4px; }
     .wire-split[data-view="clay"] .wire-label:not(.wire-label-clay),
     .wire-split[data-view="render"] .wire-label-clay,
@@ -303,7 +304,7 @@
                 <span class="wire-label">成片</span>
                 <span class="wire-label wire-label-clay">白模 · 布线</span>
                 <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
-                <span class="wire-handle" aria-hidden="true">↔</span>
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
               <p>Astra 把太阳压低，色温调到 2400 K。光穿过百叶窗，在墙面和课桌上留下长长的影子。教室一下有了放学后的感觉。</p>
               <p>黄昏看完，我想再往前推一步。如果很久都没人进来，这间教室会变成什么样？</p>
@@ -329,7 +330,7 @@
                 <span class="wire-label">成片</span>
                 <span class="wire-label wire-label-clay">白模 · 布线</span>
                 <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
-                <span class="wire-handle" aria-hidden="true">↔</span>
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
               <p>墙皮褪色，桌椅歪倒，废纸和枯叶堆在角落。换成手工，我光想到要挨个做旧、摆杂物、铺藤蔓，大概就会把这个念头先放一放。</p>
               <p>Astra 把原来的荒废效果图作为终点，让积尘、污渍和剥落逐渐加深，桌椅慢慢歪倒，纸张与落叶积起来。藤蔓则由几何节点控制生长和叶片展开，最后回到那片爬上黑板边缘的常春藤。</p><figure class="motion-preview">
@@ -358,7 +359,7 @@
                 <span class="wire-label">成片</span>
                 <span class="wire-label wire-label-clay">白模 · 布线</span>
                 <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
-                <span class="wire-handle" aria-hidden="true">↔</span>
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
               <p>课桌和椅子错开时间离开地面，纸张随后飘起来。升起以后，物体仍然有轻微的旋转和漂移，教室像突然失去了重力。</p>
               <p>Astra 沿用静态构图中的视线安排，让镜头前的几张桌椅留在原处，再给后排物体分配不同的起飞时间、高度和旋转幅度。先看低清动画，确认运动节奏，再决定哪里需要继续调整。</p><figure class="motion-preview">
