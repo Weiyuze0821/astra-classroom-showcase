@@ -9,13 +9,23 @@
   const phases = [...root.querySelectorAll('[data-replay-phase]')];
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const stages = [
-    {"command": "核验记录摘要 · 沿用已跑通的流程\n\n前次任务：240500631\n工程：flood_farm.blend\n流程：分析 → 上传 → 提交 → 查询 → 下载", "note": "本次复用洪水任务验证过的 CLI 工作流和分析修复方法，不代表新工程可以跳过环境与资产检查。"},
-    {"command": "本次环境核验摘要\n\n本机 Blender：5.1.0\n安装路径：\nC:/Program Files/\nblender-5.1.0-windows-x64\n\n云端配置名：5.1\n云端 Blender：5.1.1\n区域：gpu75\n\n用户完成网页登录后，云端查询恢复。", "note": "这里是实际核验结果的整理，不是伪造的终端原始输出。软件版本、安装路径和云端配置均在分析与提交前核对。"},
-    {command: 'C:\\> rft --zone gpu75 submit\n     --task-id 240536419 --yes', note: '打包图像并检查缺失资产；CLI 1.0.7 分析包缺 Blender 模块，在独立临时目录补齐后分析通过。随后修复传输端口配置并沿用已有任务号提交。命令为实际执行内容，换行仅为展示。'},
-    {command: '本地回执：连接中断\n\nC:\\> rft --json --zone gpu75\n     task get 240536419\n\nstatus: rendering\nframes: 96\nframes_failed: 0', note: '提交回执曾报错；随后云端状态与节点日志确认已开始渲染，因此没有重复提交。这里展示查询字段摘要。'},
-    {command: 'C:\\> rft --json --zone gpu75\n     task get 240536419\n\nstatus: rendering\nframes_done: 9\nframes: 96\nframes_failed: 0', note: '实际保存的中途查询：9 帧完成，0 失败。等待过程被压缩，进度不会虚构为连续增长。'},
-    {command: 'C:\\> rft --json --zone gpu75\n     task get 240536419\n\nstatus: done\nframes_done: 96\nframes_failed: 0\n\nC:\\> rft --zone gpu75 download submit\n     --task-id 240536419\n     --dest <本地输出目录>', note: '下载命令中的本机目录已缩写。96 张图片均可读取，尺寸为 1920×1080，抽查第 1、48、96 帧后合成为左侧动画。'}
-  ];
+  {
+    "command": "核验摘要 · 沿用洪水任务流程\nBlender 路径、版本与云端配置已核对\n图像已打包，缺失项已检查",
+    "note": "准备过程压缩展示：用户完成登录；核对本机 5.1.0 与云端 5.1.1，沿用之前的方法补齐分析器并恢复传输服务。"
+  },
+  {
+    "command": "C:\\> rft --zone gpu75 submit\n     --task-id 240536419 --yes\n\n随后查询云端：status: rendering",
+    "note": "实际提交命令。回执曾连接中断，随后查询及节点日志确认任务在运行，没有重复提交。"
+  },
+  {
+    "command": "C:\\> rft --json --zone gpu75\n     task get 240536419\n\nstatus: rendering\nframes_done: 9 / 96\nframes_failed: 0",
+    "note": "真实查询快照，字段合并展示。中间等待已省略。"
+  },
+  {
+    "command": "查询结果：done · 96 / 96 · 0 失败\n\nC:\\> rft --zone gpu75 download submit\n     --task-id 240536419\n     --dest <本地输出目录>",
+    "note": "完成状态为真实查询摘要，目录已缩写。96 张 1080p 图片均可读取，抽查第 1、48、96 帧后合成为左侧成片。"
+  }
+];
   const events = [];
   let timer;
   let cursor = 0;
@@ -32,7 +42,7 @@
     chat.scrollTop = message.classList.contains('replay-delivery') ? message.offsetTop - 16 : chat.scrollHeight;
   }
   stages.forEach((stage, index) => {
-    events.push({delay: 400, run() {
+    events.push({delay: 150, run() {
       phases.forEach((phase, i) => {
         if (i === index) phase.setAttribute('aria-current', 'step');
         else phase.removeAttribute('aria-current');
@@ -40,17 +50,17 @@
     }});
     const group = messages.filter(message => Number(message.dataset.replayStep) === index);
     group.filter(message => message.classList.contains('user')).forEach(message => {
-      events.push({delay: 1700, run: () => reveal(message)});
+      events.push({delay: 1000, run: () => reveal(message)});
     });
-    events.push({delay: 500, run() {
+    events.push({delay: 200, run() {
       focus('terminal'); output.textContent = '';
       root.querySelector('#replay-evidence').textContent = stage.note;
     }});
     stage.command.split('\n').forEach(line => {
-      events.push({delay: line ? 230 : 100, run() { output.textContent += line + '\n'; }});
+      events.push({delay: line ? 90 : 50, run() { output.textContent += line + '\n'; }});
     });
     group.filter(message => !message.classList.contains('user')).forEach(message => {
-      events.push({delay: index === stages.length - 1 ? 11000 : 3300, run() {
+      events.push({delay: index === stages.length - 1 ? 9500 : index === 0 ? 1600 : 2200, run() {
         reveal(message);
         if (message.classList.contains('replay-delivery')) {
           video.currentTime = 0;
