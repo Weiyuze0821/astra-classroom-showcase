@@ -174,10 +174,7 @@
     .farm-cta:hover { background: var(--accent); }
     @media (max-width: 680px) { .farm-promo { grid-template-columns: 1fr; } }
 
-    .submission-process { margin-top: 1rem; }
-    .submission-process > summary { width: fit-content; padding: .65rem .85rem; border: 1px solid var(--control-line); border-radius: 8px; color: var(--accent); background: var(--surface); font-weight: 650; cursor: pointer; }
-    .submission-process > summary:hover { background: var(--mint); }
-    .farm-replay { margin-top: .75rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+    .farm-replay { margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
     .replay-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1rem 1.3rem; border-bottom: 1px solid var(--line); background: var(--mint); font-size: .76rem; color: var(--accent); }
     .replay-heading span:last-child { color: var(--muted); }
     .replay-layout { display: grid; grid-template-columns: 1.2fr 1fr; }
@@ -221,8 +218,6 @@
     .render-tabs strong { margin: .25rem 0; font-size: clamp(1.15rem, 3vw, 1.8rem); color: var(--accent); }
     .render-tabs small { font-size: .73rem; }
     .render-proof { margin-top: .65rem; }
-    .render-proof summary { width: fit-content; padding-block: .35rem; color: var(--accent); font-size: .88rem; cursor: pointer; }
-    .render-proof figure { margin-top: .5rem; }
     .replay-output .image-zoom { border-radius: 8px; }
     .replay-output img { border: 1px solid var(--line); border-radius: inherit; }
     .replay-output video { border-radius: 8px; }
@@ -353,7 +348,7 @@
               </div>
               <p>第一次渲染显示完成，文件夹里却没图。WorkBuddy 改用完整的保存路径重跑，才拿到预览图。</p>
               <figure id="workbuddy" class="motion-preview">
-                <video id="dusk-replay" class="conversation-replay" controls muted playsinline preload="metadata" width="1340" height="1107" aria-label="WorkBuddy 制作黄昏预览的 15 秒回放" data-src="article-media/workbuddy-dusk-replay.mp4?v=15s"></video>
+                <video id="dusk-replay" class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" aria-label="WorkBuddy 制作黄昏预览的 15 秒回放" data-src="article-media/workbuddy-dusk-replay.mp4?v=15s"></video>
                 <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" width="22" height="22" alt="">WorkBuddy 黄昏试渲回放 · 15 秒。<a href="article-media/workbuddy-dusk-replay.gif?v=15s" download>下载 GIF</a></figcaption>
               </figure>
             </figure>
@@ -376,7 +371,7 @@
               <details id="rerun-status" class="trial-dialogue" open>
                 <summary>看 WorkBuddy 对话（荒废）</summary>
                 <figure class="motion-preview">
-                  <video class="conversation-replay" controls muted playsinline preload="metadata" width="1340" height="1107" data-src="article-media/workbuddy-abandoned-short.mp4?v=15s" aria-label="荒废教室，WorkBuddy 桌面会话，15 秒"></video>
+                  <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" data-src="article-media/workbuddy-abandoned-short.mp4?v=15s" aria-label="荒废教室，WorkBuddy 桌面会话，15 秒"></video>
                   <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">看看 WorkBuddy 怎么根据反馈调整预览。<a href="article-media/workbuddy-abandoned-replay.mp4?v=4">查看完整对话</a> · <a href="article-media/workbuddy-abandoned-short.gif?v=15s" download>下载对话 GIF</a></figcaption>
                 </figure>
               </details>
@@ -392,7 +387,7 @@
               <details id="zerog-chat" class="trial-dialogue" open>
                 <summary>看 WorkBuddy 对话（失重）</summary>
                 <figure class="motion-preview">
-                  <video class="conversation-replay" controls muted playsinline preload="metadata" width="1627" height="1192" data-src="article-media/workbuddy-zerog-chat-15s.mp4" aria-label="失重教室，WorkBuddy 桌面会话，15 秒"></video>
+                  <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1627" height="1192" data-src="article-media/workbuddy-zerog-chat-15s.mp4" aria-label="失重教室，WorkBuddy 桌面会话，15 秒"></video>
                   <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">看 WorkBuddy 怎么调整桌椅位置，最后选了哪张预览。</figcaption>
                 </figure>
               </details>
@@ -432,48 +427,37 @@
   </div>
   <div role="tabpanel" id="render-panel-zerog" aria-labelledby="render-tab-zerog">
     <figure>
-      <video controls muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-zerog-240839983.jpg" data-src="article-media/workbuddy-zerog-240839983.mp4?v=4s" aria-label="本轮失重动画，任务 240839983，4 秒"></video>
+      <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-zerog-240839983.jpg" data-src="article-media/workbuddy-zerog-240839983.mp4?v=4s" aria-label="本轮失重动画，任务 240839983，4 秒"></video>
       <figcaption>4 秒 · 桌椅和纸张慢慢飘起来。</figcaption>
     </figure>
-    <details class="render-proof">
-      <summary>查看任务完成截图</summary>
-      <figure>
-        <button type="button" class="image-zoom" aria-label="放大失重任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240839983.png" width="1920" height="919" alt="Renderbus 失重任务 240839983：96 帧完成，0 帧失败"></button>
-        <figcaption>失重 · 任务 240839983 · 点击截图放大</figcaption>
-      </figure>
-    </details>
+    <figure class="render-proof">
+      <button type="button" class="image-zoom" aria-label="放大失重任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240839983.png" width="1920" height="919" alt="Renderbus 失重任务 240839983：96 帧完成，0 帧失败"></button>
+      <figcaption>失重 · 任务 240839983 · 点击截图放大</figcaption>
+    </figure>
   </div>
   <div role="tabpanel" id="render-panel-aging" aria-labelledby="render-tab-aging" hidden>
     <figure>
-      <video controls muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-aging-240840393.jpg" data-src="article-media/workbuddy-aging-240840393.mp4?v=4s" aria-label="本轮荒废动画，任务 240840393，4 秒"></video>
+      <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-aging-240840393.jpg" data-src="article-media/workbuddy-aging-240840393.mp4?v=4s" aria-label="本轮荒废动画，任务 240840393，4 秒"></video>
       <figcaption>4 秒 · 墙面慢慢变旧，藤蔓爬上黑板边。</figcaption>
     </figure>
-    <details class="render-proof">
-      <summary>查看任务完成截图</summary>
-      <figure>
-        <button type="button" class="image-zoom" aria-label="放大荒废任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840393.png" width="1920" height="919" alt="Renderbus 荒废任务 240840393：96 帧完成，0 帧失败"></button>
-        <figcaption>荒废 · 任务 240840393 · 点击截图放大</figcaption>
-      </figure>
-    </details>
+    <figure class="render-proof">
+      <button type="button" class="image-zoom" aria-label="放大荒废任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840393.png" width="1920" height="919" alt="Renderbus 荒废任务 240840393：96 帧完成，0 帧失败"></button>
+      <figcaption>荒废 · 任务 240840393 · 点击截图放大</figcaption>
+    </figure>
   </div>
   <div role="tabpanel" id="render-panel-flood" aria-labelledby="render-tab-flood" hidden>
     <figure>
-      <video controls muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-flood-240840673.jpg" data-src="article-media/workbuddy-flood-240840673.mp4" aria-label="本轮洪水动画，任务 240840673"></video>
+      <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-flood-240840673.jpg" data-src="article-media/workbuddy-flood-240840673.mp4" aria-label="本轮洪水动画，任务 240840673"></video>
       <figcaption>4 秒 · 水从右窗冲进来，漫过课桌之间。</figcaption>
     </figure>
-    <details class="render-proof">
-      <summary>查看任务完成截图</summary>
-      <figure>
-        <button type="button" class="image-zoom" aria-label="放大洪水任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840673.png" width="1920" height="919" alt="Renderbus 洪水任务 240840673：96 帧完成，0 帧失败"></button>
-        <figcaption>洪水 · 任务 240840673 · 点击截图放大</figcaption>
-      </figure>
-    </details>
+    <figure class="render-proof">
+      <button type="button" class="image-zoom" aria-label="放大洪水任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840673.png" width="1920" height="919" alt="Renderbus 洪水任务 240840673：96 帧完成，0 帧失败"></button>
+      <figcaption>洪水 · 任务 240840673 · 点击截图放大</figcaption>
+    </figure>
   </div>
 </div>
 
-          <details class="submission-process">
-            <summary>查看提交过程</summary>
-<div class="farm-replay" id="farm-replay" aria-label="WorkBuddy 本轮 CLI 提交回放">
+<div class="farm-replay" id="farm-replay" role="region" aria-label="WorkBuddy 本轮 CLI 提交回放">
 <div class="replay-heading"><span class="replay-brand"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="28" height="28">WorkBuddy <span class="replay-brand-agent">× Renderbus CLI</span></span><span>本轮提交 · 2026 年 11 月 19 日</span></div>
 <div class="replay-layout">
 <div class="replay-conversation" tabindex="0" aria-label="WorkBuddy 真实对话节选，可滚动查看">
@@ -495,7 +479,6 @@
 <div class="replay-controls"><div class="replay-steps" role="group" aria-label="回放阶段，点击直接查看"><button type="button" data-replay-phase="0">01 技能与分析</button><button type="button" data-replay-phase="1">02 上传失败</button><button type="button" data-replay-phase="2">03 同号重试</button><button type="button" data-replay-phase="3">04 补交洪水</button><button type="button" data-replay-phase="4">05 查询进度</button><button type="button" data-replay-phase="5">06 下载抽帧</button><button type="button" data-replay-phase="6">07 完成验片</button></div><button type="button" id="replay-toggle">暂停回放</button><button type="button" id="replay-restart">↻ 重播</button></div>
 <p class="replay-disclosure">引号内为 WorkBuddy 会话节选；其他文字为工具记录摘要。命令略去外层脚本、本地绝对路径及作业 ID；独立复查单独标注。时间为北京时间，进度不是实时数据。</p>
 </div>
-          </details>
         </section>
 
 <section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">额外探索 · 未来教室</p><h2 id="future-heading">如果这间教室在太空里呢？</h2><p>从霓虹灯光和轨道示意屏，到金属墙板、桌面终端与天体仪，同一间教室也能变成轨道实验室。</p></div>
@@ -606,13 +589,15 @@
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const observer = new IntersectionObserver(entries => {
         for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
           const video = entry.target;
-          observer.unobserve(video);
-          if (video.paused && video.currentTime === 0) video.play().catch(() => {});
+          if (entry.intersectionRatio < 0.2) {
+            video.pause();
+          } else if (video.paused) {
+            video.play().catch(() => {});
+          }
         }
-      }, { threshold: 0.25 });
-      document.querySelectorAll('#dusk-replay, .film-and-blender').forEach(video => observer.observe(video));
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.variant video, .replay-output video').forEach(video => observer.observe(video));
     }
 
     document.querySelectorAll('.wire-slider').forEach(slider => {
