@@ -1,4 +1,5 @@
 (() => {
+  const manifestURL = document.currentScript.dataset.manifest || 'media-manifest.json';
   const progress = document.querySelector('#loader-progress');
   const detail = document.querySelector('#loader-detail');
   const message = document.querySelector('#loader-message');
@@ -66,7 +67,7 @@
     message.textContent = '正在准备完整画面，加载完成后自动进入。';
     try {
       if (!manifest) {
-        const response = await fetch('media-manifest.json');
+        const response = await fetch(manifestURL);
         if (!response.ok) throw new Error('Manifest unavailable');
         manifest = await response.json();
       }
