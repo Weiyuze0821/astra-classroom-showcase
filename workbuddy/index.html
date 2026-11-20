@@ -124,7 +124,7 @@
     .conversation-replay { aspect-ratio: auto; object-fit: contain; }
     .eyebrow { color: var(--accent); font-size: .85rem !important; }
     .future-replay { margin: 2rem 0 2.5rem; }
-    .future-replay video { border: 1px solid var(--line); border-radius: 10px; }
+    .future-replay video { border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
     .motion-preview { margin: 1rem 0; }
     .motion-preview:last-child { margin-bottom: 0; }
     #workbuddy, .trial-dialogue { max-width: 760px; margin-inline: auto; scroll-margin-top: 1rem; }
@@ -285,7 +285,7 @@
         <header class="workbuddy-hero">
           <div>
             <h1>我只说了四句话，<span>WorkBuddy 让一间教室经历了四种结局</span></h1>
-            <p class="lead">黄昏、失重、荒废、洪水，都从同一间 Blender 教室开始。拿失重来说，我们用 WorkBuddy 摆出桌椅悬空的样子，再用 Renderbus CLI 把工程送上云端，看椅子离地时有没有轻飘飘的感觉。</p>
+            <p class="lead">在 WorkBuddy 里说一句，Renderbus CLI 就能把失重、荒废、洪水三段动画送上云端。每段 96 帧，共 288 帧。<strong>本地渲一帧的工夫，云端可以同时算这 288 帧。</strong>你的显卡还能接着试下一个创意。</p>
             <div class="hero-actions">
               <a class="hero-primary" data-media-preview="video" href="article-media/workbuddy-dusk-replay.mp4?v=15s"><span aria-hidden="true">▶</span> 看 WorkBuddy 试渲</a>
               <a href="#farm">看云端成片 <span aria-hidden="true">↓</span></a>
@@ -525,6 +525,10 @@
             <figure class="iteration-image"><img data-src="article-media/flood-particles-after.png" alt="调整后的第60帧：农场重渲的洪水画面"><figcaption>调整后 · 农场重渲的第 60 帧。飞沫更少，镜头和水势也有调整。</figcaption></figure></section>
 
 <section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">额外探索 · 未来教室</p><h2 id="future-heading">如果这间教室在太空里呢？</h2><p>从霓虹灯光和轨道示意屏，到金属墙板、桌面终端与天体仪，同一间教室也能变成轨道实验室。</p></div>
+  <figure class="future-replay">
+    <video controls loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/workbuddy-future-walkthrough-poster.jpg?v=mint" data-src="article-media/workbuddy-future-walkthrough.mp4?v=mint" aria-label="未来教室制作步骤回放，左侧为 WorkBuddy 进展，右侧为 Blender 工程画面，28 秒"></video>
+    <figcaption>28 秒制作回放。左侧以 WorkBuddy 的口吻重现六个步骤，右侧展示原 Blender 工程里的桌面终端、金属墙板和天体仪，最后回到渲染成片。</figcaption>
+  </figure>
 <figure class="iteration-image"><img data-src="article-media/future-first.png" alt="未来教室早期版：青蓝和品红灯光、轨道示意屏"><figcaption>早期方向 · 霓虹教学实验室</figcaption></figure><figure class="iteration-image"><img data-src="article-media/future-final.png" alt="未来教室最终版：金属墙板、桌面终端和天体仪"><figcaption>继续调整后 · 轨道实验室</figcaption></figure></section>
         <section id="render-project" aria-labelledby="render-project-heading">
           <div class="workbuddy-invitation">
@@ -641,7 +645,7 @@
           }
         }
       }, { threshold: 0.2 });
-      document.querySelectorAll('.variant video, .replay-output video').forEach(video => observer.observe(video));
+      document.querySelectorAll('.variant video, .replay-output video, .future-replay video').forEach(video => observer.observe(video));
     }
 
     document.querySelectorAll('.wire-slider').forEach(slider => {
@@ -662,6 +666,6 @@
   </script>
 <script src="workbuddy-replay.js?v=24fps"></script>
 <script src="image-lightbox.js?v=media2"></script>
-<script src="../load-gallery.js?v=manifest" data-manifest="media-manifest.json?v=934fbc234753"></script>
+<script src="../load-gallery.js?v=manifest" data-manifest="media-manifest.json?v=97029b2ba7f8"></script>
 </body>
 </html>
