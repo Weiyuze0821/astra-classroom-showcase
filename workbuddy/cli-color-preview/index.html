@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我只说了四句话，WorkBuddy 让一间教室经历了四种结局</title>
+</head>
+<body style="max-width:660px;margin:0 auto;padding:24px 18px 40px;background-color:#0C0E12;background-image:radial-gradient(ellipse 95% 480px at 50% 150px,#21513b 0%,#173027 45%,#111f1c 72%,#0c0e12 100%);font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#DDDDE0;-webkit-font-smoothing:antialiased">
+
+<section style="max-width:640px;margin:0 auto;overflow-wrap:break-word;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;color:#DDDDE0">
+
+  <!-- 导语卡片 -->
+  <section style="margin:0 0 22px;padding:15px 16px;background-color:rgba(15,24,21,.68);border-left:3px solid #13CB75;border-radius:0 8px 8px 0">
+    <p style="margin:0;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">我用 Blender 官方示例场景做了一次工作流实测：全程通过 WorkBuddy 下达指令调整场景参数；失重、荒废、洪水三段动画各 96 帧、共 288 帧，通过 Renderbus CLI 直接提交云端渲染任务。<strong style="color:#13CB75;font-weight:700">本地渲一张静帧的时间，云端可以并行推进这 288 帧的渲染</strong>，本机显卡得以空出来继续打磨下一组镜头。</p>
+  </section>
+
+  <!-- 透明双图标主图（不加边框，保留通透感） -->
+  <img alt="WorkBuddy × Renderbus 透明双图标主图" src="media/workbuddy-renderbus-hero-svg.png" style="display:block;width:100%;height:auto;margin:6px 0 20px">
+
+  <!-- 实录首图 + 统一置底图注 -->
+  <img alt="WorkBuddy 黄昏回放的结果画面，显示黄昏教室的效果图" src="../article-media/workbuddy-dusk-replay-still.png" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:14px 0 0">
+  <p style="margin:8px 0 26px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">WorkBuddy 桌面实录 · 黄昏试渲</p>
+
+  <!-- 章节 1 -->
+  <section style="margin:34px 0 14px;padding-top:22px;border-top:1px solid #2B3336">
+    <h2 style="margin:0;padding-left:11px;border-left:4px solid #13CB75;font-size:19px;font-weight:700;line-height:1.4;color:#FFFFFF;letter-spacing:0.02em">本地调静帧，云端跑序列</h2>
+  </section>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">三个镜头调整静帧效果后逐一上传到 Renderbus，洪水镜头刚提交到 Renderbus，我便切回本机调整后期效果。5 分钟后向 WorkBuddy 查询渲染进度：失重与荒废两段已经完成，洪水也渲染到了第 59 帧。三段合计 288 帧全部完成后，最终成片如下。</p>
+  <img alt="「把下午改成黄昏。」「让桌椅飘起来。」「让它看起来很久没人来过。」「把教室淹了。」" src="media/%E5%9B%9B%E5%8F%A5%E8%AF%9D-%E9%A6%96%E5%B1%8F%E6%88%90%E7%89%87.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 26px">
+
+  <!-- 章节 2 -->
+  <section style="margin:34px 0 14px;padding-top:22px;border-top:1px solid #2B3336">
+    <h2 style="margin:0;padding-left:11px;border-left:4px solid #13CB75;font-size:19px;font-weight:700;line-height:1.4;color:#FFFFFF;letter-spacing:0.02em">基准场景：改造前的教室</h2>
+  </section>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">使用过 Blender 的小伙伴，应该可以看出基础工程取自 Blender 官方示例《Classroom》。改造过程中保持原有建筑结构与机位不变，先从光线变化切入测试。</p>
+  <img alt="改造前的教室，桌椅整齐排在黑板前" src="../article-media/2b613f18b87412bd.jpeg" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 26px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">改造前的原场景</p>
+
+  <!-- 章节 3 -->
+  <section style="margin:34px 0 14px;padding-top:22px;border-top:1px solid #2B3336">
+    <h2 style="margin:0;padding-left:11px;border-left:4px solid #13CB75;font-size:19px;font-weight:700;line-height:1.4;color:#FFFFFF;letter-spacing:0.02em">灯光试水与失重构图</h2>
+  </section>
+
+  <!-- 指令卡片 1 -->
+  <section style="margin:20px 0 14px;padding:12px 16px;background-color:#17191D;border-left:3px solid #13CB75;border-radius:0 8px 8px 0">
+    <p style="margin:0;font-size:17px;font-weight:700;line-height:1.5;color:#13CB75;letter-spacing:0.02em">「把下午改成黄昏。」</p>
+  </section>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">这一步重点观察窗边夕阳光的光影效果。我让 WorkBuddy 保持机位不变、压低太阳高度角，先在本地输出一张静帧确认光影方向。</p>
+  <img alt="黄昏渲染效果与白模布线对照" src="media/%E9%BB%84%E6%98%8F-%E7%99%BD%E6%A8%A1%E5%AF%B9%E7%85%A7.png" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 22px">
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">首次执行时，任务虽然返回完成，输出目录里却没有生成图片。排查后发现是保存路径不完整，WorkBuddy 补全路径重新渲染后，才顺利拿到预览图。</p>
+  <img alt="WorkBuddy 黄昏试渲对话，15 秒短版" src="../article-media/workbuddy-dusk-replay.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 26px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">黄昏试渲对话 · 15 秒</p>
+
+  <!-- 指令卡片 2 -->
+  <section style="margin:26px 0 14px;padding:12px 16px;background-color:#17191D;border-left:3px solid #13CB75;border-radius:0 8px 8px 0">
+    <p style="margin:0;font-size:17px;font-weight:700;line-height:1.5;color:#13CB75;letter-spacing:0.02em">「让桌椅都飘起来。」</p>
+  </section>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">如果教室里的桌椅全部同时失重浮空，画面会失去地面参照。试过几版后，我保留前排桌椅落在地面稳住空间关系，只让后排分批离地升起。</p>
+  <img alt="失重成片与 Blender 过程动图" src="media/zerog-film-and-blender.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 24px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">失重成片与 Blender 分批离地设置</p>
+
+  <img alt="WorkBuddy 失重试渲对话，15 秒短版" src="media/%E5%A4%B1%E9%87%8D%E5%AF%B9%E8%AF%9D-%E5%8E%9F%E5%B1%8F%E7%9F%AD%E7%89%88.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 24px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">失重试渲对话 · 调整桌椅高度与位置</p>
+
+  <img alt="失重渲染效果与白模布线对照" src="media/%E5%A4%B1%E9%87%8D-%E7%99%BD%E6%A8%A1%E5%AF%B9%E7%85%A7.png" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 26px">
+
+  <!-- 章节 4 -->
+  <section style="margin:34px 0 14px;padding-top:22px;border-top:1px solid #2B3336">
+    <h2 style="margin:0;padding-left:11px;border-left:4px solid #13CB75;font-size:19px;font-weight:700;line-height:1.4;color:#FFFFFF;letter-spacing:0.02em">96 帧序列交给云端渲染</h2>
+  </section>
+  <p style="margin:0 0 14px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">4 秒动画按每秒 24 帧计算需要输出 96 帧，只有跑完完整序列，才能看清桌椅分批离地的最终实际效果。工程定稿后，WorkBuddy 调用 Renderbus CLI 完成场景分析，并将工程与资产一并上传，生成渲染任务。</p>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">失重与荒废率先完成渲染，拉回本地后我抽检了第 1、48、96 帧，确认画面衔接正常。</p>
+
+  <img alt="本轮云端输出，依次播放失重、荒废、洪水，合计 12 秒" src="media/%E6%9C%AC%E8%BD%AE%E4%BA%91%E7%AB%AF%E6%88%90%E7%89%87-%E4%B8%89%E9%95%9C%E5%A4%B4.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 24px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">云端成片依次为失重、荒废、洪水</p>
+
+  <img alt="Renderbus 任务完成截图，依次为失重、荒废和洪水" src="media/%E4%B8%89%E9%A1%B9%E4%BB%BB%E5%8A%A1-%E5%AE%8C%E6%88%90%E6%88%AA%E5%9B%BE.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 24px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">三项任务各完成 96 帧，失败 0 帧</p>
+
+  <!-- 普通子标题 -->
+  <h3 style="margin:26px 0 12px;padding-bottom:6px;border-bottom:1px dashed #365247;font-size:16.5px;font-weight:700;line-height:1.45;color:#F5F6F7;letter-spacing:0.02em">对话内查进度与拉取成片</h3>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">以下 35 秒录屏记录了 WorkBuddy 调用 CLI 提交工程、查询状态，直至将渲染帧下载回本机的完整过程。</p>
+  <img alt="WorkBuddy 与 Renderbus CLI 完整录屏：从分析工程到完成验片" src="media/Renderbus-CLI-%E5%AE%8C%E6%95%B4%E9%9D%A2%E6%9D%BF%E5%BD%95%E5%B1%8F.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 26px">
+
+  <!-- 章节 5 -->
+  <section style="margin:34px 0 14px;padding-top:22px;border-top:1px solid #2B3336">
+    <h2 style="margin:0;padding-left:11px;border-left:4px solid #13CB75;font-size:19px;font-weight:700;line-height:1.4;color:#FFFFFF;letter-spacing:0.02em">时间推移与流体测试</h2>
+  </section>
+
+  <!-- 指令卡片 3 -->
+  <section style="margin:20px 0 14px;padding:12px 16px;background-color:#17191D;border-left:3px solid #13CB75;border-radius:0 8px 8px 0">
+    <p style="margin:0;font-size:17px;font-weight:700;line-height:1.5;color:#13CB75;letter-spacing:0.02em">「让这里像很久没人来过。」</p>
+  </section>
+  <img alt="荒废渲染效果与白模布线对照" src="media/%E8%8D%92%E5%BA%9F-%E7%99%BD%E6%A8%A1%E5%AF%B9%E7%85%A7.png" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:14px 0 20px">
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">第一版虽然做了旧化处理，但桌椅排列过于整齐，观感更接近刚放暑假，而非长期荒废。于是保持机位不变，让几把椅子倒伏在过道，再让藤蔓从右侧窗口一路蔓延到黑板旁，空间的衰败感才真正立住，观众看着不烧心。</p>
+
+  <img alt="荒废成片与 Blender 过程动图" src="media/aging-film-and-blender.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 24px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">荒废成片与墙面、藤蔓制作过程</p>
+
+  <img alt="WorkBuddy 荒废试渲对话，15 秒短版" src="../article-media/workbuddy-abandoned-short.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 26px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">荒废试渲对话 · 按反馈调整桌椅与藤蔓</p>
+
+  <!-- 指令卡片 4 -->
+  <section style="margin:26px 0 14px;padding:12px 16px;background-color:#17191D;border-left:3px solid #13CB75;border-radius:0 8px 8px 0">
+    <p style="margin:0;font-size:17px;font-weight:700;line-height:1.5;color:#13CB75;letter-spacing:0.02em">「把教室淹了。」</p>
+  </section>
+  <img alt="洪水涌进教室，浪花从课桌之间掀起" src="../article-media/8b8d97246329a84c.jpeg" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:14px 0 22px">
+
+  <h3 style="margin:24px 0 12px;padding-bottom:6px;border-bottom:1px dashed #365247;font-size:16.5px;font-weight:700;line-height:1.45;color:#F5F6F7;letter-spacing:0.02em">控制飞沫密度，理清水流层次</h3>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">第一版流体模拟中，白色飞沫过密，几乎把课桌腿完全遮住，水体走向难以辨认。随后降低飞沫量并同步微调镜头与水势大小，水流从窗口涌入、沿过道推进的层次才清晰呈现。</p>
+
+  <img alt="洪水第 60 帧，左为调整前，右为调整后" src="media/%E6%B4%AA%E6%B0%B4-%E7%AC%AC60%E5%B8%A7%E5%89%8D%E5%90%8E.jpg" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 22px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">第 60 帧对比 · 左为调整前预览，右为调整后在 Renderbus 重渲</p>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">定稿提交时，Blender 烘焙出的 384 个流体缓存文件由 WorkBuddy 自动分为四批上传，全部传齐后再交由 Renderbus 正式渲染。</p>
+
+  <!-- 额外探索章节 -->
+  <section style="margin:36px 0 14px;padding-top:22px;border-top:1px solid #2B3336">
+    <p style="margin:0 0 8px;font-size:12px;font-weight:700;line-height:1.4;color:#13CB75;letter-spacing:0.08em">额外探索 · 未来教室</p>
+    <h2 style="margin:0;padding-left:11px;border-left:4px solid #13CB75;font-size:19px;font-weight:700;line-height:1.4;color:#FFFFFF;letter-spacing:0.02em">延伸测试：将教室改造成轨道实验室</h2>
+  </section>
+  <p style="margin:0 0 16px;font-size:15.5px;line-height:1.82;letter-spacing:0.03em;color:#DDDDE0">完成前四组镜头后，我顺带做了一次风格跨度更大的尝试——把同一间教室改造成太空轨道实验室。初期方案偏赛博霓虹风格，后续逐步收敛到金属墙板、桌面终端与天体仪等结构细节，最终定稿为偏写实的轨道实验舱，并复用之前的 WorkBuddy 流程，调用 CLI 工具提交到 Renderbus 渲染成片。效果过程如下。</p>
+
+  <img alt="未来教室制作回放动图" src="media/workbuddy-future-walkthrough.gif" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 24px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">28 秒制作回放 · 左侧为 WorkBuddy 六步拆解，右侧为原工程结构与成片</p>
+
+  <img alt="未来教室，左为霓虹初稿，右为轨道实验室定稿" src="media/%E8%BD%A8%E9%81%93%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E5%88%9D%E7%A8%BF%E5%AE%9A%E7%A8%BF.jpg" style="display:block;width:100%;height:auto;border-radius:8px;border:1px solid #333B3E;margin:16px 0 0">
+  <p style="margin:8px 0 28px;font-size:13px;line-height:1.6;color:#A5AFB8;text-align:center;letter-spacing:0.02em">左：早期霓虹教学实验室方向　右：轨道实验室定稿</p>
+
+  <!-- 文末行动引导卡片 -->
+  <section style="margin:34px 0 18px;padding:22px 18px 20px;background-color:#17191D;border:1px solid #365247;border-radius:10px;text-align:center">
+    <p style="margin:0 0 10px;font-size:16.5px;font-weight:700;line-height:1.5;color:#FFFFFF;letter-spacing:0.02em">你想让 WorkBuddy 实现什么创意？</p>
+    <p style="margin:0 0 16px;font-size:13.5px;line-height:1.75;color:#B7C1C8;letter-spacing:0.02em">长按下方二维码，进入完整案例，文末可选「试试 WorkBuddy」或「用 Renderbus 渲染我的项目」。点公众号文末「阅读原文」打开 Renderbus CLI 指南。</p>
+    <img alt="完整案例与 Renderbus 官网入口" src="media/%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%AE%98%E7%BD%91%E5%85%A5%E5%8F%A3.png" style="display:block;width:100%;height:auto;border-radius:8px;margin:0 auto">
+  </section>
+
+  <!-- 版权声明 -->
+  <p style="margin:18px 0 0;padding-top:14px;border-top:1px solid #30363B;font-size:12px;line-height:1.6;color:#9EA8B2;text-align:center;letter-spacing:0.02em">场景《Classroom》由 Christophe Seux 制作，采用 CC0 授权。</p>
+
+</section>
+</body>
+</html>
