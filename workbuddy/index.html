@@ -561,18 +561,16 @@
     const toggle = document.querySelector('#opening-toggle');
     const openingStatus = document.querySelector('#opening-status');
     let openingStarted = false;
-    const ready = video => video.readyState >= 2 ? Promise.resolve() : new Promise(resolve => {
-      video.addEventListener('loadeddata', resolve, { once: true });
-    });
     const updateOpening = () => {
       const playing = openingVideos.some(video => !video.paused && !video.ended);
       toggle.textContent = playing ? '暂停' : '播放';
     };
     const playOpening = async (restart = false) => {
       openingStarted = true;
-      await Promise.all(openingVideos.map(ready));
       if (restart || openingVideos.every(video => video.ended)) {
-        openingVideos.forEach(video => { video.currentTime = 0; });
+        openingVideos.forEach(video => {
+          try { video.currentTime = 0; } catch {}
+        });
       }
       const results = await Promise.allSettled(openingVideos.filter(video => !video.ended).map(video => video.play()));
       openingStatus.textContent = results.some(result => result.status === 'rejected')
@@ -636,6 +634,6 @@
   </script>
 <script src="workbuddy-replay.js?v=24fps"></script>
 <script src="image-lightbox.js?v=media2"></script>
-<script src="../load-gallery.js?v=manifest" data-manifest="media-manifest.json?v=ced12049d00d"></script>
+<script src="../load-gallery.js?v=mobile-fix1" data-manifest="media-manifest.json?v=ced12049d00d"></script>
 </body>
 </html>

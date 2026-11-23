@@ -34,26 +34,62 @@
     downloaded.set(url, URL.createObjectURL(blob));
   }
 
+  function withTimeout(promise, ms) {
+    return new Promise(resolve => {
+      let settled = false;
+      const done = () => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve();
+      };
+      const timer = setTimeout(done, ms);
+      Promise.resolve(promise).then(done, done);
+    });
+  }
+
+  function waitForVideoFrame(video, ms) {
+    if (video.readyState >= 2) return Promise.resolve();
+    return withTimeout(new Promise(resolve => {
+      const done = () => {
+        video.removeEventListener('loadeddata', done);
+        video.removeEventListener('canplay', done);
+        video.removeEventListener('error', done);
+        resolve();
+      };
+      video.addEventListener('loadeddata', done, {once: true});
+      video.addEventListener('canplay', done, {once: true});
+      video.addEventListener('error', done, {once: true});
+    }), ms);
+  }
+
   async function prepareMedia() {
     const images = [...document.querySelectorAll('img[data-src]')];
-    for (const image of images) image.src = downloaded.get(image.dataset.src);
-    await Promise.all(images.map(image => image.decode()));
+    for (const image of images) {
+      const src = downloaded.get(image.dataset.src);
+      if (src) image.src = src;
+    }
+    const eagerImages = images.filter(image => !image.closest('details:not([open])'));
+    await withTimeout(Promise.allSettled(eagerImages.map(image => image.decode())), 2000);
+
     const videos = [...document.querySelectorAll('video[data-src]')];
-    await Promise.all(videos.map(video => new Promise((resolve, reject) => {
-      const finish = () => { cleanup(); resolve(); };
-      const fail = () => { cleanup(); reject(new Error('Video decode failed')); };
-      const cleanup = () => {
-        video.removeEventListener('loadeddata', finish);
-        video.removeEventListener('error', fail);
-      };
-      video.addEventListener('loadeddata', finish);
-      video.addEventListener('error', fail);
-      if (video.dataset.poster) video.poster = downloaded.get(video.dataset.poster);
-      video.preload = 'auto';
-      video.src = downloaded.get(video.dataset.src);
-      video.load();
-    })));
-    await document.fonts.ready;
+    const eagerVideos = [];
+    for (const video of videos) {
+      const poster = video.dataset.poster ? downloaded.get(video.dataset.poster) : null;
+      if (poster) video.poster = poster;
+      const src = downloaded.get(video.dataset.src);
+      if (!src) continue;
+      const inClosedDetails = Boolean(video.closest('details:not([open])'));
+      const isOpening = Boolean(video.closest('.opening-showcase'));
+      video.preload = inClosedDetails ? 'metadata' : (isOpening ? 'auto' : 'metadata');
+      video.src = src;
+      if (isOpening) {
+        video.load();
+        eagerVideos.push(video);
+      }
+    }
+    await Promise.allSettled(eagerVideos.map(video => waitForVideoFrame(video, 1500)));
+    await withTimeout(document.fonts.ready, 1500);
     document.body.classList.add('media-ready');
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
       // The opening has its own coordinated playback; resume only inline videos here.
