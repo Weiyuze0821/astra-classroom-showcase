@@ -280,7 +280,14 @@
     .workbuddy-hero {
       background: transparent; border: 0; border-radius: 0;
       margin: 0; padding: clamp(2rem, 5vw, 4.25rem) 0;
+      grid-template-columns: minmax(0, 1fr); justify-items: center;
+      gap: 0;
     }
+    .workbuddy-hero h1 { text-align: center; }
+    .workbuddy-hero .lead, .hero-lockup, .hero-workspace { width: min(100%, 640px); max-width: none; }
+    .workbuddy-hero .lead { margin: 1rem 0 22px; }
+    .hero-lockup { display: block; height: auto; margin: 6px 0 20px; background: transparent; }
+    .workbuddy-hero .hero-actions { justify-content: center; }
     .workbuddy-hero h1 { font-size: clamp(2rem, 3.65vw, 3.4rem); line-height: 1.17; }
     .workbuddy-hero h1 span { color: var(--ink); }
     .workbuddy-hero .lead strong { color: #fff; }
@@ -306,17 +313,6 @@
     }
     .farm-promo { background: radial-gradient(ellipse at 82% 0, #21513b, #142820 55%, #141819); }
     @media (min-width: 840px) {
-      .workbuddy-hero {
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: "title title" "lead workspace" "actions workspace";
-        align-content: center; column-gap: clamp(2rem, 5vw, 4rem); row-gap: 1.15rem;
-      }
-      .workbuddy-hero > div { display: contents; }
-      .workbuddy-hero h1 { grid-area: title; text-align: center; margin-bottom: .45em; }
-      .workbuddy-hero h1 span { margin-top: .08em; }
-      .workbuddy-hero .lead { grid-area: lead; align-self: end; margin: 0; max-width: none; }
-      .workbuddy-hero .hero-actions { grid-area: actions; align-self: start; margin: 0; }
-      .hero-workspace { grid-area: workspace; }
       .opening-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .opening-showcase { display: grid; grid-template-columns: minmax(0, .83fr) minmax(0, 1.17fr); gap: 1.25rem 2rem; }
       #finished-renders-label, .showcase-intro, .opening-toolbar { margin: 0; }
@@ -327,7 +323,7 @@
     }
     @media (max-width: 620px) {
       .mast { gap: .55rem; }
-      .workbuddy-hero { gap: 1.2rem; padding-block: 1.7rem; }
+      .workbuddy-hero { padding-block: 1.7rem; }
       .workbuddy-hero h1 { font-size: clamp(1.8rem, 6.8vw, 2.3rem); }
       .opening-card strong { font-size: .93rem; }
       .opening-card figcaption { padding: .6rem; }
@@ -360,18 +356,17 @@
     <main>
       <article>
         <header class="workbuddy-hero">
-          <div>
-            <h1>我只说了四句话，<span>WorkBuddy 让一间教室经历了四种结局</span></h1>
-            <p class="lead">我用 Blender 官方示例场景做了一次工作流实测：全程通过 WorkBuddy 下达指令调整场景参数；失重、荒废、洪水三段动画各 96 帧、共 288 帧，通过 Renderbus CLI 直接提交云端渲染任务。<strong>本地渲一张静帧的时间，云端可以并行推进这 288 帧的渲染</strong>，本机显卡得以空出来继续打磨下一组镜头。</p>
-            <div class="hero-actions">
-              <a class="hero-primary" data-media-preview="video" href="article-media/workbuddy-dusk-replay-avc.mp4"><span aria-hidden="true">▶</span> 看 WorkBuddy 试渲</a>
-              <a href="#farm">看云端成片 <span aria-hidden="true">↓</span></a>
-            </div>
-          </div>
+          <h1>我只说了四句话，<span>WorkBuddy 让一间教室经历了四种结局</span></h1>
+          <p class="lead">我用 Blender 官方示例场景做了一次工作流实测：全程通过 WorkBuddy 下达指令调整场景参数；失重、荒废、洪水三段动画各 96 帧、共 288 帧，通过 Renderbus CLI 直接提交云端渲染任务。<strong>本地渲一张静帧的时间，云端可以并行推进这 288 帧的渲染</strong>，本机显卡得以空出来继续打磨下一组镜头。</p>
+          <img class="hero-lockup" data-src="article-media/workbuddy-renderbus-hero-svg.png" width="1420" height="600" alt="WorkBuddy × Renderbus">
           <figure class="hero-workspace">
             <figcaption><strong>WorkBuddy 桌面实录</strong><span>黄昏试渲</span></figcaption>
             <img data-src="article-media/workbuddy-dusk-replay-still.png" width="1340" height="1107" alt="WorkBuddy 黄昏回放的结果画面，显示黄昏教室的效果图">
           </figure>
+          <div class="hero-actions">
+              <a class="hero-primary" data-media-preview="video" href="article-media/workbuddy-dusk-replay-avc.mp4"><span aria-hidden="true">▶</span> 看 WorkBuddy 试渲</a>
+              <a href="#farm">看云端成片 <span aria-hidden="true">↓</span></a>
+            </div>
         </header>
         <div class="opening-showcase" id="finished-renders" role="group" aria-labelledby="finished-renders-label">
           <h2 id="finished-renders-label">本地调静帧，云端跑序列</h2>
@@ -741,6 +736,6 @@
   </script>
 <script src="workbuddy-replay.js?v=24fps"></script>
 <script src="image-lightbox.js?v=media2"></script>
-<script src="../load-gallery.js?v=mobile-fix1" data-manifest="media-manifest-avc.json?v=2838f8e4dc89"></script>
+<script src="../load-gallery.js?v=mobile-fix1" data-manifest="media-manifest-avc.json?v=f351135a1288"></script>
 </body>
 </html>
