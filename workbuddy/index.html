@@ -124,35 +124,33 @@
     .conversation-replay { aspect-ratio: auto; object-fit: contain; }
     .eyebrow { color: var(--accent); font-size: .85rem !important; }
     .future-replay { margin: 2rem 0 2.5rem; }
-    .future-replay video { border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+    .future-replay video { border: 1px solid var(--line); border-radius: 10px; }
     .motion-preview { margin: 1rem 0; }
     .motion-preview:last-child { margin-bottom: 0; }
     #workbuddy, .trial-dialogue { max-width: 760px; margin-inline: auto; scroll-margin-top: 1rem; }
     .trial-dialogue { margin-block: .65rem 1rem; }
     .trial-dialogue > summary { width: fit-content; padding-block: .4rem; color: var(--accent); font-size: .9rem; font-weight: 650; cursor: pointer; }
     .trial-dialogue > summary:hover { color: var(--ink); }
-    .flood-excerpt { padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
     .trial-dialogue .motion-preview { margin-top: .5rem; }
     .motion-preview video { border: 1px solid var(--line); border-radius: 8px; }
     .motion-preview .trial-replay-avatar { display: inline-block; width: 22px; height: 22px; margin: 0 .4rem 0 0; vertical-align: middle; background: transparent; }
 
     .opening-showcase { padding: clamp(.85rem, 2.2vw, 1.45rem); border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, var(--mint), #f1faf6); scroll-margin-top: 1rem; }
     .opening-showcase .showcase-label { color: var(--accent); }
-    #finished-renders-label { margin: 0 0 1rem; color: var(--ink); font-size: clamp(1.55rem, 3.1vw, 2.5rem); line-height: 1.25; text-wrap: balance; }
     .opening-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
     .opening-card { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
     .opening-card video { object-fit: contain; }
     .opening-card figcaption { padding: 1rem 1.1rem 1.2rem; }
-    .showcase-intro { max-width: 48em; margin: 0 0 1.25rem; color: var(--ink); font-size: 1rem; line-height: 1.75; }
+    .opening-card .scene-index { display: block; margin-bottom: .55rem; color: var(--accent); font-size: .7rem; letter-spacing: .12em; }
     .opening-card strong { display: block; color: var(--ink); font-family: var(--display); font-size: clamp(1rem, 1.6vw, 1.35rem); font-weight: 500; }
     .opening-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
-    #opening-status { margin: 0 auto 0 0; font-size: .85rem; color: var(--muted); }
+    .opening-toolbar p { flex: 1 1 260px; margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.7; }
     .opening-toolbar button { min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--control-line); border-radius: 24px; background: var(--surface); color: var(--ink); font: inherit; font-size: .82rem; cursor: pointer; }
     .opening-toolbar button:hover { background: var(--mint-strong); border-color: var(--accent); }
     @media (max-width: 680px) {
       .opening-grid { gap: 8px; }
       .opening-card figcaption { padding: .55rem .6rem; }
-
+      .opening-card .scene-index { margin: 0; }
     }
 
     section[aria-labelledby="working"] > .iteration-image:last-child { margin-bottom: 0; }
@@ -160,21 +158,14 @@
     #farm-heading { margin-bottom: .45em; }
     #future > .iteration-image:last-child { margin-bottom: 0; }
     #render-project { padding-top: clamp(1.125rem, 2vw, 1.5rem); }
-    .workbuddy-invitation { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .35rem 1.25rem; margin: 0 0 clamp(1.125rem, 2vw, 1.5rem); padding-left: .9rem; border-left: 3px solid var(--accent); }
-    .workbuddy-invitation p { margin: 0; font: clamp(1.15rem, 2vw, 1.6rem)/1.45 var(--display); text-wrap: pretty; }
-    .workbuddy-invitation a { color: var(--accent); font-size: .9rem; font-weight: 650; white-space: nowrap; }
-    .workbuddy-invitation a:hover { color: var(--ink); }
-    .farm-promo { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: clamp(1.25rem, 4vw, 3rem); padding: clamp(1.2rem, 3.4vw, 2.4rem); border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(115deg, var(--surface), var(--mint-strong)); }
-    .farm-promo .eyebrow { margin: 0 0 .5rem; font-weight: 650; }
-    .farm-promo h2 { margin: 0 0 .8rem; font-size: clamp(1.7rem, 3.6vw, 2.6rem); text-wrap: balance; }
-    .farm-promo-copy > p:not(.eyebrow) { max-width: 30em; margin: 0 0 1.1rem; color: var(--muted); line-height: 1.75; }
-    .farm-flow { list-style: none; margin: 0; padding: .25rem 1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
-    .farm-flow li { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .8rem; padding: .7rem .15rem; font-size: .86rem; line-height: 1.5; }
-    .farm-flow li + li { border-top: 1px solid var(--line); }
-    .farm-flow span { padding: .2rem .5rem; border-radius: 999px; background: var(--mint); color: var(--accent); font-size: .7rem; font-variant-numeric: tabular-nums; font-weight: 700; }
-    .farm-cta { display: inline-flex; align-items: center; gap: .8rem; min-height: 44px; padding: .65rem 1rem; border-radius: 999px; background: var(--ink); color: var(--surface); text-decoration: none; font-size: .9rem; font-weight: 650; }
-    .farm-cta:hover { background: var(--accent); }
-    @media (max-width: 680px) { .farm-promo { grid-template-columns: 1fr; } }
+    .closing { max-width: 880px; margin: 2rem auto 0; border-top: 1px solid var(--line); }
+    .closing h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); }
+    .trial-pair { max-width: 880px; margin: 1.3rem auto 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+    .trial-pair img { border-radius: 8px; }
+    .extra { max-width: 880px; margin: .7rem auto; }
+    .extra > summary { padding: .65rem 0; color: var(--accent); font-size: .92rem; cursor: pointer; }
+    .production-notes { border-top: 1px solid var(--line); }
+    @media (max-width: 500px) { .trial-pair { grid-template-columns: 1fr; } }
 
     .farm-replay { margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
     .replay-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1rem 1.3rem; border-bottom: 1px solid var(--line); background: var(--mint); font-size: .76rem; color: var(--accent); }
@@ -220,7 +211,7 @@
     .render-tabs strong { margin: .25rem 0; font-size: clamp(1.15rem, 3vw, 1.8rem); color: var(--accent); }
     .render-tabs small { font-size: .73rem; }
     .sample-frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin-block: 1rem; }
-    @media (max-width: 600px) { .sample-frames { grid-template-columns: 1fr; } }
+    @media (max-width: 600px) { .sample-frames { gap: .4rem; } }
     .render-proof { margin-top: .65rem; }
     .replay-output .image-zoom { border-radius: 8px; }
     .replay-output img { border: 1px solid var(--line); border-radius: inherit; }
@@ -275,7 +266,7 @@
     <div class="mast">
       <strong>WorkBuddy × Renderbus CLI</strong>
       <nav aria-label="文章目录">
-        <a href="#variants">从黄昏到失重</a>
+        <a href="#finished-renders">四种结局</a>
         <a href="#farm">云端看成片</a>
         <a href="#credits">作品署名</a>
       </nav>
@@ -285,7 +276,7 @@
         <header class="workbuddy-hero">
           <div>
             <h1>我只说了四句话，<span>WorkBuddy 让一间教室经历了四种结局</span></h1>
-            <p class="lead">在 WorkBuddy 里说一句，Renderbus CLI 就能把失重、荒废、洪水三段动画送上云端。每段 96 帧，共 288 帧。<strong>本地渲一帧的工夫，云端可以同时算这 288 帧。</strong>你的显卡还能接着试下一个创意。</p>
+            <p class="lead">黄昏、失重、荒废、洪水，都从同一间 Blender 教室开始。拿失重来说，我们用 WorkBuddy 摆出桌椅悬空的样子，再用 Renderbus CLI 把工程送上云端，看椅子离地时有没有轻飘飘的感觉。</p>
             <div class="hero-actions">
               <a class="hero-primary" data-media-preview="video" href="article-media/workbuddy-dusk-replay.mp4?v=15s"><span aria-hidden="true">▶</span> 看 WorkBuddy 试渲</a>
               <a href="#farm">看云端成片 <span aria-hidden="true">↓</span></a>
@@ -297,8 +288,7 @@
           </figure>
         </header>
         <div class="opening-showcase" id="finished-renders" role="group" aria-labelledby="finished-renders-label">
-          <h2 id="finished-renders-label">本地看静帧，云端渲动画</h2>
-          <p class="showcase-intro">椅子已经悬起来了，可它飘得是不是太快？光看静帧拿不准。只想看这 4 秒，本机就得算 96 帧。等的时候想顺手试试窗边的光，还得跟渲染抢显卡。直接在 WorkBuddy 对话里用 Renderbus CLI 把动画交给农场，本机就能接着试光。等成片回来，看过动作再决定怎么调。</p>
+          <p class="showcase-label" id="finished-renders-label">同一间教室，四种结局</p>
           <div class="opening-grid">
             <figure class="opening-card">
               <img width="1280" height="720" data-src="article-media/13847e1f881f9bb5.jpeg" alt="斜阳穿过百叶窗，照在空教室的课桌上">
@@ -318,140 +308,78 @@
             </figure>
           </div>
           <div class="opening-toolbar">
-            <p id="opening-status" aria-live="polite"></p>
+            <p id="opening-status" aria-live="polite">黄昏为静帧，其余三段为云渲染动画。</p>
             <button type="button" id="opening-toggle">播放</button>
             <button type="button" id="opening-replay">↻ 重新播放</button>
           </div>
         </div>
 
-        <section aria-labelledby="start">
+        <section id="variants" aria-labelledby="zerog-edit-heading">
           <div class="prose">
-            <h2 id="start">先看改造前的教室</h2>
-            <p>我们用的是 Blender 官方示例里的教室。先不动镜头，只把下午的光调成黄昏。</p>
+            <h2 id="zerog-edit-heading">椅子悬空了，为什么还看不出失重？</h2>
+            <p>试到第四版，桌椅已经离地，失重感却还很弱。第五版里，WorkBuddy 把前排四套桌椅留在原位，让远处的椅子再升高一些。有了前排做参照，悬空的感觉出来了。接下来想看的，是椅子离开地面的那一瞬间。</p>
           </div>
-          <figure class="original">
-            <img data-src="article-media/2b613f18b87412bd.jpeg" alt="改造前的教室，桌椅整齐排在黑板前">
-            <figcaption>改造前的教室</figcaption>
-          </figure>
-        </section>
-
-        <section id="variants" aria-labelledby="variants-heading">
-          <h2 id="variants-heading">从一束光，到一排浮起来的课桌</h2>
-          <div class="variants">
-            <figure class="variant">
-              <h3>「把下午改成黄昏。」</h3>
-              <p>窗边那束光落在哪张桌子上？我们让 WorkBuddy 保留机位、压低太阳，先在本地渲一张。拖动下图，可以看到同一个模型打上黄昏光线后的样子。</p>
-
-              <div class="wire-split">
-                <img data-src="article-media/13847e1f881f9bb5.jpeg" alt="黄昏的教室，低角度暖光穿过百叶窗">
-                <img class="wire-clay" data-src="article-media/8b22de34d2888c16.png" alt="同机位的 Blender 白模布线">
-                <span class="wire-divider" aria-hidden="true"></span>
-                <span class="wire-label">渲染效果</span>
-                <span class="wire-label wire-label-clay">白模 · 布线</span>
-                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
-                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </div>
-              <p>第一次渲染显示完成，文件夹里却没图。WorkBuddy 改用完整的保存路径重跑，才拿到预览图。</p>
-              <details id="workbuddy" class="trial-dialogue" open>
-                <summary>看 WorkBuddy 对话（黄昏）</summary>
-                <figure class="motion-preview">
-                  <video id="dusk-replay" class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" aria-label="WorkBuddy 制作黄昏预览的 15 秒回放" data-src="article-media/workbuddy-dusk-replay.mp4?v=15s"></video>
-                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" width="22" height="22" alt="">WorkBuddy 黄昏试渲回放 · 15 秒。<a href="article-media/workbuddy-dusk-replay.gif?v=15s" download>下载 GIF</a></figcaption>
-                </figure>
-              </details>
-            </figure>
-            <figure class="variant">
-              <h3>「让桌椅都飘起来。」</h3>
-              <p>试过几版后，我们把前排桌椅留在地面当参照，只让后排分批升起。定格看，椅子已经悬空了。可它是轻轻浮起来，还是猛地跳了一下？两张预览之间的那段动作，才决定这个镜头有没有失重感。</p>
-
-
-              <figure id="zerog-walkthrough" class="motion-preview">
-                <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-film-and-blender.mp4?v=18s" aria-label="失重教室成片与 Blender 工程操作循环播放"></video>
-                <figcaption>先看桌椅飘起来，再看 Blender 里怎么设置它们分批离地。</figcaption>
-              </figure>
-              <details id="zerog-chat" class="trial-dialogue" open>
-                <summary>看 WorkBuddy 对话（失重）</summary>
-                <figure class="motion-preview">
-                  <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1627" height="1192" data-src="article-media/workbuddy-zerog-chat-15s.mp4" aria-label="失重教室，WorkBuddy 桌面会话，15 秒"></video>
-                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">看 WorkBuddy 怎么调整桌椅位置，最后选了哪张预览。</figcaption>
-                </figure>
-              </details>
-              <div class="wire-split">
-                <img data-src="article-media/2164b0ecfe25d0d1.jpeg" alt="失重教室，课桌、椅子和纸张悬浮在空中">
-                <img class="wire-clay" data-src="article-media/cd76a6fa17e4a336.png" alt="同机位的 Blender 白模布线">
-                <span class="wire-divider" aria-hidden="true"></span>
-                <span class="wire-label">渲染效果</span>
-                <span class="wire-label wire-label-clay">白模 · 布线</span>
-                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
-                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </div>
-            </figure>
+          <div class="trial-pair">
+            <figure><img data-src="article-media/workbuddy-zerog-preview-004.png" alt="第 004 版失重预览"><figcaption>预览 004 · 最高约 0.30 米</figcaption></figure>
+            <figure><img data-src="article-media/workbuddy-zerog-preview-005.png" alt="最终选回的第 005 版失重预览"><figcaption>选定的预览 · 前排不动，远排最高约 0.55 米</figcaption></figure>
           </div>
         </section>
 
         <section id="farm" aria-labelledby="farm-heading">
           <div class="prose">
-            <h2 id="farm-heading">看桌椅怎么离地，要把这 96 帧连起来</h2>
-            <p>这段失重镜头只有 4 秒，按每秒 24 帧播放，也得渲 96 张图。我们让 WorkBuddy 调用 Renderbus 的命令行工具（CLI），分析团队定稿的 Blender 工程，把场景和用到的素材一起上传。云端接手逐帧渲染后，本机就能腾出来继续调下一个镜头。</p>
-            <p>想知道哪段能看了，我们就在原来的对话里问进度。17:02，CLI 查回失重和荒废都已渲完，洪水完成了 96 帧中的 59 帧。我们先取回前两段的帧序列，抽看第 1、48、96 帧。点开下面的失重动画，留意后排椅子离地的先后，再对照三张静帧看它们的位置。</p>
+            <h2 id="farm-heading">让云端渲完这 4 秒</h2>
+            <p>我们在原来的对话里请 WorkBuddy 用 Renderbus CLI 提交团队定稿的工程。这 4 秒一共 96 帧，逐帧计算交给云端，本机就能留给下一个镜头。后来问哪段能看了，CLI 查到失重已经渲完。我们取回帧序列，先抽看开头、中间和结尾，再连起来看后排桌椅怎样一批批浮起。</p>
           </div>
 <div class="replay-output" id="workbuddy-render-check" role="group" aria-labelledby="farm-heading">
   <div class="render-tabs" role="tablist" aria-label="本轮云端输出">
-    <button type="button" role="tab" id="render-tab-zerog" aria-controls="render-panel-zerog" aria-selected="true"><span>失重</span><strong>96 / 96</strong><small>帧完成 · 0 失败</small></button>
-    <button type="button" role="tab" id="render-tab-aging" aria-controls="render-panel-aging" aria-selected="false" tabindex="-1"><span>荒废</span><strong>96 / 96</strong><small>帧完成 · 0 失败</small></button>
-    <button type="button" role="tab" id="render-tab-flood" aria-controls="render-panel-flood" aria-selected="false" tabindex="-1"><span>洪水</span><strong>96 / 96</strong><small>帧完成 · 0 失败</small></button>
+    <button type="button" role="tab" id="render-tab-zerog" aria-controls="render-panel-zerog" aria-selected="true"><span>失重</span></button>
+    <button type="button" role="tab" id="render-tab-aging" aria-controls="render-panel-aging" aria-selected="false" tabindex="-1"><span>荒废</span></button>
+    <button type="button" role="tab" id="render-tab-flood" aria-controls="render-panel-flood" aria-selected="false" tabindex="-1"><span>洪水</span></button>
   </div>
   <div role="tabpanel" id="render-panel-zerog" aria-labelledby="render-tab-zerog">
     <figure>
       <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-zerog-240839983.jpg" data-src="article-media/workbuddy-zerog-240839983.mp4?v=4s" aria-label="本轮失重动画，任务 240839983，4 秒"></video>
-      <figcaption>失重定稿 · 本轮云端输出，96 帧按每秒 24 帧播放。</figcaption>
+      <figcaption>失重 · 本轮云渲染成片</figcaption>
     </figure>
     <div class="sample-frames" role="group" aria-label="本轮失重动画抽帧">
       <figure><img data-src="article-media/workbuddy-zerog-240839983-frame-0001.jpg" width="960" height="540" alt="失重动画第 1 帧，任务 240839983 的云端输出"><figcaption>第 1 帧</figcaption></figure>
       <figure><img data-src="article-media/workbuddy-zerog-240839983-frame-0048.jpg" width="960" height="540" alt="失重动画第 48 帧，任务 240839983 的云端输出"><figcaption>第 48 帧</figcaption></figure>
       <figure><img data-src="article-media/workbuddy-zerog-240839983-frame-0096.jpg" width="960" height="540" alt="失重动画第 96 帧，任务 240839983 的云端输出"><figcaption>第 96 帧</figcaption></figure>
     </div>
+    <details class="extra"><summary>查看云渲染任务回执</summary>
     <figure class="render-proof">
       <button type="button" class="image-zoom" aria-label="放大失重任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240839983.png" width="1920" height="919" alt="Renderbus 失重任务 240839983：96 帧完成，0 帧失败"></button>
       <figcaption>失重 · 任务 240839983 · 点击截图放大</figcaption>
     </figure>
+    </details>
   </div>
   <div role="tabpanel" id="render-panel-aging" aria-labelledby="render-tab-aging" hidden>
     <figure>
       <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-aging-240840393.jpg" data-src="article-media/workbuddy-aging-240840393.mp4?v=4s" aria-label="本轮荒废动画，任务 240840393，4 秒"></video>
-      <figcaption>荒废定稿 · 本轮云端输出，96 帧按每秒 24 帧播放。</figcaption>
+      <figcaption>4 秒 · 墙面慢慢变旧，藤蔓爬上黑板边。</figcaption>
     </figure>
-    <div class="sample-frames" role="group" aria-label="本轮荒废动画抽帧">
-      <figure><img data-src="article-media/workbuddy-aging-240840393-frame-0001.jpg" width="960" height="540" alt="荒废动画第 1 帧，任务 240840393 的云端输出"><figcaption>第 1 帧</figcaption></figure>
-      <figure><img data-src="article-media/workbuddy-aging-240840393-frame-0048.jpg" width="960" height="540" alt="荒废动画第 48 帧，任务 240840393 的云端输出"><figcaption>第 48 帧</figcaption></figure>
-      <figure><img data-src="article-media/workbuddy-aging-240840393-frame-0096.jpg" width="960" height="540" alt="荒废动画第 96 帧，任务 240840393 的云端输出"><figcaption>第 96 帧</figcaption></figure>
-    </div>
+    <details class="extra"><summary>查看云渲染任务回执</summary>
     <figure class="render-proof">
       <button type="button" class="image-zoom" aria-label="放大荒废任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840393.png" width="1920" height="919" alt="Renderbus 荒废任务 240840393：96 帧完成，0 帧失败"></button>
       <figcaption>荒废 · 任务 240840393 · 点击截图放大</figcaption>
     </figure>
+    </details>
   </div>
   <div role="tabpanel" id="render-panel-flood" aria-labelledby="render-tab-flood" hidden>
     <figure>
       <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-flood-240840673.jpg" data-src="article-media/workbuddy-flood-240840673.mp4" aria-label="本轮洪水动画，任务 240840673"></video>
-      <figcaption>洪水定稿 · 本轮云端输出，96 帧按每秒 24 帧播放。</figcaption>
+      <figcaption>4 秒 · 水从右窗冲进来，漫过课桌之间。</figcaption>
     </figure>
-    <div class="sample-frames" role="group" aria-label="本轮洪水动画抽帧">
-      <figure><img data-src="article-media/workbuddy-flood-240840673-frame-0001.jpg" width="960" height="540" alt="洪水动画第 1 帧，任务 240840673 的云端输出"><figcaption>第 1 帧</figcaption></figure>
-      <figure><img data-src="article-media/workbuddy-flood-240840673-frame-0048.jpg" width="960" height="540" alt="洪水动画第 48 帧，任务 240840673 的云端输出"><figcaption>第 48 帧</figcaption></figure>
-      <figure><img data-src="article-media/workbuddy-flood-240840673-frame-0096.jpg" width="960" height="540" alt="洪水动画第 96 帧，任务 240840673 的云端输出"><figcaption>第 96 帧</figcaption></figure>
-    </div>
+    <details class="extra"><summary>查看云渲染任务回执</summary>
     <figure class="render-proof">
       <button type="button" class="image-zoom" aria-label="放大洪水任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840673.png" width="1920" height="919" alt="Renderbus 洪水任务 240840673：96 帧完成，0 帧失败"></button>
       <figcaption>洪水 · 任务 240840673 · 点击截图放大</figcaption>
     </figure>
+    </details>
   </div>
 </div>
 
-<div class="prose">
-  <h3>在对话里问进度，CLI 查到了什么？</h3>
-  <p>下面保留了当时的对话和命令回执。点「查询进度」可以看到三个镜头各自完成了多少帧，点「下载抽帧」可以看到失重和荒废的帧序列怎样回到本机。</p>
-</div>
+<details class="extra cli-record" open><summary>Renderbus CLI 实操回放</summary>
 <div class="farm-replay" id="farm-replay" role="region" aria-label="WorkBuddy 本轮 CLI 提交回放">
 <div class="replay-heading"><span class="replay-brand"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="28" height="28">WorkBuddy <span class="replay-brand-agent">× Renderbus CLI</span></span><span>本轮提交 · 2026 年 11 月 19 日</span></div>
 <div class="replay-layout">
@@ -474,9 +402,74 @@
 <div class="replay-controls"><div class="replay-steps" role="group" aria-label="回放阶段，点击直接查看"><button type="button" data-replay-phase="0">01 技能与分析</button><button type="button" data-replay-phase="1">02 上传失败</button><button type="button" data-replay-phase="2">03 同号重试</button><button type="button" data-replay-phase="3">04 补交洪水</button><button type="button" data-replay-phase="4">05 查询进度</button><button type="button" data-replay-phase="5">06 下载抽帧</button><button type="button" data-replay-phase="6">07 完成验片</button></div><button type="button" id="replay-toggle">暂停回放</button><button type="button" id="replay-restart">↻ 重播</button></div>
 <p class="replay-disclosure">引号内为 WorkBuddy 会话节选；其他文字为工具记录摘要。命令略去外层脚本、本地绝对路径及作业 ID；独立复查单独标注。时间为北京时间，进度不是实时数据。</p>
 </div>
+</details>
         </section>
 
-        <section aria-labelledby="more-variants"><h2 id="more-variants">让时间再往前走一点</h2>
+        <details class="extra production-notes">
+          <summary>更多制作素材与对话回放</summary>
+        <section aria-labelledby="start">
+          <div class="prose">
+            <h2 id="start">先看改造前的教室</h2>
+            <p>我们用的是 Blender 官方示例里的教室。先不动镜头，只把下午的光调成黄昏。</p>
+          </div>
+          <figure class="original">
+            <img data-src="article-media/2b613f18b87412bd.jpeg" alt="改造前的教室，桌椅整齐排在黑板前">
+            <figcaption>改造前的教室</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="variants-heading">
+          <h2 id="variants-heading">黄昏与失重的制作过程</h2>
+          <div class="variants">
+            <figure class="variant">
+              <h3>「把下午改成黄昏。」</h3>
+              <p>窗边那束光落在哪张桌子上？我们让 WorkBuddy 保留机位、压低太阳，先在本地渲一张。拖动下图，可以看到同一个模型打上黄昏光线后的样子。</p>
+
+              <div class="wire-split">
+                <img data-src="article-media/13847e1f881f9bb5.jpeg" alt="黄昏的教室，低角度暖光穿过百叶窗">
+                <img class="wire-clay" data-src="article-media/8b22de34d2888c16.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">渲染效果</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+              <p>第一次渲染显示完成，文件夹里却没图。WorkBuddy 改用完整的保存路径重跑，才拿到预览图。</p>
+              <figure id="workbuddy" class="motion-preview">
+                <video id="dusk-replay" class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" aria-label="WorkBuddy 制作黄昏预览的 15 秒回放" data-src="article-media/workbuddy-dusk-replay.mp4?v=15s"></video>
+                <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" width="22" height="22" alt="">WorkBuddy 黄昏试渲回放 · 15 秒。<a href="article-media/workbuddy-dusk-replay.gif?v=15s" download>下载 GIF</a></figcaption>
+              </figure>
+            </figure>
+            <figure class="variant">
+              <h3>「让桌椅都飘起来。」</h3>
+              <p>试过几版后，我们把前排桌椅留在地面当参照，只让后排分批升起。定格看，椅子已经悬空了。可它是轻轻浮起来，还是猛地跳了一下？两张预览之间的那段动作，才决定这个镜头有没有失重感。</p>
+
+
+              <figure id="zerog-walkthrough" class="motion-preview">
+                <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-film-and-blender.mp4?v=18s" aria-label="失重教室成片与 Blender 工程操作循环播放"></video>
+                <figcaption>先看桌椅飘起来，再看 Blender 里怎么设置它们分批离地。</figcaption>
+              </figure>
+              <details id="zerog-chat" class="trial-dialogue">
+                <summary>看 WorkBuddy 对话（失重）</summary>
+                <figure class="motion-preview">
+                  <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1627" height="1192" data-src="article-media/workbuddy-zerog-chat-15s.mp4" aria-label="失重教室，WorkBuddy 桌面会话，15 秒"></video>
+                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">看 WorkBuddy 怎么调整桌椅位置，最后选了哪张预览。</figcaption>
+                </figure>
+              </details>
+              <div class="wire-split">
+                <img data-src="article-media/2164b0ecfe25d0d1.jpeg" alt="失重教室，课桌、椅子和纸张悬浮在空中">
+                <img class="wire-clay" data-src="article-media/cd76a6fa17e4a336.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">渲染效果</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section aria-labelledby="more-variants"><h2 id="more-variants">荒废与洪水的制作过程</h2>
           <div class="variants">
             <figure class="variant">
               <h3 id="abandoned-final">「让这里像很久没人来过。」</h3>
@@ -494,7 +487,7 @@
                 <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/aging-farm-poster.jpg" data-src="article-media/aging-film-and-blender.mp4?v=18s" aria-label="荒废教室成片与 Blender 工程操作循环播放"></video>
                 <figcaption>先看教室慢慢变旧，再看 Blender 里怎么做墙面和藤蔓。</figcaption>
               </figure>
-              <details id="rerun-status" class="trial-dialogue" open>
+              <details id="rerun-status" class="trial-dialogue">
                 <summary>看 WorkBuddy 对话（荒废）</summary>
                 <figure class="motion-preview">
                   <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" data-src="article-media/workbuddy-abandoned-short.mp4?v=15s" aria-label="荒废教室，WorkBuddy 桌面会话，15 秒"></video>
@@ -508,14 +501,6 @@
 
               <img data-src="article-media/8b8d97246329a84c.jpeg" alt="洪水涌进教室，浪花从课桌之间掀起">
               <p>水从窗户冲进来，绕过课桌。水走哪条路，存在 Blender 烘焙好的流体缓存里。这次直接渲定稿，我们也把 384 个缓存文件列进上传清单，分批传完，再通过 CLI 提交洪水镜头。</p>
-              <details id="flood-chat" class="trial-dialogue" open>
-                <summary>看 WorkBuddy 对话（洪水）</summary>
-                <div class="flood-excerpt">
-                  <p><strong>用户</strong>　失重和荒废已经提交了，这次只补交洪水。</p>
-                  <p><strong>WorkBuddy · 16:57</strong>　「洪水补交完成。」</p>
-                  <a href="#farm-replay">查看完整云提交回放</a>
-                </div>
-              </details>
             </figure>
           </div>
         </section>
@@ -525,29 +510,14 @@
             <figure class="iteration-image"><img data-src="article-media/flood-particles-after.png" alt="调整后的第60帧：农场重渲的洪水画面"><figcaption>调整后 · 农场重渲的第 60 帧。飞沫更少，镜头和水势也有调整。</figcaption></figure></section>
 
 <section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">额外探索 · 未来教室</p><h2 id="future-heading">如果这间教室在太空里呢？</h2><p>从霓虹灯光和轨道示意屏，到金属墙板、桌面终端与天体仪，同一间教室也能变成轨道实验室。</p></div>
-  <figure class="future-replay">
-    <video controls loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/workbuddy-future-walkthrough-poster.jpg?v=mint" data-src="article-media/workbuddy-future-walkthrough.mp4?v=mint" aria-label="未来教室制作步骤回放，左侧为 WorkBuddy 进展，右侧为 Blender 工程画面，28 秒"></video>
-    <figcaption>28 秒制作回放。左侧以 WorkBuddy 的口吻重现六个步骤，右侧展示原 Blender 工程里的桌面终端、金属墙板和天体仪，最后回到渲染成片。</figcaption>
-  </figure>
 <figure class="iteration-image"><img data-src="article-media/future-first.png" alt="未来教室早期版：青蓝和品红灯光、轨道示意屏"><figcaption>早期方向 · 霓虹教学实验室</figcaption></figure><figure class="iteration-image"><img data-src="article-media/future-final.png" alt="未来教室最终版：金属墙板、桌面终端和天体仪"><figcaption>继续调整后 · 轨道实验室</figcaption></figure></section>
-        <section id="render-project" aria-labelledby="render-project-heading">
-          <div class="workbuddy-invitation">
-            <p>下一个 Blender 构思，你想让 WorkBuddy 帮你试什么？</p>
-            <a href="https://www.workbuddy.cn/" target="_blank" rel="noopener">试试 WorkBuddy <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="farm-promo">
-            <div class="farm-promo-copy">
-              <p class="eyebrow">Renderbus 云渲染</p>
-              <h2 id="render-project-heading">把 Blender 工程渲染成片</h2>
-              <p>预览确认后，把准备好的工程交给 Renderbus，输出正式图片或动画。</p>
-              <a class="farm-cta" href="https://www.renderbus.com/" target="_blank" rel="noopener">用 Renderbus 渲染我的项目 <span aria-hidden="true">↗</span></a>
-              <a href="https://www.renderbus.com/support-new/aixr/rft-usage-help/" target="_blank" rel="noopener">Renderbus CLI指南</a>
-            </div>
-            <ol class="farm-flow" aria-label="从工程到成片">
-              <li><span aria-hidden="true">01</span>用 WorkBuddy 调整场景</li>
-              <li><span aria-hidden="true">02</span>在 Blender 确认预览</li>
-              <li><span aria-hidden="true">03</span>交给 Renderbus 渲染</li>
-            </ol>
+        </details>
+        <section id="render-project" class="closing" aria-labelledby="render-project-heading">
+          <h2 id="render-project-heading">你的镜头里，什么动起来才好看？</h2>
+          <div class="hero-actions">
+            <a href="https://www.workbuddy.cn/" target="_blank" rel="noopener">试试 WorkBuddy ↗</a>
+            <a class="hero-primary" href="https://www.renderbus.com/" target="_blank" rel="noopener">用 Renderbus 渲染我的项目 ↗</a>
+            <a href="https://www.renderbus.com/support-new/aixr/rft-usage-help/" target="_blank" rel="noopener">CLI 使用指南 ↗</a>
           </div>
         </section>
       </article>
@@ -607,7 +577,7 @@
       const results = await Promise.allSettled(openingVideos.filter(video => !video.ended).map(video => video.play()));
       openingStatus.textContent = results.some(result => result.status === 'rejected')
         ? '点击“播放”查看三段动画。'
-        : '';
+        : '黄昏为静帧，其余三段为云渲染动画。';
       updateOpening();
     };
     openingVideos.forEach(video => {
@@ -631,7 +601,7 @@
     document.querySelectorAll('.trial-dialogue').forEach(dialogue => {
       const video = dialogue.querySelector('video');
       dialogue.addEventListener('toggle', () => {
-        if (!dialogue.open) video?.pause();
+        if (!dialogue.open) video.pause();
       });
     });
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -645,7 +615,7 @@
           }
         }
       }, { threshold: 0.2 });
-      document.querySelectorAll('.variant video, .replay-output video, .future-replay video').forEach(video => observer.observe(video));
+      document.querySelectorAll('.variant video, .replay-output video').forEach(video => observer.observe(video));
     }
 
     document.querySelectorAll('.wire-slider').forEach(slider => {
@@ -666,6 +636,6 @@
   </script>
 <script src="workbuddy-replay.js?v=24fps"></script>
 <script src="image-lightbox.js?v=media2"></script>
-<script src="../load-gallery.js?v=manifest" data-manifest="media-manifest.json?v=97029b2ba7f8"></script>
+<script src="../load-gallery.js?v=manifest" data-manifest="media-manifest.json?v=ced12049d00d"></script>
 </body>
 </html>
