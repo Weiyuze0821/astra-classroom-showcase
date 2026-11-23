@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我只说了四句话，WorkBuddy 让一间教室经历了四种结局</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7fbf9;
+      --surface: #fff;
+      --ink: #152621;
+      --muted: #466058;
+      --line: #c5ded6;
+      --accent: #09695b;
+      --mint: #e6f6f0;
+      --mint-strong: #cef0e5;
+      --control-line: #668a7f;
+      --media: #132a26;
+      --text: system-ui, "Microsoft YaHei", sans-serif;
+      --display: "Noto Serif CJK SC", "Songti SC", SimSun, serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: linear-gradient(180deg, #effaf6, var(--paper) 54rem) no-repeat; background-color: var(--paper); color: var(--ink); font-family: var(--text); }
+    a { color: var(--accent); text-underline-offset: .24em; }
+    .wrap { width: min(1120px, calc(100% - 3rem)); margin-inline: auto; }
+    .mast { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; border-bottom: 1px solid var(--line); }
+    .mast strong { color: var(--accent); font-size: .86rem; letter-spacing: .14em; }
+    nav { display: flex; flex-wrap: wrap; gap: .6rem 1.5rem; font-size: .82rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--ink); text-decoration: underline; }
+    h2, h3, blockquote { font-family: var(--display); }
+    .workbuddy-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(1.5rem, 3.6vw, 3rem);
+      margin-block: clamp(1rem, 2vw, 1.5rem);
+      padding: clamp(1.125rem, 3vw, 2.6rem);
+      border: 1px solid var(--line);
+      border-radius: clamp(16px, 2vw, 24px);
+      background: radial-gradient(ellipse at 100% 100%, #bff3e9, transparent 68%), linear-gradient(135deg, var(--surface) 20%, var(--mint));
+    }
+    .workbuddy-hero .hero-label, .opening-showcase .showcase-label { margin: 0 0 .7rem; font-size: .78rem; font-weight: 650; letter-spacing: .08em; }
+    .workbuddy-hero .hero-label { display: inline-block; padding: .34rem .7rem; border-radius: 999px; background: var(--mint); color: var(--accent); }
+    .workbuddy-hero h1 { margin: 0; font-family: var(--display); font-size: clamp(1.8rem, 3.7vw, 3.25rem); font-weight: 700; line-height: 1.2; letter-spacing: -.025em; }
+    .workbuddy-hero h1 span { display: block; color: var(--accent); text-wrap: balance; }
+    .workbuddy-hero .lead { max-width: 31em; margin: 1rem 0 0; color: var(--muted); font-size: clamp(.94rem, 1.5vw, 1.06rem); line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.3rem; }
+    .hero-actions a { display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--control-line); border-radius: 999px; background: var(--surface); color: var(--ink); font-size: .9rem; font-weight: 650; text-decoration: none; }
+    .hero-actions a:hover { border-color: var(--accent); }
+    .hero-actions .hero-primary { border-color: var(--ink); background: var(--ink); color: var(--surface); }
+    .hero-actions .hero-primary:hover { border-color: var(--accent); background: var(--accent); }
+    .hero-actions .hero-primary span { color: #87eede; }
+    .hero-workspace { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); box-shadow: 0 12px 30px #14564718; }
+    .hero-workspace figcaption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; padding: .65rem .9rem; border-bottom: 1px solid var(--line); color: var(--muted); }
+    .hero-workspace figcaption strong { color: var(--ink); }
+    .hero-workspace :focus-visible { outline-offset: -4px; }
+    .hero-workspace img { aspect-ratio: 16 / 9; object-fit: cover; object-position: center 70%; }
+    @media (max-width: 760px) {
+      .workbuddy-hero { grid-template-columns: 1fr; }
+      .hero-workspace img { aspect-ratio: 2 / 1; }
+    }
+    figure { margin: 0; min-width: 0; }
+    img, video { display: block; width: 100%; height: auto; background: var(--mint); }
+    video { color-scheme: dark; background: var(--media); aspect-ratio: 16/9; }
+    figcaption { padding-top: .65rem; font-size: .82rem; line-height: 1.6; color: var(--muted); }
+    .prose { width: min(680px, 100%); margin-inline: auto; }
+    section { padding-top: clamp(2.5rem, 5vw, 5rem); scroll-margin-top: 1rem; }
+    .prose p, .variant p { margin: 0 0 .8em; font-size: 1.06rem; line-height: 1.75; }
+    .prose p:last-child, .variant p:last-child { margin-bottom: 0; }
+    h2 { font-size: clamp(2rem, 4.8vw, 3.5rem); line-height: 1.17; margin: 0 0 .7em; letter-spacing: -.035em; }
+    h3 { font-size: 1.8rem; line-height: 1.35; margin: .85rem 0 1.1rem; }
+    .variant img { margin-bottom: 1rem; }
+    .original { margin-top: 1.7rem; }
+    .variants { display: grid; grid-template-columns: 1fr; gap: clamp(1.35rem, 3vw, 2.5rem); }
+    .variant { border-top: 1px solid var(--line); padding-top: .8rem; }
+    .variant img, .comparison img { aspect-ratio: 16/9; object-fit: cover; }
+    .variant p { color: var(--muted); max-width: 680px; }
+    .comparison { margin-top: 1.9rem; gap: 1rem; }
+    blockquote { margin: 1.75rem 0 0; padding: .2rem 0 .2rem 1rem; border-left: 2px solid var(--accent); font-size: clamp(1.3rem, 3vw, 1.85rem); line-height: 1.65; }
+    footer { margin-top: clamp(1.75rem, 3vw, 2.5rem); padding: 1.1rem 0 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .83rem; line-height: 1.8; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+    @media (max-width: 620px) {
+      .wrap { width: calc(100% - 2rem); }
+      .mast { align-items: flex-start; flex-direction: column; }
+      .variants, .comparison { grid-template-columns: 1fr; }
+    }
+
+    .wire-split { --split: 50%; --slant: min(8%, var(--split), calc(100% - var(--split))); --top: calc(var(--split) + var(--slant)); --bottom: calc(var(--split) - var(--slant)); position: relative; isolation: isolate; aspect-ratio: 16 / 9; margin-bottom: 1.4rem; overflow: hidden; }
+    .wire-split img { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; }
+    .wire-clay { clip-path: polygon(var(--top) 0, 100% 0, 100% 100%, var(--bottom) 100%); }
+    .wire-divider { position: absolute; inset: 0; background: var(--surface); clip-path: polygon(var(--top) 0, calc(var(--top) + 2px) 0, calc(var(--bottom) + 2px) 100%, var(--bottom) 100%); }
+    .wire-label { position: absolute; left: .75rem; bottom: .75rem; padding: .3rem .55rem; color: var(--surface); background: #132a26ed; font-size: .78rem; }
+    .wire-label-clay { left: auto; right: .75rem; bottom: auto; top: .75rem; }
+
+    .wire-slider { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; touch-action: pan-y; }
+    .wire-handle { position: absolute; top: 50%; left: clamp(24px, var(--split), calc(100% - 24px)); transform: translate(-50%, -50%); display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid var(--surface); border-radius: 50%; color: var(--surface); background: var(--media); font: 700 24px system-ui; }
+    .wire-handle svg { display: block; width: 24px; height: 24px; }
+    .wire-slider:focus-visible + .wire-handle { outline: 3px solid var(--ink); outline-offset: 2px; }
+    .wire-split[data-view="clay"] .wire-label:not(.wire-label-clay),
+    .wire-split[data-view="render"] .wire-label-clay,
+    .wire-split[data-view] .wire-divider { visibility: hidden; }
+
+    .process-record { margin: 2rem 0; padding: clamp(1.1rem, 4vw, 2rem); border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+    .process-record figcaption { padding: 0 0 1.15rem; color: var(--accent); }
+    .dialogue-record { max-width: 760px; margin: 1.8rem auto 2rem; padding: 0; border: 0; border-radius: 0; background: transparent; }
+    .dialogue-record .dialogue-caption { margin: 0 0 1.2rem; color: var(--muted); font: .72rem/1.5 var(--text); }
+    .dialogue-record .chat-line { width: fit-content; max-width: 82%; margin: 0 0 1.5rem auto; padding: .85rem 1.15rem; border: 1px solid var(--line); border-radius: 20px 20px 5px 20px; background: var(--mint); }
+    .dialogue-record .chat-line > strong { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .dialogue-record .chat-line p { margin: 0; color: var(--ink); font-size: .98rem; line-height: 1.8; }
+    .dialogue-record .chat-line.agent { position: relative; width: auto; max-width: 94%; margin: 0; padding: 0 0 0 2.65rem; border: 0; border-radius: 0; background: transparent; }
+    .dialogue-record .chat-line.agent .agent-avatar { position: absolute; top: -9px; left: -9px; width: 47px; height: 47px; margin: 0; aspect-ratio: 1; object-fit: contain; background: transparent; }
+    .dialogue-record .chat-line.agent > strong { position: static; display: block; width: auto; height: auto; overflow: visible; clip-path: none; margin: .1rem 0 .4rem; color: var(--ink); font-size: .84rem; font-weight: 600; }
+    .dialogue-record .chat-line.agent p { color: var(--muted); }
+    @media (max-width: 620px) {
+      .dialogue-record { margin-block: 1.4rem 1.8rem; }
+      .dialogue-record .chat-line { max-width: 90%; padding: .75rem .95rem; }
+      .dialogue-record .chat-line.agent { max-width: 100%; padding-left: 2.4rem; }
+    }
+    .client-result { margin: 2rem 0; }
+    .client-result img { border: 1px solid var(--line); border-radius: 8px; }
+    .iteration-image { margin: 2rem 0; }
+    .conversation-replay { aspect-ratio: auto; object-fit: contain; }
+    .eyebrow { color: var(--accent); font-size: .85rem !important; }
+    .future-replay { margin: 2rem 0 2.5rem; }
+    .future-replay video { border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+    .motion-preview { margin: 1rem 0; }
+    .motion-preview:last-child { margin-bottom: 0; }
+    #workbuddy, .trial-dialogue { max-width: 760px; margin-inline: auto; scroll-margin-top: 1rem; }
+    .trial-dialogue { margin-block: .65rem 1rem; }
+    .trial-dialogue > summary { width: fit-content; padding-block: .4rem; color: var(--accent); font-size: .9rem; font-weight: 650; cursor: pointer; }
+    .trial-dialogue > summary:hover { color: var(--ink); }
+    .flood-excerpt { padding: 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+    .trial-dialogue .motion-preview { margin-top: .5rem; }
+    .motion-preview video { border: 1px solid var(--line); border-radius: 8px; }
+    .motion-preview .trial-replay-avatar { display: inline-block; width: 22px; height: 22px; margin: 0 .4rem 0 0; vertical-align: middle; background: transparent; }
+
+    .opening-showcase { padding: clamp(.85rem, 2.2vw, 1.45rem); border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(180deg, var(--mint), #f1faf6); scroll-margin-top: 1rem; }
+    .opening-showcase .showcase-label { color: var(--accent); }
+    #finished-renders-label { margin: 0 0 1rem; color: var(--ink); font-size: clamp(1.55rem, 3.1vw, 2.5rem); line-height: 1.25; text-wrap: balance; }
+    .opening-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .opening-card { overflow: hidden; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+    .opening-card video { object-fit: contain; }
+    .opening-card figcaption { padding: 1rem 1.1rem 1.2rem; }
+    .showcase-intro { max-width: 48em; margin: 0 0 1.25rem; color: var(--ink); font-size: 1rem; line-height: 1.75; }
+    .opening-card strong { display: block; color: var(--ink); font-family: var(--display); font-size: clamp(1rem, 1.6vw, 1.35rem); font-weight: 500; }
+    .opening-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+    #opening-status { margin: 0 auto 0 0; font-size: .85rem; color: var(--muted); }
+    .opening-toolbar button { min-height: 44px; padding: .6rem 1rem; border: 1px solid var(--control-line); border-radius: 24px; background: var(--surface); color: var(--ink); font: inherit; font-size: .82rem; cursor: pointer; }
+    .opening-toolbar button:hover { background: var(--mint-strong); border-color: var(--accent); }
+    @media (max-width: 680px) {
+      .opening-grid { gap: 8px; }
+      .opening-card figcaption { padding: .55rem .6rem; }
+
+    }
+
+    section[aria-labelledby="working"] > .iteration-image:last-child { margin-bottom: 0; }
+    #farm { padding-top: clamp(2rem, 4vw, 3.5rem); }
+    #farm-heading { margin-bottom: .45em; }
+    #future > .iteration-image:last-child { margin-bottom: 0; }
+    #render-project { padding-top: clamp(1.125rem, 2vw, 1.5rem); }
+    .workbuddy-invitation { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .35rem 1.25rem; margin: 0 0 clamp(1.125rem, 2vw, 1.5rem); padding-left: .9rem; border-left: 3px solid var(--accent); }
+    .workbuddy-invitation p { margin: 0; font: clamp(1.15rem, 2vw, 1.6rem)/1.45 var(--display); text-wrap: pretty; }
+    .workbuddy-invitation a { color: var(--accent); font-size: .9rem; font-weight: 650; white-space: nowrap; }
+    .workbuddy-invitation a:hover { color: var(--ink); }
+    .farm-promo { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; gap: clamp(1.25rem, 4vw, 3rem); padding: clamp(1.2rem, 3.4vw, 2.4rem); border: 1px solid var(--line); border-radius: 18px; background: linear-gradient(115deg, var(--surface), var(--mint-strong)); }
+    .farm-promo .eyebrow { margin: 0 0 .5rem; font-weight: 650; }
+    .farm-promo h2 { margin: 0 0 .8rem; font-size: clamp(1.7rem, 3.6vw, 2.6rem); text-wrap: balance; }
+    .farm-promo-copy > p:not(.eyebrow) { max-width: 30em; margin: 0 0 1.1rem; color: var(--muted); line-height: 1.75; }
+    .farm-flow { list-style: none; margin: 0; padding: .25rem 1rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .farm-flow li { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: .8rem; padding: .7rem .15rem; font-size: .86rem; line-height: 1.5; }
+    .farm-flow li + li { border-top: 1px solid var(--line); }
+    .farm-flow span { padding: .2rem .5rem; border-radius: 999px; background: var(--mint); color: var(--accent); font-size: .7rem; font-variant-numeric: tabular-nums; font-weight: 700; }
+    .farm-cta { display: inline-flex; align-items: center; gap: .8rem; min-height: 44px; padding: .65rem 1rem; border-radius: 999px; background: var(--ink); color: var(--surface); text-decoration: none; font-size: .9rem; font-weight: 650; }
+    .farm-cta:hover { background: var(--accent); }
+    @media (max-width: 680px) { .farm-promo { grid-template-columns: 1fr; } }
+
+    .farm-replay { margin-top: 1.25rem; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: var(--surface); }
+    .replay-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; padding: 1rem 1.3rem; border-bottom: 1px solid var(--line); background: var(--mint); font-size: .76rem; color: var(--accent); }
+    .replay-heading span:last-child { color: var(--muted); }
+    .replay-layout { display: grid; grid-template-columns: 1.2fr 1fr; }
+    .replay-conversation { position: relative; height: 540px; overflow-y: auto; padding: 1.6rem; scrollbar-color: var(--control-line) transparent; }
+    .replay-conversation:focus-visible { outline-offset: -3px; }
+    .replay-message { margin: 0 0 1.6rem; max-width: 95%; }
+    .replay-message > span { display: block; font-size: .78rem; font-weight: 600; color: var(--accent); margin-bottom: .5rem; }
+    .replay-message p { font-size: .95rem; line-height: 1.8; margin: 0; }
+    .replay-message.user { margin-left: auto; max-width: 84%; padding: .8rem 1rem; background: var(--mint); border-radius: 16px 16px 4px 16px; }
+    .replay-message small { font-size: .72rem; color: var(--muted); }
+    .replay-message[hidden] { display: none; }
+    .replay-terminal { padding: 1.6rem; border-left: 1px solid var(--line); background: var(--paper); min-width: 0; }
+    .replay-terminal-title { color: var(--accent); font-size: .8rem; }
+    .replay-terminal-title span { display: block; margin-top: .6rem; color: var(--muted); font-size: .72rem; }
+    .replay-terminal pre { white-space: pre-wrap; overflow-wrap: anywhere; font: .82rem/1.9 Consolas, monospace; color: var(--ink); min-height: 230px; margin: 1.5rem 0; }
+    .replay-terminal p, .replay-terminal a { font-size: .78rem; line-height: 1.8; }
+    .replay-terminal p { color: var(--muted); }
+    .replay-controls { display: flex; flex-wrap: wrap; gap: .5rem; padding: 1rem; border-top: 1px solid var(--line); }
+    .replay-controls button { border: 1px solid var(--control-line); border-radius: 6px; color: var(--ink); background: var(--surface); min-height: 40px; padding: .5rem .7rem; cursor: pointer; }
+    .replay-controls button:hover, .replay-controls button[aria-current="step"] { color: var(--accent); background: var(--mint); border-color: var(--accent); }
+    .replay-steps { display: flex; flex-wrap: wrap; gap: .4rem; flex: 1; }
+    .farm-replay .replay-disclosure { padding: 0 1.3rem 1.1rem; margin: 0; font-size: .73rem; line-height: 1.8; color: var(--muted); }
+    @media(max-width: 700px) { .replay-layout { grid-template-columns: 1fr; } .replay-conversation { position: relative; height: 320px; padding: 1rem; } .replay-terminal { border-left: 0; border-top: 1px solid var(--line); padding: 1rem; } .replay-terminal pre { min-height: 0; } .replay-steps { flex-basis: 100%; } }
+
+    .replay-brand { display: flex; align-items: center; gap: .55rem; color: var(--ink); font-weight: 600; }
+    .replay-brand img { width: 28px; height: 28px; background: transparent; }
+    .replay-heading .replay-brand-agent { font-size: .72rem; font-weight: 400; color: var(--muted); }
+    .replay-message > .replay-agent-name { display: flex; align-items: center; gap: .5rem; }
+    .replay-agent-name img { width: 24px; height: 24px; flex: none; background: transparent; }
+    .replay-agent-name small { font-weight: 400; }
+    .replay-message.is-entering { animation: replay-appear .32s ease-out; }
+    .replay-message.user.is-entering { animation-name: replay-user-appear; }
+    @keyframes replay-appear { from { opacity: 0; transform: translate(-8px, 8px); } to { opacity: 1; transform: none; } }
+    @keyframes replay-user-appear { from { opacity: 0; transform: translate(8px, 8px); } to { opacity: 1; transform: none; } }
+    .replay-steps > button { padding: .5rem .6rem; font-size: .75rem; }
+    .replay-output { max-width: 880px; margin: 1rem auto 0; scroll-margin-top: 1rem; }
+    .render-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin: 1.4rem 0 1rem; }
+    .render-tabs button { padding: .8rem .6rem; border: 1px solid var(--control-line); border-radius: 8px; background: var(--surface); color: var(--muted); text-align: left; cursor: pointer; font: inherit; }
+    .render-tabs button[aria-selected="true"] { border-color: var(--accent); background: var(--mint-strong); color: var(--ink); }
+    .render-tabs span, .render-tabs strong, .render-tabs small { display: block; }
+    .render-tabs strong { margin: .25rem 0; font-size: clamp(1.15rem, 3vw, 1.8rem); color: var(--accent); }
+    .render-tabs small { font-size: .73rem; }
+    .sample-frames { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem; margin-block: 1rem; }
+    @media (max-width: 600px) { .sample-frames { grid-template-columns: 1fr; } }
+    .render-proof { margin-top: .65rem; }
+    .replay-output .image-zoom { border-radius: 8px; }
+    .replay-output img { border: 1px solid var(--line); border-radius: inherit; }
+    .replay-output video { border-radius: 8px; }
+    .replay-terminal.is-active, .replay-conversation.is-active { box-shadow: inset 3px 0 var(--accent); }
+    @media(prefers-reduced-motion: reduce) { .replay-message.is-entering { animation: none; } }
+
+    .image-zoom { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+    img[data-zoomable] { cursor: zoom-in; }
+    html.image-preview-open { overflow: hidden; }
+    .image-lightbox { width: min(1344px, 94vw); max-width: none; max-height: 94vh; padding: 1rem; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: var(--surface); box-shadow: 0 24px 100px #0e272180; }
+    .image-lightbox::backdrop { background: #132a268c; backdrop-filter: blur(3px); }
+    .image-lightbox-bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .7rem; }
+    .image-lightbox-bar span { font-size: .78rem; color: var(--muted); }
+    .image-lightbox-close { width: 40px; height: 40px; flex-shrink: 0; border: 1px solid var(--control-line); border-radius: 50%; background: var(--mint); color: var(--ink); font-size: 1.6rem; cursor: pointer; }
+    .image-lightbox img { width: auto; height: auto; max-width: 100%; max-height: 78vh; object-fit: contain; margin: 0 auto; background: transparent; border-radius: 4px; }
+    .linked-preview .image-lightbox-close { width: auto; min-height: 44px; padding-inline: 1rem; border-radius: 1.5rem; font: inherit; }
+    .linked-preview video { max-height: 75vh; max-height: 75dvh; object-fit: contain; aspect-ratio: auto; }
+    .linked-preview [hidden] { display: none; }
+    .image-lightbox-caption { margin: .8rem 0 0; color: var(--muted); font-size: .8rem; line-height: 1.6; }
+    @media(max-width: 620px) { .image-lightbox { width: 94vw; padding: .75rem; } }
+
+
+
+    .shot-checklist { margin: 1rem 0 0; padding-left: 1.2rem; color: var(--muted); font-size: .95rem; line-height: 1.9; }
+    .shot-checklist li { margin-bottom: .4rem; }
+    body:not(.media-ready) { overflow: hidden; }
+    body:not(.media-ready) > .wrap { display: none; }
+    .page-loader { min-height: 100svh; display: grid; place-items: center; padding: 2rem; }
+    .loader-inner { width: min(420px, 100%); }
+    .loader-brand { color: var(--accent); letter-spacing: .16em; font-size: .76rem; }
+    .loader-inner h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 1.4rem 0; }
+    .loader-inner p { color: var(--muted); line-height: 1.8; font-size: .9rem; }
+    .loader-progress { width: 100%; height: 3px; margin: 1rem 0; accent-color: var(--accent); }
+    #loader-retry { padding: .7rem 1.2rem; border: 1px solid var(--line); border-radius: 24px; color: var(--ink); background: transparent; cursor: pointer; }
+    .media-ready .page-loader { display: none; }
+
+    :root {
+      color-scheme: dark;
+      --paper: #0c0e12;
+      --surface: #17191d;
+      --ink: #f5f7f6;
+      --muted: #b4bebc;
+      --line: #343c3b;
+      --accent: #35df90;
+      --mint: #172c23;
+      --mint-strong: #204532;
+      --control-line: #52645c;
+      --media: #0a1010;
+      --display: var(--text);
+    }
+    body {
+      background: radial-gradient(ellipse 85% 720px at 50% 0, #21513b, #142a22 56%, transparent 100%) var(--paper) no-repeat;
+    }
+    .mast { padding-block: 1rem; }
+    .mast strong { color: var(--ink); letter-spacing: .04em; }
+    .workbuddy-hero {
+      background: transparent; border: 0; border-radius: 0;
+      margin: 0; padding: clamp(2rem, 5vw, 4.25rem) 0;
+    }
+    .workbuddy-hero h1 { font-size: clamp(2rem, 3.65vw, 3.4rem); line-height: 1.17; }
+    .workbuddy-hero h1 span { color: var(--ink); }
+    .workbuddy-hero .lead strong { color: #fff; }
+    .hero-workspace { box-shadow: 0 16px 44px #0005; }
+    .hero-actions a, .farm-cta, .opening-toolbar button { border-radius: .65rem; }
+    .hero-actions .hero-primary, .farm-cta { background: #fff; color: #121417; }
+    .hero-actions .hero-primary span { color: #14613d; }
+    .hero-actions .hero-primary:hover, .farm-cta:hover { background: #dcffe9; color: #101812; }
+    .opening-showcase { background: var(--surface); }
+    .opening-card { background: var(--paper); }
+    .opening-card strong { font-weight: 600; }
+    .opening-card figcaption { padding: .8rem; }
+    .opening-toolbar { justify-content: flex-end; }
+    h2 { font-size: clamp(1.65rem, 3.3vw, 2.6rem); line-height: 1.24; }
+    .variant { background: var(--surface); border: 1px solid var(--line); border-radius: 1rem; padding: clamp(.85rem, 2.5vw, 2rem); }
+    .wire-divider { background: #fff; }
+    .wire-label, .wire-handle { color: #fff; background: #101916ed; }
+    .wire-handle { border-color: #fff; }
+    .replay-terminal { background: #101315; }
+    .replay-terminal pre { color: #c8ecd9; }
+    .replay-controls button[aria-current="step"], .render-tabs button[aria-selected="true"] {
+      border-color: #13cb75; background: #173427; color: #fff;
+    }
+    .farm-promo { background: radial-gradient(ellipse at 82% 0, #21513b, #142820 55%, #141819); }
+    @media (min-width: 840px) {
+      .workbuddy-hero {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "title title" "lead workspace" "actions workspace";
+        align-content: center; column-gap: clamp(2rem, 5vw, 4rem); row-gap: 1.15rem;
+      }
+      .workbuddy-hero > div { display: contents; }
+      .workbuddy-hero h1 { grid-area: title; text-align: center; margin-bottom: .45em; }
+      .workbuddy-hero h1 span { margin-top: .08em; }
+      .workbuddy-hero .lead { grid-area: lead; align-self: end; margin: 0; max-width: none; }
+      .workbuddy-hero .hero-actions { grid-area: actions; align-self: start; margin: 0; }
+      .hero-workspace { grid-area: workspace; }
+      .opening-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .opening-showcase { display: grid; grid-template-columns: minmax(0, .83fr) minmax(0, 1.17fr); gap: 1.25rem 2rem; }
+      #finished-renders-label, .showcase-intro, .opening-toolbar { margin: 0; }
+      .opening-grid, .opening-toolbar { grid-column: 1 / -1; }
+      section[aria-labelledby="working"], #future { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      section[aria-labelledby="working"] > .prose, #future > .prose, #future > .future-replay { grid-column: 1 / -1; }
+      section[aria-labelledby="working"] .iteration-image, #future .iteration-image { margin: 0; }
+    }
+    @media (max-width: 620px) {
+      .mast { gap: .55rem; }
+      .workbuddy-hero { gap: 1.2rem; padding-block: 1.7rem; }
+      .workbuddy-hero h1 { font-size: clamp(1.8rem, 6.8vw, 2.3rem); }
+      .opening-card strong { font-size: .93rem; }
+      .opening-card figcaption { padding: .6rem; }
+      .opening-showcase { border-radius: .85rem; }
+      .variant h3 { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-loader" role="status" aria-live="polite">
+    <div class="loader-inner">
+      <div class="loader-brand">WORKBUDDY × BLENDER × RENDERBUS</div>
+      <h2>同一间教室，<br>不同的可能。</h2>
+      <p id="loader-message">正在准备完整画面，加载完成后自动进入。</p>
+      <progress class="loader-progress" id="loader-progress" value="0" max="100" aria-label="素材下载进度"></progress>
+      <p id="loader-detail">0%</p>
+      <button type="button" id="loader-retry" hidden>重新加载</button>
+      <noscript><p>请开启浏览器 JavaScript，以加载视频和交互画面。</p></noscript>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="mast">
+      <strong>WorkBuddy × Renderbus CLI</strong>
+      <nav aria-label="文章目录">
+        <a href="#variants">从黄昏到失重</a>
+        <a href="#farm">云端看成片</a>
+        <a href="#credits">作品署名</a>
+      </nav>
+    </div>
+    <main>
+      <article>
+        <header class="workbuddy-hero">
+          <div>
+            <h1>我只说了四句话，<span>WorkBuddy 让一间教室经历了四种结局</span></h1>
+            <p class="lead">我用 Blender 官方示例场景做了一次工作流实测：全程通过 WorkBuddy 下达指令调整场景参数；失重、荒废、洪水三段动画各 96 帧、共 288 帧，通过 Renderbus CLI 直接提交云端渲染任务。<strong>本地渲一张静帧的时间，云端可以并行推进这 288 帧的渲染</strong>，本机显卡得以空出来继续打磨下一组镜头。</p>
+            <div class="hero-actions">
+              <a class="hero-primary" data-media-preview="video" href="article-media/workbuddy-dusk-replay.mp4?v=15s"><span aria-hidden="true">▶</span> 看 WorkBuddy 试渲</a>
+              <a href="#farm">看云端成片 <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+          <figure class="hero-workspace">
+            <figcaption><strong>WorkBuddy 桌面实录</strong><span>黄昏试渲</span></figcaption>
+            <img data-src="article-media/workbuddy-dusk-replay-still.png" width="1340" height="1107" alt="WorkBuddy 黄昏回放的结果画面，显示黄昏教室的效果图">
+          </figure>
+        </header>
+        <div class="opening-showcase" id="finished-renders" role="group" aria-labelledby="finished-renders-label">
+          <h2 id="finished-renders-label">本地调静帧，云端跑序列</h2>
+          <p class="showcase-intro">三个镜头调整静帧效果后逐一上传到 Renderbus，洪水镜头刚提交到 Renderbus，我便切回本机调整后期效果。5 分钟后向 WorkBuddy 查询渲染进度：失重与荒废两段已经完成，洪水也渲染到了第 59 帧。三段合计 288 帧全部完成后，最终成片如下。</p>
+          <div class="opening-grid">
+            <figure class="opening-card">
+              <img width="1280" height="720" data-src="article-media/13847e1f881f9bb5.jpeg" alt="斜阳穿过百叶窗，照在空教室的课桌上">
+              <figcaption><strong>「把下午改成黄昏。」</strong></figcaption>
+            </figure>
+            <figure class="opening-card">
+              <video loop muted playsinline preload="auto" width="1920" height="1080" aria-label="失重动画，静音循环播放" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-farm-24fps.mp4"></video>
+              <figcaption><strong>「让桌椅飘起来。」</strong></figcaption>
+            </figure>
+            <figure class="opening-card">
+              <video loop muted playsinline preload="auto" width="1920" height="1080" aria-label="荒废动画，静音循环播放" data-poster="article-media/aging-farm-poster.jpg" data-src="article-media/aging-farm-24fps.mp4"></video>
+              <figcaption><strong>「让它看起来很久没人来过。」</strong></figcaption>
+            </figure>
+            <figure class="opening-card">
+              <video loop muted playsinline preload="auto" width="1920" height="1080" aria-label="洪水动画，静音循环播放" data-poster="article-media/8b8d97246329a84c.jpeg" data-src="article-media/f841c31eb2fa537c.mp4"></video>
+              <figcaption><strong>「把教室淹了。」</strong></figcaption>
+            </figure>
+          </div>
+          <div class="opening-toolbar">
+            <p id="opening-status" aria-live="polite"></p>
+            <button type="button" id="opening-toggle">播放</button>
+            <button type="button" id="opening-replay">↻ 重新播放</button>
+          </div>
+        </div>
+
+        <section aria-labelledby="start">
+          <div class="prose">
+            <h2 id="start">基准场景：改造前的教室</h2>
+            <p>使用过 Blender 的小伙伴，应该可以看出基础工程取自 Blender 官方示例《Classroom》。改造过程中保持原有建筑结构与机位不变，先从光线变化切入测试。</p>
+          </div>
+          <figure class="original">
+            <img data-src="article-media/2b613f18b87412bd.jpeg" alt="改造前的教室，桌椅整齐排在黑板前">
+            <figcaption>改造前的原场景</figcaption>
+          </figure>
+        </section>
+
+        <section id="variants" aria-labelledby="variants-heading">
+          <h2 id="variants-heading">灯光试水与失重构图</h2>
+          <div class="variants">
+            <figure class="variant">
+              <h3>「把下午改成黄昏。」</h3>
+              <p>这一步重点观察窗边夕阳光的光影效果。我让 WorkBuddy 保持机位不变、压低太阳高度角，先在本地输出一张静帧确认光影方向。</p>
+
+              <div class="wire-split">
+                <img data-src="article-media/13847e1f881f9bb5.jpeg" alt="黄昏的教室，低角度暖光穿过百叶窗">
+                <img class="wire-clay" data-src="article-media/8b22de34d2888c16.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">渲染效果</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+              <p>首次执行时，任务虽然返回完成，输出目录里却没有生成图片。排查后发现是保存路径不完整，WorkBuddy 补全路径重新渲染后，才顺利拿到预览图。</p>
+              <details id="workbuddy" class="trial-dialogue" open>
+                <summary>看 WorkBuddy 对话（黄昏）</summary>
+                <figure class="motion-preview">
+                  <video id="dusk-replay" class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" aria-label="WorkBuddy 制作黄昏预览的 15 秒回放" data-src="article-media/workbuddy-dusk-replay.mp4?v=15s"></video>
+                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" width="22" height="22" alt="">WorkBuddy 黄昏试渲回放 · 15 秒。<a href="article-media/workbuddy-dusk-replay.gif?v=15s" download>下载 GIF</a></figcaption>
+                </figure>
+              </details>
+            </figure>
+            <figure class="variant">
+              <h3>「让桌椅都飘起来。」</h3>
+              <p>如果教室里的桌椅全部同时失重浮空，画面会失去地面参照。试过几版后，我保留前排桌椅落在地面稳住空间关系，只让后排分批离地升起。</p>
+
+
+              <figure id="zerog-walkthrough" class="motion-preview">
+                <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-film-and-blender.mp4?v=18s" aria-label="失重教室成片与 Blender 工程操作循环播放"></video>
+                <figcaption>失重成片与 Blender 分批离地设置</figcaption>
+              </figure>
+              <details id="zerog-chat" class="trial-dialogue" open>
+                <summary>看 WorkBuddy 对话（失重）</summary>
+                <figure class="motion-preview">
+                  <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1627" height="1192" data-src="article-media/workbuddy-zerog-chat-15s.mp4" aria-label="失重教室，WorkBuddy 桌面会话，15 秒"></video>
+                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">失重试渲对话 · 调整桌椅高度与位置</figcaption>
+                </figure>
+              </details>
+              <div class="wire-split">
+                <img data-src="article-media/2164b0ecfe25d0d1.jpeg" alt="失重教室，课桌、椅子和纸张悬浮在空中">
+                <img class="wire-clay" data-src="article-media/cd76a6fa17e4a336.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">渲染效果</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section id="farm" aria-labelledby="farm-heading">
+          <div class="prose">
+            <h2 id="farm-heading">96 帧序列交给云端渲染</h2>
+            <p>4 秒动画按每秒 24 帧计算需要输出 96 帧，只有跑完完整序列，才能看清桌椅分批离地的最终实际效果。工程定稿后，WorkBuddy 调用 Renderbus CLI 完成场景分析，并将工程与资产一并上传，生成渲染任务。</p>
+            <p>失重与荒废率先完成渲染，拉回本地后我抽检了第 1、48、96 帧，确认画面衔接正常。下方可切换查看三段云端成片、抽帧与任务完成截图。</p>
+          </div>
+<div class="replay-output" id="workbuddy-render-check" role="group" aria-labelledby="farm-heading">
+  <div class="render-tabs" role="tablist" aria-label="本轮云端输出">
+    <button type="button" role="tab" id="render-tab-zerog" aria-controls="render-panel-zerog" aria-selected="true"><span>失重</span><strong>96 / 96</strong><small>帧完成 · 0 失败</small></button>
+    <button type="button" role="tab" id="render-tab-aging" aria-controls="render-panel-aging" aria-selected="false" tabindex="-1"><span>荒废</span><strong>96 / 96</strong><small>帧完成 · 0 失败</small></button>
+    <button type="button" role="tab" id="render-tab-flood" aria-controls="render-panel-flood" aria-selected="false" tabindex="-1"><span>洪水</span><strong>96 / 96</strong><small>帧完成 · 0 失败</small></button>
+  </div>
+  <div role="tabpanel" id="render-panel-zerog" aria-labelledby="render-tab-zerog">
+    <figure>
+      <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-zerog-240839983.jpg" data-src="article-media/workbuddy-zerog-240839983.mp4?v=4s" aria-label="本轮失重动画，任务 240839983，4 秒"></video>
+      <figcaption>失重定稿 · 本轮云端输出，96 帧按每秒 24 帧播放。</figcaption>
+    </figure>
+    <div class="sample-frames" role="group" aria-label="本轮失重动画抽帧">
+      <figure><img data-src="article-media/workbuddy-zerog-240839983-frame-0001.jpg" width="960" height="540" alt="失重动画第 1 帧，任务 240839983 的云端输出"><figcaption>第 1 帧</figcaption></figure>
+      <figure><img data-src="article-media/workbuddy-zerog-240839983-frame-0048.jpg" width="960" height="540" alt="失重动画第 48 帧，任务 240839983 的云端输出"><figcaption>第 48 帧</figcaption></figure>
+      <figure><img data-src="article-media/workbuddy-zerog-240839983-frame-0096.jpg" width="960" height="540" alt="失重动画第 96 帧，任务 240839983 的云端输出"><figcaption>第 96 帧</figcaption></figure>
+    </div>
+    <figure class="render-proof">
+      <button type="button" class="image-zoom" aria-label="放大失重任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240839983.png" width="1920" height="919" alt="Renderbus 失重任务 240839983：96 帧完成，0 帧失败"></button>
+      <figcaption>失重 · 任务 240839983 · 点击截图放大</figcaption>
+    </figure>
+  </div>
+  <div role="tabpanel" id="render-panel-aging" aria-labelledby="render-tab-aging" hidden>
+    <figure>
+      <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-aging-240840393.jpg" data-src="article-media/workbuddy-aging-240840393.mp4?v=4s" aria-label="本轮荒废动画，任务 240840393，4 秒"></video>
+      <figcaption>荒废定稿 · 本轮云端输出，96 帧按每秒 24 帧播放。</figcaption>
+    </figure>
+    <div class="sample-frames" role="group" aria-label="本轮荒废动画抽帧">
+      <figure><img data-src="article-media/workbuddy-aging-240840393-frame-0001.jpg" width="960" height="540" alt="荒废动画第 1 帧，任务 240840393 的云端输出"><figcaption>第 1 帧</figcaption></figure>
+      <figure><img data-src="article-media/workbuddy-aging-240840393-frame-0048.jpg" width="960" height="540" alt="荒废动画第 48 帧，任务 240840393 的云端输出"><figcaption>第 48 帧</figcaption></figure>
+      <figure><img data-src="article-media/workbuddy-aging-240840393-frame-0096.jpg" width="960" height="540" alt="荒废动画第 96 帧，任务 240840393 的云端输出"><figcaption>第 96 帧</figcaption></figure>
+    </div>
+    <figure class="render-proof">
+      <button type="button" class="image-zoom" aria-label="放大荒废任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840393.png" width="1920" height="919" alt="Renderbus 荒废任务 240840393：96 帧完成，0 帧失败"></button>
+      <figcaption>荒废 · 任务 240840393 · 点击截图放大</figcaption>
+    </figure>
+  </div>
+  <div role="tabpanel" id="render-panel-flood" aria-labelledby="render-tab-flood" hidden>
+    <figure>
+      <video controls loop muted playsinline preload="none" width="1920" height="1080" data-poster="article-media/workbuddy-flood-240840673.jpg" data-src="article-media/workbuddy-flood-240840673.mp4" aria-label="本轮洪水动画，任务 240840673"></video>
+      <figcaption>洪水定稿 · 本轮云端输出，96 帧按每秒 24 帧播放。</figcaption>
+    </figure>
+    <div class="sample-frames" role="group" aria-label="本轮洪水动画抽帧">
+      <figure><img data-src="article-media/workbuddy-flood-240840673-frame-0001.jpg" width="960" height="540" alt="洪水动画第 1 帧，任务 240840673 的云端输出"><figcaption>第 1 帧</figcaption></figure>
+      <figure><img data-src="article-media/workbuddy-flood-240840673-frame-0048.jpg" width="960" height="540" alt="洪水动画第 48 帧，任务 240840673 的云端输出"><figcaption>第 48 帧</figcaption></figure>
+      <figure><img data-src="article-media/workbuddy-flood-240840673-frame-0096.jpg" width="960" height="540" alt="洪水动画第 96 帧，任务 240840673 的云端输出"><figcaption>第 96 帧</figcaption></figure>
+    </div>
+    <figure class="render-proof">
+      <button type="button" class="image-zoom" aria-label="放大洪水任务的 Renderbus 完成截图"><img data-src="article-media/workbuddy-renderbus-240840673.png" width="1920" height="919" alt="Renderbus 洪水任务 240840673：96 帧完成，0 帧失败"></button>
+      <figcaption>洪水 · 任务 240840673 · 点击截图放大</figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="prose">
+  <h3>对话内查进度与拉取成片</h3>
+  <p>下面保留了当时的对话和命令回执。点「查询进度」可以看到三个镜头各自完成了多少帧，点「下载抽帧」可以看到失重和荒废的帧序列怎样回到本机。</p>
+</div>
+<div class="farm-replay" id="farm-replay" role="region" aria-label="WorkBuddy 本轮 CLI 提交回放">
+<div class="replay-heading"><span class="replay-brand"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="28" height="28">WorkBuddy <span class="replay-brand-agent">× Renderbus CLI</span></span><span>本轮提交 · 2026 年 11 月 19 日</span></div>
+<div class="replay-layout">
+<div class="replay-conversation" tabindex="0" aria-label="WorkBuddy 真实对话节选，可滚动查看">
+<div class="replay-message user" data-replay-step="0"><span>用户 · 原话节选</span><p>你用 Renderbus 的 CLI 提交技能，把这三条动画从本地工程送到农场渲染吧。</p></div>
+<div class="replay-message" data-replay-step="0"><span>工具记录 · 16:34</span><p>WorkBuddy 读取提交技能后分析失重工程，取得任务号 <b>240839983</b>。</p></div>
+<div class="replay-message" data-replay-step="1" hidden><span>工具记录 · 16:37–16:38</span><p>两次提交都停在上传阶段，没有云端受理回执。</p></div>
+<div class="replay-message" data-replay-step="2" hidden><span class="replay-agent-name"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="24" height="24">WorkBuddy <small>· 16:41 回顾</small></span><p>「改用前台阻塞模式 <code>rft daemon run</code> 保持存活后，两条都顺利上传提交。」</p></div>
+<div class="replay-message user" data-replay-step="3" hidden><span>用户 · 原话节选</span><p>失重和荒废已经提交了，这次只补交洪水。</p></div>
+<div class="replay-message" data-replay-step="3" hidden><span class="replay-agent-name"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="24" height="24">WorkBuddy <small>· 16:57</small></span><p>「洪水补交完成。」上传清单含 384 个流体缓存文件和 39 个教室资产；四批上传都完成后才提交。</p></div>
+<div class="replay-message user" data-replay-step="4" hidden><span>用户 · 原话</span><p>查询一下几个任务渲染的进度到哪里了，有没有已经完成的</p></div>
+<div class="replay-message" data-replay-step="4" hidden><span class="replay-agent-name"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="24" height="24">WorkBuddy <small>· 17:02</small></span><p>「失重、荒废两条已经全部渲染完成，各 96 帧、0 失败。」洪水当时已完成 59/96 帧。</p></div>
+<div class="replay-message user" data-replay-step="5" hidden><span>用户 · 原话</span><p>抽查前中后帧我看下现在效果是否正确</p></div>
+<div class="replay-message" data-replay-step="5" hidden><span class="replay-agent-name"><img data-src="article-media/workbuddy-avatar.svg" alt="" width="24" height="24">WorkBuddy <small>· 17:06</small></span><p>「两条动画的前中后帧都看完了，渲染效果正常。」失重和荒废各检查了第 1、48、96 帧。</p></div>
+<div class="replay-message" data-replay-step="6" hidden><span>独立核验 · 17:09 起</span><p>洪水也已渲完。三项均为 <b>96/96 帧、0 失败</b>。下载洪水帧序列，沿用 WorkBuddy 已下载的另外两组帧，逐一合成并核对。<a href="#workbuddy-render-check">返回成片 ↑</a></p></div>
+</div>
+<div class="replay-terminal"><div class="replay-terminal-title">›_ CLI 命令与回执节选 <span>Renderbus · gpu75</span></div>
+<pre id="replay-command"></pre><p id="replay-evidence"></p></div>
+</div>
+<div class="replay-controls"><div class="replay-steps" role="group" aria-label="回放阶段，点击直接查看"><button type="button" data-replay-phase="0">01 技能与分析</button><button type="button" data-replay-phase="1">02 上传失败</button><button type="button" data-replay-phase="2">03 同号重试</button><button type="button" data-replay-phase="3">04 补交洪水</button><button type="button" data-replay-phase="4">05 查询进度</button><button type="button" data-replay-phase="5">06 下载抽帧</button><button type="button" data-replay-phase="6">07 完成验片</button></div><button type="button" id="replay-toggle">暂停回放</button><button type="button" id="replay-restart">↻ 重播</button></div>
+<p class="replay-disclosure">引号内为 WorkBuddy 会话节选；其他文字为工具记录摘要。命令略去外层脚本、本地绝对路径及作业 ID；独立复查单独标注。时间为北京时间，进度不是实时数据。</p>
+</div>
+        </section>
+
+        <section aria-labelledby="more-variants"><h2 id="more-variants">时间推移与流体测试</h2>
+          <div class="variants">
+            <figure class="variant">
+              <h3 id="abandoned-final">「让这里像很久没人来过。」</h3>
+              <div class="wire-split" style="--split: 100%" data-view="render">
+                <img data-src="article-media/aecb2b911b431591.jpeg" alt="废弃教室，桌椅倾倒，藤蔓沿墙爬向黑板">
+                <img class="wire-clay" data-src="article-media/4b6f6d96bde5c68d.png" alt="同机位的 Blender 白模布线">
+                <span class="wire-divider" aria-hidden="true"></span>
+                <span class="wire-label">渲染效果</span>
+                <span class="wire-label wire-label-clay">白模 · 布线</span>
+                <input class="wire-slider" type="range" min="0" max="100" value="100" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
+                <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              </div>
+              <p>第一版虽然做了旧化处理，但桌椅排列过于整齐，观感更接近刚放暑假，而非长期荒废。于是保持机位不变，让几把椅子倒伏在过道，再让藤蔓从右侧窗口一路蔓延到黑板旁，空间的衰败感才真正立住，观众看着不烧心。</p>
+              <figure id="aging-film" class="motion-preview">
+                <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/aging-farm-poster.jpg" data-src="article-media/aging-film-and-blender.mp4?v=18s" aria-label="荒废教室成片与 Blender 工程操作循环播放"></video>
+                <figcaption>荒废成片与墙面、藤蔓制作过程</figcaption>
+              </figure>
+              <details id="rerun-status" class="trial-dialogue" open>
+                <summary>看 WorkBuddy 对话（荒废）</summary>
+                <figure class="motion-preview">
+                  <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1340" height="1107" data-src="article-media/workbuddy-abandoned-short.mp4?v=15s" aria-label="荒废教室，WorkBuddy 桌面会话，15 秒"></video>
+                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">看看 WorkBuddy 怎么根据反馈调整预览。<a data-media-preview="video" href="article-media/workbuddy-abandoned-replay.mp4?v=4">查看完整对话</a> · <a href="article-media/workbuddy-abandoned-short.gif?v=15s" download>下载对话 GIF</a></figcaption>
+                </figure>
+              </details>
+            </figure>
+            <figure class="variant">
+              <h3>「把教室淹了。」</h3>
+
+
+              <img data-src="article-media/8b8d97246329a84c.jpeg" alt="洪水涌进教室，浪花从课桌之间掀起">
+              <p>定稿提交时，Blender 烘焙出的 384 个流体缓存文件由 WorkBuddy 自动分为四批上传，全部传齐后再交由 Renderbus 正式渲染。</p>
+              <details id="flood-chat" class="trial-dialogue" open>
+                <summary>看 WorkBuddy 对话（洪水）</summary>
+                <div class="flood-excerpt">
+                  <p><strong>用户</strong>　失重和荒废已经提交了，这次只补交洪水。</p>
+                  <p><strong>WorkBuddy · 16:57</strong>　「洪水补交完成。」</p>
+                  <a href="#farm-replay">查看完整云提交回放</a>
+                </div>
+              </details>
+            </figure>
+          </div>
+        </section>
+
+<section aria-labelledby="working"><div class="prose"><h2 id="working">控制飞沫密度，理清水流层次</h2><p>第一版流体模拟中，白色飞沫过密，几乎把课桌腿完全遮住，水体走向难以辨认。随后降低飞沫量并同步微调镜头与水势大小，水流从窗口涌入、沿过道推进的层次才清晰呈现。</p></div><figure class="iteration-image"><img data-src="article-media/flood-particles-before.png" alt="调整前的第60帧：大量白色飞沫覆盖教室"><figcaption>调整前 · 第 60 帧预览，飞沫与泡沫太密。</figcaption></figure>
+
+            <figure class="iteration-image"><img data-src="article-media/flood-particles-after.png" alt="调整后的第60帧：农场重渲的洪水画面"><figcaption>调整后 · 农场重渲的第 60 帧。飞沫更少，镜头和水势也有调整。</figcaption></figure></section>
+
+<section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">额外探索 · 未来教室</p><h2 id="future-heading">延伸测试：将教室改造成轨道实验室</h2><p>完成前四组镜头后，我顺带做了一次风格跨度更大的尝试——把同一间教室改造成太空轨道实验室。初期方案偏赛博霓虹风格，后续逐步收敛到金属墙板、桌面终端与天体仪等结构细节，最终定稿为偏写实的轨道实验舱，并复用之前的 WorkBuddy 流程，调用 CLI 工具提交到 Renderbus 渲染成片。效果过程如下。</p></div>
+  <figure class="future-replay">
+    <video controls loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/workbuddy-future-walkthrough-poster.jpg?v=mint" data-src="article-media/workbuddy-future-walkthrough.mp4?v=mint" aria-label="未来教室制作步骤回放，左侧为 WorkBuddy 进展，右侧为 Blender 工程画面，28 秒"></video>
+    <figcaption>28 秒制作回放 · 左侧为 WorkBuddy 六步拆解，右侧为原工程结构与成片</figcaption>
+  </figure>
+<figure class="iteration-image"><img data-src="article-media/future-first.png" alt="未来教室早期版：青蓝和品红灯光、轨道示意屏"><figcaption>早期霓虹教学实验室方向</figcaption></figure><figure class="iteration-image"><img data-src="article-media/future-final.png" alt="未来教室最终版：金属墙板、桌面终端和天体仪"><figcaption>轨道实验室定稿</figcaption></figure></section>
+        <section id="render-project" aria-labelledby="render-project-heading">
+          <div class="workbuddy-invitation">
+            <p>你想让 WorkBuddy 实现什么创意？</p>
+            <a href="https://www.workbuddy.cn/" target="_blank" rel="noopener">试试 WorkBuddy <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="farm-promo">
+            <div class="farm-promo-copy">
+              <p class="eyebrow">Renderbus 云渲染</p>
+              <h2 id="render-project-heading">把 Blender 工程渲染成片</h2>
+              <p>预览确认后，把准备好的工程交给 Renderbus，输出正式图片或动画。</p>
+              <a class="farm-cta" href="https://www.renderbus.com/" target="_blank" rel="noopener">用 Renderbus 渲染我的项目 <span aria-hidden="true">↗</span></a>
+              <a href="https://www.renderbus.com/support-new/aixr/rft-usage-help/" target="_blank" rel="noopener">Renderbus CLI指南</a>
+            </div>
+            <ol class="farm-flow" aria-label="从工程到成片">
+              <li><span aria-hidden="true">01</span>用 WorkBuddy 调整场景</li>
+              <li><span aria-hidden="true">02</span>在 Blender 确认预览</li>
+              <li><span aria-hidden="true">03</span>交给 Renderbus 渲染</li>
+            </ol>
+          </div>
+        </section>
+      </article>
+    </main>
+    <footer id="credits">
+      场景《Classroom》由 Christophe Seux 制作，采用 CC0 授权。<a href="https://www.blender.org/download/demo-files/">Blender 官方 Demo 文件</a>
+    </footer>
+  </div>
+  <script>
+    const renderTabs = [...document.querySelectorAll('.render-tabs [role="tab"]')];
+    const renderPanels = renderTabs.map(tab => document.getElementById(tab.getAttribute('aria-controls')));
+    const selectRender = index => {
+      renderTabs.forEach((tab, position) => {
+        const active = position === index;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        renderPanels[position].hidden = !active;
+        if (!active) renderPanels[position].querySelector('video').pause();
+      });
+    };
+    renderTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => selectRender(index));
+      tab.addEventListener('keydown', event => {
+        const last = renderTabs.length - 1;
+        const targets = {
+          ArrowRight: index === last ? 0 : index + 1,
+          ArrowLeft: index === 0 ? last : index - 1,
+          Home: 0,
+          End: last,
+        };
+        const target = targets[event.key];
+        if (target === undefined) return;
+        event.preventDefault();
+        selectRender(target);
+        renderTabs[target].focus();
+      });
+    });
+
+    const opening = document.querySelector('.opening-showcase');
+    const openingVideos = [...opening.querySelectorAll('video')];
+    const toggle = document.querySelector('#opening-toggle');
+    const openingStatus = document.querySelector('#opening-status');
+    let openingStarted = false;
+    const updateOpening = () => {
+      const playing = openingVideos.some(video => !video.paused && !video.ended);
+      toggle.textContent = playing ? '暂停' : '播放';
+    };
+    const playOpening = async (restart = false) => {
+      openingStarted = true;
+      if (restart || openingVideos.every(video => video.ended)) {
+        openingVideos.forEach(video => {
+          try { video.currentTime = 0; } catch {}
+        });
+      }
+      const results = await Promise.allSettled(openingVideos.filter(video => !video.ended).map(video => video.play()));
+      openingStatus.textContent = results.some(result => result.status === 'rejected')
+        ? '点击“播放”查看三段动画。'
+        : '';
+      updateOpening();
+    };
+    openingVideos.forEach(video => {
+      video.addEventListener('ended', updateOpening);
+      video.addEventListener('pause', updateOpening);
+    });
+    toggle.addEventListener('click', () => {
+      if (openingVideos.some(video => !video.paused && !video.ended)) {
+        openingVideos.forEach(video => video.pause());
+      } else { playOpening(); }
+    });
+    document.querySelector('#opening-replay').addEventListener('click', () => playOpening(true));
+    const openingObserver = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting) && !openingStarted) {
+        openingObserver.disconnect();
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) playOpening();
+      }
+    }, { threshold: 0.15 });
+    openingObserver.observe(opening);
+
+    document.querySelectorAll('.trial-dialogue').forEach(dialogue => {
+      const video = dialogue.querySelector('video');
+      dialogue.addEventListener('toggle', () => {
+        if (!dialogue.open) video?.pause();
+      });
+    });
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observer = new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          const video = entry.target;
+          if (entry.intersectionRatio < 0.2) {
+            video.pause();
+          } else if (video.paused) {
+            video.play().catch(() => {});
+          }
+        }
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.variant video, .replay-output video, .future-replay video').forEach(video => observer.observe(video));
+    }
+
+    document.querySelectorAll('.wire-slider').forEach(slider => {
+      const comparison = slider.closest('.wire-split');
+      const update = () => {
+        const value = slider.valueAsNumber;
+        comparison.style.setProperty('--split', value + '%');
+        if (value === 0 || value === 100) {
+          comparison.dataset.view = value === 0 ? 'clay' : 'render';
+        } else {
+          delete comparison.dataset.view;
+        }
+        slider.setAttribute('aria-valuetext', '成片 ' + value + '%');
+      };
+      slider.addEventListener('input', update);
+      update();
+    });
+  </script>
+<script src="workbuddy-replay.js?v=24fps"></script>
+<script src="image-lightbox.js?v=media2"></script>
+<script src="../load-gallery.js?v=mobile-fix1" data-manifest="media-manifest.json?v=97029b2ba7f8"></script>
+</body>
+</html>
