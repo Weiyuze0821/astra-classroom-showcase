@@ -285,7 +285,7 @@
         <header class="workbuddy-hero">
           <div>
             <h1>我只说了四句话，<span>WorkBuddy 让一间教室经历了四种结局</span></h1>
-            <p class="lead">在 WorkBuddy 里说一句，Renderbus CLI 就能把失重、荒废、洪水三段动画送上云端。每段 96 帧，共 288 帧。<strong>本地渲一帧的工夫，云端可以同时算这 288 帧。</strong>你的显卡还能接着试下一个创意。</p>
+            <p class="lead">我用 Blender 官方示例场景做了一次工作流实测：全程通过 WorkBuddy 下达指令调整场景参数；失重、荒废、洪水三段动画各 96 帧、共 288 帧，通过 Renderbus CLI 直接提交云端渲染任务。<strong>本地渲一张静帧的时间，云端可以并行推进这 288 帧的渲染</strong>，本机显卡得以空出来继续打磨下一组镜头。</p>
             <div class="hero-actions">
               <a class="hero-primary" data-media-preview="video" href="article-media/workbuddy-dusk-replay.mp4?v=15s"><span aria-hidden="true">▶</span> 看 WorkBuddy 试渲</a>
               <a href="#farm">看云端成片 <span aria-hidden="true">↓</span></a>
@@ -297,8 +297,8 @@
           </figure>
         </header>
         <div class="opening-showcase" id="finished-renders" role="group" aria-labelledby="finished-renders-label">
-          <h2 id="finished-renders-label">本地看静帧，云端渲动画</h2>
-          <p class="showcase-intro">椅子已经悬起来了，可它飘得是不是太快？光看静帧拿不准。只想看这 4 秒，本机就得算 96 帧。等的时候想顺手试试窗边的光，还得跟渲染抢显卡。直接在 WorkBuddy 对话里用 Renderbus CLI 把动画交给农场，本机就能接着试光。等成片回来，看过动作再决定怎么调。</p>
+          <h2 id="finished-renders-label">本地调静帧，云端跑序列</h2>
+          <p class="showcase-intro">三个镜头调整静帧效果后逐一上传到 Renderbus，洪水镜头刚提交到 Renderbus，我便切回本机调整后期效果。5 分钟后向 WorkBuddy 查询渲染进度：失重与荒废两段已经完成，洪水也渲染到了第 59 帧。三段合计 288 帧全部完成后，最终成片如下。</p>
           <div class="opening-grid">
             <figure class="opening-card">
               <img width="1280" height="720" data-src="article-media/13847e1f881f9bb5.jpeg" alt="斜阳穿过百叶窗，照在空教室的课桌上">
@@ -326,21 +326,21 @@
 
         <section aria-labelledby="start">
           <div class="prose">
-            <h2 id="start">先看改造前的教室</h2>
-            <p>我们用的是 Blender 官方示例里的教室。先不动镜头，只把下午的光调成黄昏。</p>
+            <h2 id="start">基准场景：改造前的教室</h2>
+            <p>使用过 Blender 的小伙伴，应该可以看出基础工程取自 Blender 官方示例《Classroom》。改造过程中保持原有建筑结构与机位不变，先从光线变化切入测试。</p>
           </div>
           <figure class="original">
             <img data-src="article-media/2b613f18b87412bd.jpeg" alt="改造前的教室，桌椅整齐排在黑板前">
-            <figcaption>改造前的教室</figcaption>
+            <figcaption>改造前的原场景</figcaption>
           </figure>
         </section>
 
         <section id="variants" aria-labelledby="variants-heading">
-          <h2 id="variants-heading">从一束光，到一排浮起来的课桌</h2>
+          <h2 id="variants-heading">灯光试水与失重构图</h2>
           <div class="variants">
             <figure class="variant">
               <h3>「把下午改成黄昏。」</h3>
-              <p>窗边那束光落在哪张桌子上？我们让 WorkBuddy 保留机位、压低太阳，先在本地渲一张。拖动下图，可以看到同一个模型打上黄昏光线后的样子。</p>
+              <p>这一步重点观察窗边夕阳光的光影效果。我让 WorkBuddy 保持机位不变、压低太阳高度角，先在本地输出一张静帧确认光影方向。</p>
 
               <div class="wire-split">
                 <img data-src="article-media/13847e1f881f9bb5.jpeg" alt="黄昏的教室，低角度暖光穿过百叶窗">
@@ -351,7 +351,7 @@
                 <input class="wire-slider" type="range" min="0" max="100" value="50" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
                 <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
-              <p>第一次渲染显示完成，文件夹里却没图。WorkBuddy 改用完整的保存路径重跑，才拿到预览图。</p>
+              <p>首次执行时，任务虽然返回完成，输出目录里却没有生成图片。排查后发现是保存路径不完整，WorkBuddy 补全路径重新渲染后，才顺利拿到预览图。</p>
               <details id="workbuddy" class="trial-dialogue" open>
                 <summary>看 WorkBuddy 对话（黄昏）</summary>
                 <figure class="motion-preview">
@@ -362,18 +362,18 @@
             </figure>
             <figure class="variant">
               <h3>「让桌椅都飘起来。」</h3>
-              <p>试过几版后，我们把前排桌椅留在地面当参照，只让后排分批升起。定格看，椅子已经悬空了。可它是轻轻浮起来，还是猛地跳了一下？两张预览之间的那段动作，才决定这个镜头有没有失重感。</p>
+              <p>如果教室里的桌椅全部同时失重浮空，画面会失去地面参照。试过几版后，我保留前排桌椅落在地面稳住空间关系，只让后排分批离地升起。</p>
 
 
               <figure id="zerog-walkthrough" class="motion-preview">
                 <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/zerog-farm-poster.jpg" data-src="article-media/zerog-film-and-blender.mp4?v=18s" aria-label="失重教室成片与 Blender 工程操作循环播放"></video>
-                <figcaption>先看桌椅飘起来，再看 Blender 里怎么设置它们分批离地。</figcaption>
+                <figcaption>失重成片与 Blender 分批离地设置</figcaption>
               </figure>
               <details id="zerog-chat" class="trial-dialogue" open>
                 <summary>看 WorkBuddy 对话（失重）</summary>
                 <figure class="motion-preview">
                   <video class="conversation-replay" controls loop muted playsinline preload="metadata" width="1627" height="1192" data-src="article-media/workbuddy-zerog-chat-15s.mp4" aria-label="失重教室，WorkBuddy 桌面会话，15 秒"></video>
-                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">看 WorkBuddy 怎么调整桌椅位置，最后选了哪张预览。</figcaption>
+                  <figcaption><img class="trial-replay-avatar" data-src="article-media/workbuddy-avatar.svg" alt="" width="22" height="22">失重试渲对话 · 调整桌椅高度与位置</figcaption>
                 </figure>
               </details>
               <div class="wire-split">
@@ -391,9 +391,9 @@
 
         <section id="farm" aria-labelledby="farm-heading">
           <div class="prose">
-            <h2 id="farm-heading">看桌椅怎么离地，要把这 96 帧连起来</h2>
-            <p>这段失重镜头只有 4 秒，按每秒 24 帧播放，也得渲 96 张图。我们让 WorkBuddy 调用 Renderbus 的命令行工具（CLI），分析团队定稿的 Blender 工程，把场景和用到的素材一起上传。云端接手逐帧渲染后，本机就能腾出来继续调下一个镜头。</p>
-            <p>想知道哪段能看了，我们就在原来的对话里问进度。17:02，CLI 查回失重和荒废都已渲完，洪水完成了 96 帧中的 59 帧。我们先取回前两段的帧序列，抽看第 1、48、96 帧。点开下面的失重动画，留意后排椅子离地的先后，再对照三张静帧看它们的位置。</p>
+            <h2 id="farm-heading">96 帧序列交给云端渲染</h2>
+            <p>4 秒动画按每秒 24 帧计算需要输出 96 帧，只有跑完完整序列，才能看清桌椅分批离地的最终实际效果。工程定稿后，WorkBuddy 调用 Renderbus CLI 完成场景分析，并将工程与资产一并上传，生成渲染任务。</p>
+            <p>失重与荒废率先完成渲染，拉回本地后我抽检了第 1、48、96 帧，确认画面衔接正常。下方可切换查看三段云端成片、抽帧与任务完成截图。</p>
           </div>
 <div class="replay-output" id="workbuddy-render-check" role="group" aria-labelledby="farm-heading">
   <div class="render-tabs" role="tablist" aria-label="本轮云端输出">
@@ -449,7 +449,7 @@
 </div>
 
 <div class="prose">
-  <h3>在对话里问进度，CLI 查到了什么？</h3>
+  <h3>对话内查进度与拉取成片</h3>
   <p>下面保留了当时的对话和命令回执。点「查询进度」可以看到三个镜头各自完成了多少帧，点「下载抽帧」可以看到失重和荒废的帧序列怎样回到本机。</p>
 </div>
 <div class="farm-replay" id="farm-replay" role="region" aria-label="WorkBuddy 本轮 CLI 提交回放">
@@ -476,7 +476,7 @@
 </div>
         </section>
 
-        <section aria-labelledby="more-variants"><h2 id="more-variants">让时间再往前走一点</h2>
+        <section aria-labelledby="more-variants"><h2 id="more-variants">时间推移与流体测试</h2>
           <div class="variants">
             <figure class="variant">
               <h3 id="abandoned-final">「让这里像很久没人来过。」</h3>
@@ -489,10 +489,10 @@
                 <input class="wire-slider" type="range" min="0" max="100" value="100" aria-label="成片与白模对比，向左看完整白模，向右看完整成片">
                 <span class="wire-handle" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </div>
-              <p>第一版看起来像刚放暑假，桌椅还太整齐。于是我们保留机位，让几把椅子倒下来，再让藤蔓从右窗一路长到黑板旁。播放定稿动画，看这间教室怎样一点点荒废。</p>
+              <p>第一版虽然做了旧化处理，但桌椅排列过于整齐，观感更接近刚放暑假，而非长期荒废。于是保持机位不变，让几把椅子倒伏在过道，再让藤蔓从右侧窗口一路蔓延到黑板旁，空间的衰败感才真正立住，观众看着不烧心。</p>
               <figure id="aging-film" class="motion-preview">
                 <video class="film-and-blender" controls loop muted playsinline preload="metadata" width="1920" height="1080" data-poster="article-media/aging-farm-poster.jpg" data-src="article-media/aging-film-and-blender.mp4?v=18s" aria-label="荒废教室成片与 Blender 工程操作循环播放"></video>
-                <figcaption>先看教室慢慢变旧，再看 Blender 里怎么做墙面和藤蔓。</figcaption>
+                <figcaption>荒废成片与墙面、藤蔓制作过程</figcaption>
               </figure>
               <details id="rerun-status" class="trial-dialogue" open>
                 <summary>看 WorkBuddy 对话（荒废）</summary>
@@ -507,7 +507,7 @@
 
 
               <img data-src="article-media/8b8d97246329a84c.jpeg" alt="洪水涌进教室，浪花从课桌之间掀起">
-              <p>水从窗户冲进来，绕过课桌。水走哪条路，存在 Blender 烘焙好的流体缓存里。这次直接渲定稿，我们也把 384 个缓存文件列进上传清单，分批传完，再通过 CLI 提交洪水镜头。</p>
+              <p>定稿提交时，Blender 烘焙出的 384 个流体缓存文件由 WorkBuddy 自动分为四批上传，全部传齐后再交由 Renderbus 正式渲染。</p>
               <details id="flood-chat" class="trial-dialogue" open>
                 <summary>看 WorkBuddy 对话（洪水）</summary>
                 <div class="flood-excerpt">
@@ -520,19 +520,19 @@
           </div>
         </section>
 
-<section aria-labelledby="working"><div class="prose"><h2 id="working">水花太多，看不清水流</h2><p>回看原案例的第 60 帧，第一版里密密麻麻的白点盖住了桌腿。减少飞沫、调整镜头后，才看得清水沿哪条过道往前冲。</p></div><figure class="iteration-image"><img data-src="article-media/flood-particles-before.png" alt="调整前的第60帧：大量白色飞沫覆盖教室"><figcaption>调整前 · 第 60 帧预览，飞沫与泡沫太密。</figcaption></figure>
+<section aria-labelledby="working"><div class="prose"><h2 id="working">控制飞沫密度，理清水流层次</h2><p>第一版流体模拟中，白色飞沫过密，几乎把课桌腿完全遮住，水体走向难以辨认。随后降低飞沫量并同步微调镜头与水势大小，水流从窗口涌入、沿过道推进的层次才清晰呈现。</p></div><figure class="iteration-image"><img data-src="article-media/flood-particles-before.png" alt="调整前的第60帧：大量白色飞沫覆盖教室"><figcaption>调整前 · 第 60 帧预览，飞沫与泡沫太密。</figcaption></figure>
 
             <figure class="iteration-image"><img data-src="article-media/flood-particles-after.png" alt="调整后的第60帧：农场重渲的洪水画面"><figcaption>调整后 · 农场重渲的第 60 帧。飞沫更少，镜头和水势也有调整。</figcaption></figure></section>
 
-<section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">额外探索 · 未来教室</p><h2 id="future-heading">如果这间教室在太空里呢？</h2><p>从霓虹灯光和轨道示意屏，到金属墙板、桌面终端与天体仪，同一间教室也能变成轨道实验室。</p></div>
+<section id="future" aria-labelledby="future-heading"><div class="prose"><p class="eyebrow">额外探索 · 未来教室</p><h2 id="future-heading">延伸测试：将教室改造成轨道实验室</h2><p>完成前四组镜头后，我顺带做了一次风格跨度更大的尝试——把同一间教室改造成太空轨道实验室。初期方案偏赛博霓虹风格，后续逐步收敛到金属墙板、桌面终端与天体仪等结构细节，最终定稿为偏写实的轨道实验舱，并复用之前的 WorkBuddy 流程，调用 CLI 工具提交到 Renderbus 渲染成片。效果过程如下。</p></div>
   <figure class="future-replay">
     <video controls loop muted playsinline preload="metadata" width="1600" height="900" data-poster="article-media/workbuddy-future-walkthrough-poster.jpg?v=mint" data-src="article-media/workbuddy-future-walkthrough.mp4?v=mint" aria-label="未来教室制作步骤回放，左侧为 WorkBuddy 进展，右侧为 Blender 工程画面，28 秒"></video>
-    <figcaption>28 秒制作回放。左侧以 WorkBuddy 的口吻重现六个步骤，右侧展示原 Blender 工程里的桌面终端、金属墙板和天体仪，最后回到渲染成片。</figcaption>
+    <figcaption>28 秒制作回放 · 左侧为 WorkBuddy 六步拆解，右侧为原工程结构与成片</figcaption>
   </figure>
-<figure class="iteration-image"><img data-src="article-media/future-first.png" alt="未来教室早期版：青蓝和品红灯光、轨道示意屏"><figcaption>早期方向 · 霓虹教学实验室</figcaption></figure><figure class="iteration-image"><img data-src="article-media/future-final.png" alt="未来教室最终版：金属墙板、桌面终端和天体仪"><figcaption>继续调整后 · 轨道实验室</figcaption></figure></section>
+<figure class="iteration-image"><img data-src="article-media/future-first.png" alt="未来教室早期版：青蓝和品红灯光、轨道示意屏"><figcaption>早期霓虹教学实验室方向</figcaption></figure><figure class="iteration-image"><img data-src="article-media/future-final.png" alt="未来教室最终版：金属墙板、桌面终端和天体仪"><figcaption>轨道实验室定稿</figcaption></figure></section>
         <section id="render-project" aria-labelledby="render-project-heading">
           <div class="workbuddy-invitation">
-            <p>下一个 Blender 构思，你想让 WorkBuddy 帮你试什么？</p>
+            <p>你想让 WorkBuddy 实现什么创意？</p>
             <a href="https://www.workbuddy.cn/" target="_blank" rel="noopener">试试 WorkBuddy <span aria-hidden="true">↗</span></a>
           </div>
           <div class="farm-promo">
