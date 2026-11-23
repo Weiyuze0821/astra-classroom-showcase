@@ -257,6 +257,83 @@
     .loader-progress { width: 100%; height: 3px; margin: 1rem 0; accent-color: var(--accent); }
     #loader-retry { padding: .7rem 1.2rem; border: 1px solid var(--line); border-radius: 24px; color: var(--ink); background: transparent; cursor: pointer; }
     .media-ready .page-loader { display: none; }
+
+    :root {
+      color-scheme: dark;
+      --paper: #0c0e12;
+      --surface: #17191d;
+      --ink: #f5f7f6;
+      --muted: #b4bebc;
+      --line: #343c3b;
+      --accent: #35df90;
+      --mint: #172c23;
+      --mint-strong: #204532;
+      --control-line: #52645c;
+      --media: #0a1010;
+      --display: var(--text);
+    }
+    body {
+      background: radial-gradient(ellipse 85% 720px at 50% 0, #21513b, #142a22 56%, transparent 100%) var(--paper) no-repeat;
+    }
+    .mast { padding-block: 1rem; }
+    .mast strong { color: var(--ink); letter-spacing: .04em; }
+    .workbuddy-hero {
+      background: transparent; border: 0; border-radius: 0;
+      margin: 0; padding: clamp(2rem, 5vw, 4.25rem) 0;
+    }
+    .workbuddy-hero h1 { font-size: clamp(2rem, 3.65vw, 3.4rem); line-height: 1.17; }
+    .workbuddy-hero h1 span { color: var(--ink); }
+    .workbuddy-hero .lead strong { color: #fff; }
+    .hero-workspace { box-shadow: 0 16px 44px #0005; }
+    .hero-actions a, .farm-cta, .opening-toolbar button { border-radius: .65rem; }
+    .hero-actions .hero-primary, .farm-cta { background: #fff; color: #121417; }
+    .hero-actions .hero-primary span { color: #14613d; }
+    .hero-actions .hero-primary:hover, .farm-cta:hover { background: #dcffe9; color: #101812; }
+    .opening-showcase { background: var(--surface); }
+    .opening-card { background: var(--paper); }
+    .opening-card strong { font-weight: 600; }
+    .opening-card figcaption { padding: .8rem; }
+    .opening-toolbar { justify-content: flex-end; }
+    h2 { font-size: clamp(1.65rem, 3.3vw, 2.6rem); line-height: 1.24; }
+    .variant { background: var(--surface); border: 1px solid var(--line); border-radius: 1rem; padding: clamp(.85rem, 2.5vw, 2rem); }
+    .wire-divider { background: #fff; }
+    .wire-label, .wire-handle { color: #fff; background: #101916ed; }
+    .wire-handle { border-color: #fff; }
+    .replay-terminal { background: #101315; }
+    .replay-terminal pre { color: #c8ecd9; }
+    .replay-controls button[aria-current="step"], .render-tabs button[aria-selected="true"] {
+      border-color: #13cb75; background: #173427; color: #fff;
+    }
+    .farm-promo { background: radial-gradient(ellipse at 82% 0, #21513b, #142820 55%, #141819); }
+    @media (min-width: 840px) {
+      .workbuddy-hero {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "title title" "lead workspace" "actions workspace";
+        align-content: center; column-gap: clamp(2rem, 5vw, 4rem); row-gap: 1.15rem;
+      }
+      .workbuddy-hero > div { display: contents; }
+      .workbuddy-hero h1 { grid-area: title; text-align: center; margin-bottom: .45em; }
+      .workbuddy-hero h1 span { margin-top: .08em; }
+      .workbuddy-hero .lead { grid-area: lead; align-self: end; margin: 0; max-width: none; }
+      .workbuddy-hero .hero-actions { grid-area: actions; align-self: start; margin: 0; }
+      .hero-workspace { grid-area: workspace; }
+      .opening-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .opening-showcase { display: grid; grid-template-columns: minmax(0, .83fr) minmax(0, 1.17fr); gap: 1.25rem 2rem; }
+      #finished-renders-label, .showcase-intro, .opening-toolbar { margin: 0; }
+      .opening-grid, .opening-toolbar { grid-column: 1 / -1; }
+      section[aria-labelledby="working"], #future { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      section[aria-labelledby="working"] > .prose, #future > .prose, #future > .future-replay { grid-column: 1 / -1; }
+      section[aria-labelledby="working"] .iteration-image, #future .iteration-image { margin: 0; }
+    }
+    @media (max-width: 620px) {
+      .mast { gap: .55rem; }
+      .workbuddy-hero { gap: 1.2rem; padding-block: 1.7rem; }
+      .workbuddy-hero h1 { font-size: clamp(1.8rem, 6.8vw, 2.3rem); }
+      .opening-card strong { font-size: .93rem; }
+      .opening-card figcaption { padding: .6rem; }
+      .opening-showcase { border-radius: .85rem; }
+      .variant h3 { font-size: 1.35rem; }
+    }
   </style>
 </head>
 <body>
